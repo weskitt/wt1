@@ -46,6 +46,8 @@
             this.button7 = new System.Windows.Forms.Button();
             this.skinTrackBar8 = new CCWin.SkinControl.SkinTrackBar();
             this.label8 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.skinTrackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -78,7 +80,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(775, 936);
             this.panel1.TabIndex = 2;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
             // label1
             // 
@@ -246,11 +248,26 @@
             this.label8.TabIndex = 3;
             this.label8.Text = "50";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // openBtn
+            // 
+            this.openBtn.Location = new System.Drawing.Point(892, 972);
+            this.openBtn.Name = "openBtn";
+            this.openBtn.Size = new System.Drawing.Size(75, 23);
+            this.openBtn.TabIndex = 11;
+            this.openBtn.Text = "Open Wave";
+            this.openBtn.UseVisualStyleBackColor = true;
+            this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1673, 1006);
+            this.Controls.Add(this.openBtn);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox4);
@@ -296,6 +313,8 @@
         private System.Windows.Forms.Button button7;
         private CCWin.SkinControl.SkinTrackBar skinTrackBar8;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button openBtn;
     }
 }
 
