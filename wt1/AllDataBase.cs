@@ -70,12 +70,17 @@ namespace wt1
             public int tone;  //声调
 
             public SortedDictionary<int, PhonationInfo> info = new SortedDictionary<int, PhonationInfo>();
-            public List<PhonationInfo> vinfo = new List<PhonationInfo>();
+            public List<PhonationInfo> ModInfo = new List<PhonationInfo>();
             public SortedDictionary<int, int> keyData = new SortedDictionary<int, int>();  //间断不连续关键帧数据
             public List<int> data = new List<int>(); //发音具体数据
         };
 
         public SortedDictionary<string, Voice> VoiceData = new SortedDictionary<string, Voice>();  //汉字， 发音数据
+
+        public static float General_x(int curX)
+        {
+            return -1.0f + (curX / (float)(1920 - 1)) * 2.0f;
+        }
 
     }
 }

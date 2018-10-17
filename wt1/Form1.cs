@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CCWin;
 using MathNet;
+//using static wt1.WaveViewer;
 
 namespace wt1
 {
@@ -24,6 +25,8 @@ namespace wt1
         private void Form1_Load(object sender, EventArgs e)
         {
             panel1.Width = this.Width;
+            WaveViewer wv = new WaveViewer();
+            wv.GerneralWave();
         }
 
 

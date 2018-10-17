@@ -6,18 +6,20 @@ using static wt1.AllDataBase;
 
 namespace wt1
 {
-    class WaveViewer
+    public class WaveViewer
     {
         public int PCMSamCount;
         public int BaseSamCount;
         public float lastU;
         float lastD;
 
-        public SortedDictionary<int, BaseVoiceSamp> BaseSampMap = new SortedDictionary<int, BaseVoiceSamp>();
-        public SortedDictionary<int, BaseVoiceSamp> BaseSampMap2 = new SortedDictionary<int, BaseVoiceSamp>();
+        public SortedDictionary<int, BaseVoiceSamp> BaseSampSingle = new SortedDictionary<int, BaseVoiceSamp>();
+        public SortedDictionary<int, BaseVoiceSamp> BaseSamps = new SortedDictionary<int, BaseVoiceSamp>();
 
         public void GerneralWave()
         {
+            
+            //bsiter.Current.Key;
             //创建base基本数据
             float preAmp = 0.000000001f;
             int diffStep = 1;
@@ -34,8 +36,8 @@ namespace wt1
                 t_bvs.value = preAmp;
                 t_bvs.invertPoint = 0;
                 t_bvs.areaID = 0;
-                //BaseSampMap[t_bvs.index] = t_bvs; //重复，覆盖
-                BaseSampMap.Add(t_bvs.index, t_bvs); //
+                //BaseSamps[t_bvs.index] = t_bvs; //重复，覆盖
+                BaseSampSingle.Add(t_bvs.index, t_bvs); //
             }
 
             /******************************************************************/
@@ -54,7 +56,7 @@ namespace wt1
                 begin = -1.0f,
                 end = -0.8f
             };
-            tVoice.vinfo.Add(tInfo);
+            tVoice.ModInfo.Add(tInfo);
 
             tInfo = new PhonationInfo
             {
@@ -71,7 +73,7 @@ namespace wt1
                 Arate0 = 3,
                 Arate1 = -0.08f
             };
-            tVoice.vinfo.Add(tInfo);
+            tVoice.ModInfo.Add(tInfo);
 
             tInfo = new PhonationInfo
             {
@@ -86,8 +88,41 @@ namespace wt1
                 Arate0 = 3, //收缩时， 为负-则外凸， 为正-则内凹
                 Arate1 = -0.08f
             };
-            tVoice.vinfo.Add(tInfo);
+            tVoice.ModInfo.Add(tInfo);
 
+            lastU = preAmp;
+            int modIndex = 0;
+            var bsiter = BaseSampSingle.GetEnumerator();
+
+            while (modIndex <= tVoice.ModInfo.Count && bsiter.MoveNext() )
+            {
+                NewMod:
+                if (General_x(bsiter.Current.Key) >=tVoice.ModInfo[modIndex].begin  && General_x(bsiter.Current.Key) < tVoice.ModInfo[modIndex].end)
+                {
+                    tVoice.ModInfo[modIndex].fusion(bsiter.Current.Value, lastU);
+                }
+                else
+                {
+                    ++modIndex;
+                    goto NewMod;
+                }
+            }
+
+            /******************************************************************/
+            //数据补完
+            //一:补全逆转数据
+            foreach (var samp in BaseSampSingle)
+            {
+                BaseVoiceSamp t_bvs = new BaseVoiceSamp
+                {
+                    index = samp.Value.index + diffStep,
+                    invertPoint = samp.Value.invertPoint,
+                    value = samp.Value.invertPoint - samp.Value.value
+                };
+
+                BaseSamps[samp.Value.index] = samp.Value;
+                BaseSamps[t_bvs.index] = t_bvs;
+            }
 
         }
     }
