@@ -14,6 +14,7 @@ namespace wt1
         float lastD;
 
         public SortedDictionary<int, BaseVoiceSamp> BaseSampSingle = new SortedDictionary<int, BaseVoiceSamp>();
+        public List<int> BSkeys = new List<int>();
         public SortedDictionary<int, BaseVoiceSamp> BaseSamps = new SortedDictionary<int, BaseVoiceSamp>();
 
         public void GerneralWave()
@@ -30,22 +31,24 @@ namespace wt1
             
             for (int i = 0; i < PairCount; i++)
             {
-                BaseVoiceSamp t_bvs;
-
-                t_bvs.index = i * PackStep;
-                t_bvs.value = preAmp;
-                t_bvs.invertPoint = 0;
-                t_bvs.areaID = 0;
+                BaseVoiceSamp t_bvs = new BaseVoiceSamp
+                {
+                    index = i * PackStep,
+                    value = preAmp,
+                    invertPoint = 0,
+                    areaID = 0
+                };
                 //BaseSamps[t_bvs.index] = t_bvs; //重复，覆盖
                 BaseSampSingle.Add(t_bvs.index, t_bvs); //
+                BSkeys.Add(t_bvs.index);
             }
 
             /******************************************************************/
             //塑形计算   数据修饰.
-            PhonationInfo tInfo;
+            VoiceModInfo tInfo;
             Voice tVoice = new Voice();
 
-            tInfo = new PhonationInfo
+            tInfo = new VoiceModInfo
             {
                 areaID = 1,
                 preVoice = true,
@@ -58,7 +61,7 @@ namespace wt1
             };
             tVoice.ModInfo.Add(tInfo);
 
-            tInfo = new PhonationInfo
+            tInfo = new VoiceModInfo
             {
                 areaID = 2,
                 preVoice = false,
@@ -75,7 +78,7 @@ namespace wt1
             };
             tVoice.ModInfo.Add(tInfo);
 
-            tInfo = new PhonationInfo
+            tInfo = new VoiceModInfo
             {
                 areaID = 3,
                 preVoice = false,
@@ -94,12 +97,16 @@ namespace wt1
             int modIndex = 0;
             var bsiter = BaseSampSingle.GetEnumerator();
 
-            while (modIndex <= tVoice.ModInfo.Count && bsiter.MoveNext() )
+
+            for (int i = 0; i < BSkeys.Count; i++)
             {
-                NewMod:
-                if (General_x(bsiter.Current.Key) >=tVoice.ModInfo[modIndex].begin  && General_x(bsiter.Current.Key) < tVoice.ModInfo[modIndex].end)
+            NewMod:
+                var bsv = BaseSampSingle[BSkeys[i]];
+                float SampIndex = General_x(bsv.index);
+
+                if (SampIndex >= tVoice.ModInfo[modIndex].begin && SampIndex < tVoice.ModInfo[modIndex].end)
                 {
-                    tVoice.ModInfo[modIndex].fusion(bsiter.Current.Value, lastU);
+                    tVoice.ModInfo[modIndex].Fusion(BaseSampSingle, BSkeys[i], ref lastU);
                 }
                 else
                 {
@@ -107,6 +114,35 @@ namespace wt1
                     goto NewMod;
                 }
             }
+
+
+            //foreach (var item in BaseSampSingle)
+            //{
+            //NewMod:
+            //    if (General_x(item.Key) >= tVoice.ModInfo[modIndex].begin && General_x(item.Key) < tVoice.ModInfo[modIndex].end)
+            //    {
+            //       // tVoice.ModInfo[modIndex].Fusion(ref item.Value, ref lastU);
+            //    }
+            //    else
+            //    {
+            //        ++modIndex;
+            //        goto NewMod;
+            //    }
+            //}
+
+            //while (modIndex <= tVoice.ModInfo.Count && bsiter.MoveNext() )
+            //{
+            //    NewMod:
+            //    if (General_x(bsiter.Current.Key) >=tVoice.ModInfo[modIndex].begin  && General_x(bsiter.Current.Key) < tVoice.ModInfo[modIndex].end)
+            //    {
+            //        tVoice.ModInfo[modIndex].Fusion(ref bsiter.Current.Value, ref lastU);
+            //    }
+            //    else
+            //    {
+            //        ++modIndex;
+            //        goto NewMod;
+            //    }
+            //}
 
             /******************************************************************/
             //数据补完

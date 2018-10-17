@@ -7,14 +7,15 @@ namespace wt1
 {
     public class AllDataBase
     {
-        public struct BaseVoiceSamp
+        public class BaseVoiceSamp
         {
             public int index;
             public float value;
             public int invertPoint; //反转点 ，Y轴值
             public int areaID;
+
         };
-        public class PhonationInfo
+        public class VoiceModInfo
         {
             public int areaID;
             public float begin; //区域描述起点
@@ -33,7 +34,7 @@ namespace wt1
             public float Arate2;
             public float baseN;
 
-            public void fusion(BaseVoiceSamp bvs, float lastU)
+            public void Fusion(SortedDictionary<int, BaseVoiceSamp> bvs, int index,ref float lastU)
             {
                 if (preVoice)
                 {
@@ -42,8 +43,8 @@ namespace wt1
                         lastU = startAmp;
                         InitlastU = false;
                     }
-                    bvs.value = lastU;
-                    lastU = bvs.value;
+                    bvs[index].value = lastU;
+                    lastU = bvs[index].value;
                 }
                 else
                 {
@@ -53,12 +54,10 @@ namespace wt1
                         Initbegin = false;
                     }
                     //counter += 1; //加速参数
-
                     Arate0 += Arate1;
-
                     baseN = Arate0 * RootRate * ort;
-                    bvs.value = lastU + baseN;
-                    lastU = bvs.value;
+                    bvs[index].value = lastU + baseN;
+                    lastU = bvs[index].value;
                 }
             }
         };
@@ -69,13 +68,14 @@ namespace wt1
             public string pinyin; //符号发音
             public int tone;  //声调
 
-            public SortedDictionary<int, PhonationInfo> info = new SortedDictionary<int, PhonationInfo>();
-            public List<PhonationInfo> ModInfo = new List<PhonationInfo>();
+            public SortedDictionary<int, VoiceModInfo> info = new SortedDictionary<int, VoiceModInfo>();
+            public List<VoiceModInfo> ModInfo = new List<VoiceModInfo>();
             public SortedDictionary<int, int> keyData = new SortedDictionary<int, int>();  //间断不连续关键帧数据
             public List<int> data = new List<int>(); //发音具体数据
         };
 
-        public SortedDictionary<string, Voice> VoiceData = new SortedDictionary<string, Voice>();  //汉字， 发音数据
+
+        public static SortedDictionary<string, Voice> VoiceData = new SortedDictionary<string, Voice>();  //汉字， 发音数据
 
         public static float General_x(int curX)
         {
