@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using static wt1.AllDataBase;
 
 namespace wt1
@@ -14,8 +15,9 @@ namespace wt1
         float lastD;
 
         public SortedDictionary<int, BaseVoiceSamp> BaseSampSingle = new SortedDictionary<int, BaseVoiceSamp>();
-        public List<int> BSkeys = new List<int>();
         public SortedDictionary<int, BaseVoiceSamp> BaseSamps = new SortedDictionary<int, BaseVoiceSamp>();
+        public List<PointF> listPoints = new List<PointF>();
+        public static PointF[] pointFs;
 
         public void GerneralWave()
         {
@@ -40,7 +42,7 @@ namespace wt1
                 };
                 //BaseSamps[t_bvs.index] = t_bvs; //重复，覆盖
                 BaseSampSingle.Add(t_bvs.index, t_bvs); //
-                BSkeys.Add(t_bvs.index);
+                //BSkeys.Add(t_bvs.index);
             }
 
             /******************************************************************/
@@ -95,8 +97,8 @@ namespace wt1
 
             lastU = preAmp;
             int modIndex = 0;
-            var bsiter = BaseSampSingle.GetEnumerator();
-
+            //var bsiter = BaseSampSingle.GetEnumerator();
+            var BSkeys = new List<int>(BaseSampSingle.Keys);
 
             for (int i = 0; i < BSkeys.Count; i++)
             {
@@ -115,35 +117,6 @@ namespace wt1
                 }
             }
 
-
-            //foreach (var item in BaseSampSingle)
-            //{
-            //NewMod:
-            //    if (General_x(item.Key) >= tVoice.ModInfo[modIndex].begin && General_x(item.Key) < tVoice.ModInfo[modIndex].end)
-            //    {
-            //       // tVoice.ModInfo[modIndex].Fusion(ref item.Value, ref lastU);
-            //    }
-            //    else
-            //    {
-            //        ++modIndex;
-            //        goto NewMod;
-            //    }
-            //}
-
-            //while (modIndex <= tVoice.ModInfo.Count && bsiter.MoveNext() )
-            //{
-            //    NewMod:
-            //    if (General_x(bsiter.Current.Key) >=tVoice.ModInfo[modIndex].begin  && General_x(bsiter.Current.Key) < tVoice.ModInfo[modIndex].end)
-            //    {
-            //        tVoice.ModInfo[modIndex].Fusion(ref bsiter.Current.Value, ref lastU);
-            //    }
-            //    else
-            //    {
-            //        ++modIndex;
-            //        goto NewMod;
-            //    }
-            //}
-
             /******************************************************************/
             //数据补完
             //一:补全逆转数据
@@ -160,6 +133,25 @@ namespace wt1
                 BaseSamps[t_bvs.index] = t_bvs;
             }
 
+        }
+
+        public void BsToVertex(ref Rectangle rect)
+        {
+            foreach (var bs in BaseSamps)
+            {
+                PointF point = new PointF
+                {
+                    X = bs.Value.index* rect.Width/ 1920 ,
+                    Y = bs.Value.value * (rect.Height/2) + rect.Height / 2
+                };
+
+                
+
+                listPoints.Add(point);
+            }
+
+            pointFs = listPoints.ToArray();
+            //pointFs = new PointF[](listPoints.ToArray);
         }
     }
 }

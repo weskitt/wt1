@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CCWin;
 using MathNet;
-//using static wt1.WaveViewer;
+using static wt1.WaveViewer;
 
 namespace wt1
 {
@@ -24,9 +24,13 @@ namespace wt1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
+            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+
             panel1.Width = this.Width;
             WaveViewer wv = new WaveViewer();
             wv.GerneralWave();
+            
         }
 
 
@@ -41,6 +45,10 @@ namespace wt1
 
             g.FillRectangle(bb, rect);
             g.DrawLine(p, 0, rect.Height / 2, rect.Width, rect.Height / 2);
+            WaveViewer wv = new WaveViewer();
+            wv.GerneralWave();
+            wv.BsToVertex(ref rect);
+            g.DrawLines(p, pointFs);
         }
 
         private void skinTrackBar1_Scroll(object sender, EventArgs e)
