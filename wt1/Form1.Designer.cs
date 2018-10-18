@@ -1,6 +1,6 @@
 ﻿namespace wt1
 {
-    partial class Form1
+    partial class Fm1
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fm1));
             this.skinTrackBar1 = new CCWin.SkinControl.SkinTrackBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,6 +48,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openBtn = new System.Windows.Forms.Button();
+            this.General = new System.Windows.Forms.Button();
+            this.Switch = new System.Windows.Forms.Button();
+            this.Both = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.skinTrackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -72,13 +75,13 @@
             this.skinTrackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.skinTrackBar1.Track = ((System.Drawing.Image)(resources.GetObject("skinTrackBar1.Track")));
             this.skinTrackBar1.Value = 50;
-            this.skinTrackBar1.Scroll += new System.EventHandler(this.skinTrackBar1_Scroll);
+            this.skinTrackBar1.Scroll += new System.EventHandler(this.SkinTrackBar1_Scroll);
             // 
             // panel1
             // 
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(775, 936);
+            this.panel1.Size = new System.Drawing.Size(954, 900);
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
@@ -96,7 +99,7 @@
             this.groupBox1.Controls.Add(this.resetBtn);
             this.groupBox1.Controls.Add(this.skinTrackBar1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 942);
+            this.groupBox1.Location = new System.Drawing.Point(174, 906);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(214, 54);
             this.groupBox1.TabIndex = 4;
@@ -111,14 +114,14 @@
             this.resetBtn.TabIndex = 4;
             this.resetBtn.Text = "Reset";
             this.resetBtn.UseVisualStyleBackColor = true;
-            this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
+            this.resetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.button3);
             this.groupBox4.Controls.Add(this.skinTrackBar4);
             this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Location = new System.Drawing.Point(232, 942);
+            this.groupBox4.Location = new System.Drawing.Point(394, 906);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(214, 54);
             this.groupBox4.TabIndex = 6;
@@ -163,7 +166,7 @@
             this.groupBox6.Controls.Add(this.button5);
             this.groupBox6.Controls.Add(this.skinTrackBar6);
             this.groupBox6.Controls.Add(this.label6);
-            this.groupBox6.Location = new System.Drawing.Point(452, 942);
+            this.groupBox6.Location = new System.Drawing.Point(614, 906);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(214, 54);
             this.groupBox6.TabIndex = 8;
@@ -208,7 +211,7 @@
             this.groupBox8.Controls.Add(this.button7);
             this.groupBox8.Controls.Add(this.skinTrackBar8);
             this.groupBox8.Controls.Add(this.label8);
-            this.groupBox8.Location = new System.Drawing.Point(672, 942);
+            this.groupBox8.Location = new System.Drawing.Point(834, 906);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(214, 54);
             this.groupBox8.TabIndex = 10;
@@ -254,19 +257,51 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(892, 972);
+            this.openBtn.Location = new System.Drawing.Point(10, 907);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(75, 23);
             this.openBtn.TabIndex = 11;
             this.openBtn.Text = "Open Wave";
             this.openBtn.UseVisualStyleBackColor = true;
-            this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
+            this.openBtn.Click += new System.EventHandler(this.OpenBtn_Click);
             // 
-            // Form1
+            // General
+            // 
+            this.General.Location = new System.Drawing.Point(10, 936);
+            this.General.Name = "General";
+            this.General.Size = new System.Drawing.Size(75, 23);
+            this.General.TabIndex = 12;
+            this.General.Text = "General";
+            this.General.UseVisualStyleBackColor = true;
+            this.General.Click += new System.EventHandler(this.General_Click);
+            // 
+            // Switch
+            // 
+            this.Switch.Location = new System.Drawing.Point(91, 907);
+            this.Switch.Name = "Switch";
+            this.Switch.Size = new System.Drawing.Size(75, 23);
+            this.Switch.TabIndex = 13;
+            this.Switch.Text = "Switch";
+            this.Switch.UseVisualStyleBackColor = true;
+            this.Switch.Click += new System.EventHandler(this.Switch_Click);
+            // 
+            // Both
+            // 
+            this.Both.Location = new System.Drawing.Point(91, 936);
+            this.Both.Name = "Both";
+            this.Both.Size = new System.Drawing.Size(75, 23);
+            this.Both.TabIndex = 14;
+            this.Both.Text = "Both";
+            this.Both.UseVisualStyleBackColor = true;
+            // 
+            // Fm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1673, 1006);
+            this.ClientSize = new System.Drawing.Size(1584, 1001);
+            this.Controls.Add(this.Both);
+            this.Controls.Add(this.Switch);
+            this.Controls.Add(this.General);
             this.Controls.Add(this.openBtn);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox6);
@@ -275,9 +310,10 @@
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.Name = "Fm1";
+            this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Fo";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.skinTrackBar1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -315,6 +351,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button openBtn;
+        private System.Windows.Forms.Button General;
+        private System.Windows.Forms.Button Switch;
+        private System.Windows.Forms.Button Both;
     }
 }
 

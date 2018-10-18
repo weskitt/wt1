@@ -12,124 +12,99 @@ using MathNet;
 using System.IO;
 using static wt1.Funcs;
 using static wt1.WaveViewer;
-using System.Runtime.InteropServices;
+//using System.Runtime.InteropServices;
 
 namespace wt1
 {
-    public partial class Form1 : Form
+    public partial class Fm1 : Form
     {
-        public Form1()
+        public Fm1()
         {
             
             InitializeComponent();
         }
-
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
-            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
-
-            panel1.Width = this.Width;
-            WaveViewer wv = new WaveViewer();
-            wv.GerneralWave();
-            
+            this.Width = 1600;
+            this.Height = 1006;
         }
 
 
         public void Panel1_Paint(object sender, PaintEventArgs e)
         {
-            
-            Graphics g = e.Graphics;
-            Pen p = new Pen(Color.Green);
-            SolidBrush bb = new SolidBrush(Color.Black);
+            panel1.Width = 1600;
+            panel1.Height = 900;
 
-            Rectangle rect = new Rectangle(0, 0, panel1.Width, panel1.Height);
-
-            g.FillRectangle(bb, rect);
-            g.DrawLine(p, 0, rect.Height / 2, rect.Width, rect.Height / 2);
-            WaveViewer wv = new WaveViewer();
-            wv.GerneralWave();
-            wv.BsToVertex(ref rect);
-            g.DrawLines(p, pointFs);
+            DrawGerneralData();
+            isGeneralShow = false;
         }
 
-        private void skinTrackBar1_Scroll(object sender, EventArgs e)
+        private void SkinTrackBar1_Scroll(object sender, EventArgs e)
         {
             label1.Text = skinTrackBar1.Value.ToString();
         }
 
-        private void resetBtn_Click(object sender, EventArgs e)
+        private void ResetBtn_Click(object sender, EventArgs e)
         {
             skinTrackBar1.Value = skinTrackBar1.Maximum/2;
             label1.Text = skinTrackBar1.Value.ToString();
         }
-
-
         
-        private void openBtn_Click(object sender, EventArgs e)
+        private void OpenBtn_Click(object sender, EventArgs e)
         {
-            var fileContent = string.Empty;
-            var filePath = string.Empty;
+            FuncInit(panel1, this);
+            OpenWaveDialog();
+            DrawPCMWave();
+            isGeneralShow = true;
+            //isGeneralShow = !isGeneralShow;
+        }
 
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+        private void DrawGerneralData()
+        {
+            var g = panel1.CreateGraphics();
+            Pen p = new Pen(Color.Green);
+            SolidBrush bb = new SolidBrush(Color.Black);
+            WaveViewer waveViewer = new WaveViewer();
+            Rectangle DrawRect = new Rectangle(0, 0, panel1.Width, panel1.Height);
+
+            g.FillRectangle(bb, DrawRect);
+            g.DrawLine(p, 0, DrawRect.Height / 2, DrawRect.Width, DrawRect.Height / 2);
+            
+
+            waveViewer.GerneralWave();
+            waveViewer.BsToVertex(ref DrawRect);
+            g.DrawLines(p, pointFs);
+            this.Text = "由GerneralWave()函数生成";
+        }
+
+        private void General_Click(object sender, EventArgs e)
+        {
+            DrawGerneralData();
+            isGeneralShow = false;
+            //isGeneralShow = !isGeneralShow;
+        }
+
+        private void Switch_Click(object sender, EventArgs e)
+        {
+            if (isGeneralShow)
             {
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    //Get the path of specified file
-                    filePath = openFileDialog.FileName;
-
-                    //Read the contents of the file into a stream
-                    //var fsm = openFileDialog.OpenFile();
-                    byte[] srcSizeb = new byte[2];
-
-                    FileStream fsm = new FileStream(filePath, FileMode.Open);
-                    fsm.Seek(42, SeekOrigin.Begin);
-                    fsm.Read(srcSizeb, 0, 2);
-                    int srcDataSize = BitConverter.ToInt16(srcSizeb, 0);
-
-                    byte[] data = new byte[srcDataSize];
-
-                    fsm.Seek(44, SeekOrigin.Begin);
-                    fsm.Read(data, 0, srcDataSize);
-
-                    
-                    List<Point> lp = new List<Point>();
-
-
-
-                    Rectangle rect = new Rectangle(0, 0, panel1.Width, panel1.Height);
-                    int t = 0;
-                    for (int i = 0; i < srcDataSize/2; i++)
-                    {
-                        Point point = new Point()
-                        {
-                            X = i * rect.Width /(srcDataSize/2),
-                            Y = BitConverter.ToInt16(data, t) /50 + rect.Height / 2
-                        };
-
-                        lp.Add(point);
-                        t += 2;
-                    }
-
-                    Point[] pcm = lp.ToArray();
-
-                    Graphics g = panel1.CreateGraphics();
-                    Pen p = new Pen(Color.Green);
-                    SolidBrush bb = new SolidBrush(Color.Black);
-                    
-                    g.FillRectangle(bb, rect);
-
-                    g.DrawLines(p, pcm);
-                }
+                DrawGerneralData();
+                isGeneralShow = !isGeneralShow;
             }
+            else
+            {
+                if(!isPCMInit)
+                {
+                    FuncInit(panel1, this);
+                    OpenWaveDialog();
+                    DrawPCMWave();
+                }
+                else
+                    DrawPCMWave();
 
-            //MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
+                isGeneralShow = !isGeneralShow;
+            }
         }
     }
 }

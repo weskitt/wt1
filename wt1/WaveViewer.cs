@@ -12,7 +12,8 @@ namespace wt1
         public int PCMSamCount;
         public int BaseSamCount;
         public float lastU;
-        float lastD;
+        public static bool isGeneralShow =false;
+        //float lastD;
 
         public SortedDictionary<int, BaseVoiceSamp> BaseSampSingle = new SortedDictionary<int, BaseVoiceSamp>();
         public SortedDictionary<int, BaseVoiceSamp> BaseSamps = new SortedDictionary<int, BaseVoiceSamp>();
@@ -21,7 +22,7 @@ namespace wt1
 
         public void GerneralWave()
         {
-            
+
             //bsiter.Current.Key;
             //创建base基本数据
             float preAmp = 0.000000001f;
@@ -30,7 +31,7 @@ namespace wt1
             int PackStep = diffStep + T_step;
             int PairCount = 1920 / PackStep;
             BaseSamCount = PairCount * 2;
-            
+
             for (int i = 0; i < PairCount; i++)
             {
                 BaseVoiceSamp t_bvs = new BaseVoiceSamp
@@ -141,11 +142,11 @@ namespace wt1
             {
                 PointF point = new PointF
                 {
-                    X = bs.Value.index* rect.Width/ 1920 ,
-                    Y = bs.Value.value * (rect.Height/2) + rect.Height / 2
+                    X = bs.Value.index * rect.Width / 1920,
+                    Y = bs.Value.value * (rect.Height / 2) + rect.Height / 2
                 };
 
-                
+
 
                 listPoints.Add(point);
             }

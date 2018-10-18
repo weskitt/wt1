@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace wt1
 {
@@ -24,6 +26,23 @@ namespace wt1
             public char[] dataType;       //---4byte,"data"  
             public short dataSize;         //2byte,数据块大小  
         };
+
+        static Graphics gp;
+        static Panel p;
+        static Rectangle drawRect;
+        static List<Point> lp = new List<Point>();
+        static string PCMPath = string.Empty;
+        static Form fm;
+        static public bool isPCMInit =false;
+        public static Point[] pcm;
+
+        public static void FuncInit(Panel panel, Form form)
+        {
+            p = panel;
+            gp = panel.CreateGraphics();
+            drawRect = new Rectangle(0, 0, panel.Width, panel.Height);
+            fm = form;
+        }
         // FileStream读取文件
         public static string FileStreamReadFile(string filePath)
         {
@@ -40,8 +59,6 @@ namespace wt1
             dec.GetChars(data, 0, data.Length, charData, 0);
             return Convert.ToString(charData);
         }
-
-
 
         // 用FileStream写文件
         public static void FileStreamWriteFile(string filePath, string str)
@@ -68,6 +85,63 @@ namespace wt1
         }
 
 
+        public static void OpenWaveDialog()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "C:\\Users\\weskitt\\OneDrive\\wav";
+                openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    byte[] dataSizeByte = new byte[2];
+                    PCMPath = openFileDialog.FileName;
+
+                    var fsm = openFileDialog.OpenFile(); //FileStream fsm = new FileStream(filePath, FileMode.Open);
+                    fsm.Seek(42, SeekOrigin.Begin);
+                    fsm.Read(dataSizeByte, 0, 2);
+                    int dataSizeInt = BitConverter.ToInt16(dataSizeByte, 0);
+
+                    byte[] data = new byte[dataSizeInt];
+
+                    fsm.Seek(44, SeekOrigin.Begin);
+                    fsm.Read(data, 0, dataSizeInt);
+
+                    int t = 0;
+                    lp = new List<Point>();
+                    for (int i = 0; i < dataSizeInt / 2; i++)
+                    {
+                        Point point = new Point()
+                        {
+                            X = i * drawRect.Width / (dataSizeInt / 2),
+                            Y = BitConverter.ToInt16(data, t) / 50 + drawRect.Height / 2
+                        };
+
+                        lp.Add(point);
+                        t += 2;
+                    }
+                }
+
+                isPCMInit = true;
+                //MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
+            }
+            
+            pcm = lp.ToArray();
+        }
+
+        public static void DrawPCMWave()
+        {
+            Pen pen = new Pen(Color.Green);
+            SolidBrush bb = new SolidBrush(Color.Black);
+
+            gp.FillRectangle(bb, drawRect);
+
+            gp.DrawLines(pen, pcm);
+
+            fm.Text = PCMPath;
+        }
 
     }
 }
