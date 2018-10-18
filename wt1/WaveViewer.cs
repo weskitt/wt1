@@ -133,7 +133,7 @@ namespace wt1
                 BaseSamps[samp.Value.index] = samp.Value;
                 BaseSamps[t_bvs.index] = t_bvs;
             }
-
+            
         }
 
         public void BsToVertex(ref Rectangle rect)

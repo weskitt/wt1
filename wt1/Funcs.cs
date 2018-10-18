@@ -85,7 +85,7 @@ namespace wt1
         }
 
 
-        public static void OpenWaveDialog()
+        public static bool OpenWaveDialog()
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -100,6 +100,7 @@ namespace wt1
                     PCMPath = openFileDialog.FileName;
 
                     var fsm = openFileDialog.OpenFile(); //FileStream fsm = new FileStream(filePath, FileMode.Open);
+
                     fsm.Seek(42, SeekOrigin.Begin);
                     fsm.Read(dataSizeByte, 0, 2);
                     int dataSizeInt = BitConverter.ToInt16(dataSizeByte, 0);
@@ -122,13 +123,13 @@ namespace wt1
                         lp.Add(point);
                         t += 2;
                     }
+                    isPCMInit = true;
                 }
-
-                isPCMInit = true;
                 //MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
             }
             
             pcm = lp.ToArray();
+            return isPCMInit;
         }
 
         public static void DrawPCMWave()

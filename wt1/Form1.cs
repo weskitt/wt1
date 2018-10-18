@@ -57,7 +57,6 @@ namespace wt1
             OpenWaveDialog();
             DrawPCMWave();
             isGeneralShow = true;
-            //isGeneralShow = !isGeneralShow;
         }
 
         private void DrawGerneralData()
@@ -82,7 +81,6 @@ namespace wt1
         {
             DrawGerneralData();
             isGeneralShow = false;
-            //isGeneralShow = !isGeneralShow;
         }
 
         private void Switch_Click(object sender, EventArgs e)
@@ -97,13 +95,23 @@ namespace wt1
                 if(!isPCMInit)
                 {
                     FuncInit(panel1, this);
-                    OpenWaveDialog();
-                    DrawPCMWave();
+                    if (OpenWaveDialog()) DrawPCMWave();
+                    else goto End;
                 }
                 else
                     DrawPCMWave();
 
                 isGeneralShow = !isGeneralShow;
+            }
+        End:;
+        }
+
+        private void Fm1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar==(char)Keys.Escape)
+            {
+                this.Close();
+                return;
             }
         }
     }
