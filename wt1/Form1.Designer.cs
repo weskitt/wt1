@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fm1));
             this.skinTrackBar1 = new CCWin.SkinControl.SkinTrackBar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.item1Data = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.resetBtn = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -49,11 +49,11 @@
             this.skinTrackBar1.Bar = ((System.Drawing.Image)(resources.GetObject("skinTrackBar1.Bar")));
             this.skinTrackBar1.BarStyle = CCWin.SkinControl.HSLTrackBarStyle.Img;
             this.skinTrackBar1.BaseColor = System.Drawing.Color.DimGray;
-            this.skinTrackBar1.Location = new System.Drawing.Point(122, 15);
-            this.skinTrackBar1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.skinTrackBar1.Location = new System.Drawing.Point(81, 10);
+            this.skinTrackBar1.Margin = new System.Windows.Forms.Padding(4);
             this.skinTrackBar1.Name = "skinTrackBar1";
             this.skinTrackBar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.skinTrackBar1.Size = new System.Drawing.Size(185, 69);
+            this.skinTrackBar1.Size = new System.Drawing.Size(123, 45);
             this.skinTrackBar1.TabIndex = 1;
             this.skinTrackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.skinTrackBar1.Track = ((System.Drawing.Image)(resources.GetObject("skinTrackBar1.Track")));
@@ -63,42 +63,42 @@
             // panel1
             // 
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(480, 270);
+            this.panel1.Size = new System.Drawing.Size(320, 180);
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
-            // label1
+            // item1Data
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(319, 39);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 18);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "50";
+            this.item1Data.AutoSize = true;
+            this.item1Data.Location = new System.Drawing.Point(213, 26);
+            this.item1Data.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.item1Data.Name = "item1Data";
+            this.item1Data.Size = new System.Drawing.Size(17, 12);
+            this.item1Data.TabIndex = 3;
+            this.item1Data.Text = "50";
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.resetBtn);
             this.groupBox1.Controls.Add(this.skinTrackBar1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(249, 282);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Controls.Add(this.item1Data);
+            this.groupBox1.Location = new System.Drawing.Point(143, 188);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.groupBox1.Size = new System.Drawing.Size(355, 75);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(237, 50);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "item1";
             // 
             // resetBtn
             // 
-            this.resetBtn.Location = new System.Drawing.Point(12, 33);
-            this.resetBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.resetBtn.Location = new System.Drawing.Point(8, 22);
+            this.resetBtn.Margin = new System.Windows.Forms.Padding(4);
             this.resetBtn.Name = "resetBtn";
-            this.resetBtn.Size = new System.Drawing.Size(98, 30);
+            this.resetBtn.Size = new System.Drawing.Size(65, 20);
             this.resetBtn.TabIndex = 4;
             this.resetBtn.Text = "Reset";
             this.resetBtn.UseVisualStyleBackColor = true;
@@ -110,10 +110,10 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(22, 285);
-            this.openBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.openBtn.Location = new System.Drawing.Point(0, 196);
+            this.openBtn.Margin = new System.Windows.Forms.Padding(4);
             this.openBtn.Name = "openBtn";
-            this.openBtn.Size = new System.Drawing.Size(105, 30);
+            this.openBtn.Size = new System.Drawing.Size(70, 20);
             this.openBtn.TabIndex = 11;
             this.openBtn.Text = "Open Wave";
             this.openBtn.UseVisualStyleBackColor = true;
@@ -121,10 +121,10 @@
             // 
             // General
             // 
-            this.General.Location = new System.Drawing.Point(22, 327);
-            this.General.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.General.Location = new System.Drawing.Point(0,216);
+            this.General.Margin = new System.Windows.Forms.Padding(4);
             this.General.Name = "General";
-            this.General.Size = new System.Drawing.Size(105, 30);
+            this.General.Size = new System.Drawing.Size(70, 20);
             this.General.TabIndex = 12;
             this.General.Text = "General";
             this.General.UseVisualStyleBackColor = true;
@@ -132,10 +132,10 @@
             // 
             // Switch
             // 
-            this.Switch.Location = new System.Drawing.Point(139, 285);
-            this.Switch.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Switch.Location = new System.Drawing.Point(70, 196);
+            this.Switch.Margin = new System.Windows.Forms.Padding(4);
             this.Switch.Name = "Switch";
-            this.Switch.Size = new System.Drawing.Size(98, 30);
+            this.Switch.Size = new System.Drawing.Size(65, 20);
             this.Switch.TabIndex = 13;
             this.Switch.Text = "Switch";
             this.Switch.UseVisualStyleBackColor = true;
@@ -143,20 +143,20 @@
             // 
             // Both
             // 
-            this.Both.Location = new System.Drawing.Point(139, 327);
-            this.Both.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Both.Location = new System.Drawing.Point(70, 216);
+            this.Both.Margin = new System.Windows.Forms.Padding(4);
             this.Both.Name = "Both";
-            this.Both.Size = new System.Drawing.Size(98, 30);
+            this.Both.Size = new System.Drawing.Size(65, 20);
             this.Both.TabIndex = 14;
             this.Both.Text = "Both";
             this.Both.UseVisualStyleBackColor = true;
             // 
             // Fm1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1924, 1050);
+            this.ClientSize = new System.Drawing.Size(1283, 700);
             this.Controls.Add(this.Both);
             this.Controls.Add(this.Switch);
             this.Controls.Add(this.General);
@@ -165,7 +165,7 @@
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Fm1";
@@ -184,7 +184,7 @@
         #endregion
         private CCWin.SkinControl.SkinTrackBar skinTrackBar1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label item1Data;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button resetBtn;
         private System.Windows.Forms.Button openBtn;

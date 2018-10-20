@@ -30,10 +30,10 @@ namespace wt1
             panel1.Height = 900;
 
             Point btnSize = new Point(openBtn.Width, openBtn.Height);
-            Point btnOpenL = new Point(0, 900);
-            Point btnSwL = new Point(btnSize.X, 900);
-            Point btnGenL = new Point(0, btnSize.Y + 900);
-            Point btnBothL = new Point(btnSize.X, btnSize.Y + 900);
+            Point btnOpenL = new Point(0, 908);
+            Point btnSwL = new Point(btnSize.X, 908);
+            Point btnGenL = new Point(0, btnSize.Y + 908);
+            Point btnBothL = new Point(btnSize.X, btnSize.Y + 908);
             Point gpL = new Point(btnSize.X * 2, 900);
 
             openBtn.Location = btnOpenL;
@@ -58,13 +58,13 @@ namespace wt1
 
         private void SkinTrackBar1_Scroll(object sender, EventArgs e)
         {
-            label1.Text = skinTrackBar1.Value.ToString();
+            item1Data.Text = skinTrackBar1.Value.ToString();
         }
 
         private void ResetBtn_Click(object sender, EventArgs e)
         {
             skinTrackBar1.Value = skinTrackBar1.Maximum/2;
-            label1.Text = skinTrackBar1.Value.ToString();
+            item1Data.Text = skinTrackBar1.Value.ToString();
         }
         
         private void OpenBtn_Click(object sender, EventArgs e)
