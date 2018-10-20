@@ -22,20 +22,36 @@ namespace wt1
         {
             
             InitializeComponent();
+            
+            this.Width = 1900;
+            this.Height = 1026;
+
+            panel1.Width = 1600;
+            panel1.Height = 900;
+
+            Point btnSize = new Point(openBtn.Width, openBtn.Height);
+            Point btnOpenL = new Point(0, 900);
+            Point btnSwL = new Point(btnSize.X, 900);
+            Point btnGenL = new Point(0, btnSize.Y + 900);
+            Point btnBothL = new Point(btnSize.X, btnSize.Y + 900);
+            Point gpL = new Point(btnSize.X * 2, 900);
+
+            openBtn.Location = btnOpenL;
+            Switch.Location = btnSwL;
+            General.Location = btnGenL;
+            Both.Location = btnBothL;
+            groupBox1.Location = gpL;
+
         }
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Width = 1600;
-            this.Height = 1006;
+
         }
 
 
         public void Panel1_Paint(object sender, PaintEventArgs e)
         {
-            panel1.Width = 1600;
-            panel1.Height = 900;
-
             DrawGerneralData();
             isGeneralShow = false;
         }
