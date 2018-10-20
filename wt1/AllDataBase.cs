@@ -20,7 +20,7 @@ namespace wt1
             public int areaID;
             public float begin; //区域描述起点
             public float end;   //区域描述终点
-            public int countEnd;
+            //public int countEnd;
             public float beginData;
             public bool Initbegin = false;
             public bool preVoice = false;
@@ -68,7 +68,7 @@ namespace wt1
             public string pinyin; //符号发音
             public int tone;  //声调
 
-            public SortedDictionary<int, VoiceModInfo> info = new SortedDictionary<int, VoiceModInfo>();
+            public SortedDictionary<int, VoiceModInfo> infos = new SortedDictionary<int, VoiceModInfo>();
             public List<VoiceModInfo> ModInfo = new List<VoiceModInfo>();
             public SortedDictionary<int, int> keyData = new SortedDictionary<int, int>();  //间断不连续关键帧数据
             public List<int> data = new List<int>(); //发音具体数据

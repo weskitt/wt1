@@ -13,6 +13,9 @@ namespace wt1
         public int BaseSamCount;
         public float lastU;
         public static bool isGeneralShow =false;
+
+        public static VoiceModInfo tInfo;
+        public static Voice tVoice;
         //float lastD;
 
         public SortedDictionary<int, BaseVoiceSamp> BaseSampSingle = new SortedDictionary<int, BaseVoiceSamp>();
@@ -48,9 +51,9 @@ namespace wt1
 
             /******************************************************************/
             //塑形计算   数据修饰.
-            VoiceModInfo tInfo;
-            Voice tVoice = new Voice();
 
+
+            tVoice = new Voice();
             tInfo = new VoiceModInfo
             {
                 areaID = 1,
@@ -63,6 +66,7 @@ namespace wt1
                 end = -0.8f
             };
             tVoice.ModInfo.Add(tInfo);
+
 
             tInfo = new VoiceModInfo
             {

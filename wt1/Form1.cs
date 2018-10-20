@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using CCWin;
 using MathNet;
 using System.IO;
+using static wt1.AllDataBase;
 using static wt1.Funcs;
 using static wt1.WaveViewer;
 //using System.Runtime.InteropServices;
@@ -23,20 +24,20 @@ namespace wt1
             
             InitializeComponent();
             
-            this.Width = 1900;
-            this.Height = 1026;
+            this.Width = 1910;
+            this.Height = 1030;
 
             panel1.Width = 1600;
             panel1.Height = 900;
 
-            Point btnSize = new Point(openBtn.Width, openBtn.Height);
+            Point btnSize = new Point(OpenBtn.Width, OpenBtn.Height);
             Point btnOpenL = new Point(0, 908);
             Point btnSwL = new Point(btnSize.X, 908);
             Point btnGenL = new Point(0, btnSize.Y + 908);
             Point btnBothL = new Point(btnSize.X, btnSize.Y + 908);
             Point gpL = new Point(btnSize.X * 2, 900);
 
-            openBtn.Location = btnOpenL;
+            OpenBtn.Location = btnOpenL;
             Switch.Location = btnSwL;
             General.Location = btnGenL;
             Both.Location = btnBothL;
@@ -56,16 +57,7 @@ namespace wt1
             isGeneralShow = false;
         }
 
-        private void SkinTrackBar1_Scroll(object sender, EventArgs e)
-        {
-            item1Data.Text = skinTrackBar1.Value.ToString();
-        }
 
-        private void ResetBtn_Click(object sender, EventArgs e)
-        {
-            skinTrackBar1.Value = skinTrackBar1.Maximum/2;
-            item1Data.Text = skinTrackBar1.Value.ToString();
-        }
         
         private void OpenBtn_Click(object sender, EventArgs e)
         {
@@ -129,6 +121,88 @@ namespace wt1
                 this.Close();
                 return;
             }
+        }
+
+        private void NewArea_Click(object sender, EventArgs e)
+        {
+            int rowCount = 0;
+            AreaGrid.Rows[rowCount].Cells["AreaID"].Value = tVoice.infos.Count+1;
+            AreaGrid.Rows[rowCount].Cells["Begin"].Value = "null";
+            AreaGrid.Rows[rowCount].Cells["End"].Value = "null";
+            AreaGrid.Rows[rowCount].Cells["StartAmp"].Value = StartAmpTRB.Value;
+            AreaGrid.Rows[rowCount].Cells["Ort"].Value = "4";
+
+
+            tInfo = new VoiceModInfo
+            {
+                areaID = 1,
+                preVoice = true,
+                InitlastU = true,
+                Initbegin = false,
+
+                startAmp = 0.03f,
+                begin = -1.0f,
+                end = -0.8f
+            };
+            tVoice.ModInfo.Add(tInfo);
+        }
+
+
+        private void Arate0TRB_Scroll(object sender, EventArgs e)
+        {
+            Arate0_LShow.Text = Arate0TRB.Value.ToString();
+        }
+        private void Arate0_Reset_Click(object sender, EventArgs e)
+        {
+            Arate0TRB.Value = 50;
+            Arate0_LShow.Text = Arate0TRB.Value.ToString();
+        }
+
+        private void Arate1TRB_Scroll(object sender, EventArgs e)
+        {
+            Arate1_LShow.Text = Arate1TRB.Value.ToString();
+        }
+        private void Arate1_Reset_Click(object sender, EventArgs e)
+        {
+            Arate1TRB.Value = 50;
+            Arate1_LShow.Text = Arate1TRB.Value.ToString();
+        }
+
+
+        private void StartAmpTRB_Scroll(object sender, EventArgs e)
+        {
+            StartAmp_LShow.Text= StartAmpTRB.Value.ToString();
+        }
+        private void StartAmp_Reset_Click(object sender, EventArgs e)
+        {
+            StartAmpTRB.Value = StartAmpTRB.Maximum / 2;
+            StartAmp_LShow.Text = StartAmpTRB.Value.ToString();
+        }
+        
+        private void RootRateTRB_Scroll(object sender, EventArgs e)
+        {
+            RootRate_DShow.Text = RootRateTRB.Value.ToString();
+        }
+        private void RootRate_Reset_Click(object sender, EventArgs e)
+        {
+            RootRateTRB.Value = 50;
+            RootRate_DShow.Text = RootRateTRB.Value.ToString();
+        }
+
+        private void BeginDataTRB_Scroll(object sender, EventArgs e)
+        {
+            BeginData_LShow.Text = BeginDataTRB.Value.ToString();
+        }
+        private void BeginData_Reset_Click(object sender, EventArgs e)
+        {
+            BeginDataTRB.Value = 50;
+            BeginData_LShow.Text = BeginDataTRB.Value.ToString();
+        }
+
+        private void ExitBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            return;
         }
     }
 }
