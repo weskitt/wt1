@@ -33,9 +33,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.StartAmp_LShow = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Arate0_LShow = new System.Windows.Forms.Label();
+            this.Arate0_L = new System.Windows.Forms.Label();
+            this.StartAmp_Reset = new System.Windows.Forms.Button();
+            this.Arate0_Reset = new System.Windows.Forms.Button();
+            this.StartAmp_L = new System.Windows.Forms.Label();
             this.Arate1_LShow = new System.Windows.Forms.Label();
             this.BeginData_LShow = new System.Windows.Forms.Label();
-            this.Arate0_LShow = new System.Windows.Forms.Label();
             this.RootRate_DShow = new System.Windows.Forms.Label();
             this.RootRate_L = new System.Windows.Forms.Label();
             this.RootRate_Reset = new System.Windows.Forms.Button();
@@ -46,12 +50,8 @@
             this.BeginData_Reset = new System.Windows.Forms.Button();
             this.BeginDataTRB = new CCWin.SkinControl.SkinTrackBar();
             this.Arate1_L = new System.Windows.Forms.Label();
-            this.Arate0_L = new System.Windows.Forms.Label();
-            this.StartAmp_L = new System.Windows.Forms.Label();
             this.Arate1_Reset = new System.Windows.Forms.Button();
             this.Arate1TRB = new CCWin.SkinControl.SkinTrackBar();
-            this.Arate0_Reset = new System.Windows.Forms.Button();
-            this.StartAmp_Reset = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.OpenBtn = new System.Windows.Forms.Button();
             this.General = new System.Windows.Forms.Button();
@@ -63,17 +63,24 @@
             this.End = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartAmp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.waveViewerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.NewArea = new System.Windows.Forms.Button();
             this.Ort_0 = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Ort__1 = new System.Windows.Forms.RadioButton();
             this.Ort_1 = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.skinTrackBar1 = new CCWin.SkinControl.SkinTrackBar();
-            this.waveViewerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Begin_LShow = new System.Windows.Forms.Label();
+            this.Begin_L = new System.Windows.Forms.Label();
+            this.Begin_Reset = new System.Windows.Forms.Button();
+            this.BeginTRB = new CCWin.SkinControl.SkinTrackBar();
             this.ExitBtn = new System.Windows.Forms.Button();
+            this.End_LShow = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.End_Reset = new System.Windows.Forms.Button();
+            this.EndTRB = new CCWin.SkinControl.SkinTrackBar();
+            this.Initbegin_Set = new System.Windows.Forms.CheckBox();
+            this.PreVoice_Set = new System.Windows.Forms.CheckBox();
+            this.InitlastU_Set = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RootRateTRB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Arate0TRB)).BeginInit();
@@ -81,9 +88,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.BeginDataTRB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Arate1TRB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AreaGrid)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.skinTrackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.waveViewerBindingSource)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BeginTRB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EndTRB)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -135,6 +143,56 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
+            // Arate0_LShow
+            // 
+            this.Arate0_LShow.AutoSize = true;
+            this.Arate0_LShow.Location = new System.Drawing.Point(625, 21);
+            this.Arate0_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Arate0_LShow.Name = "Arate0_LShow";
+            this.Arate0_LShow.Size = new System.Drawing.Size(26, 18);
+            this.Arate0_LShow.TabIndex = 19;
+            this.Arate0_LShow.Text = "50";
+            // 
+            // Arate0_L
+            // 
+            this.Arate0_L.AutoSize = true;
+            this.Arate0_L.Location = new System.Drawing.Point(554, 21);
+            this.Arate0_L.Name = "Arate0_L";
+            this.Arate0_L.Size = new System.Drawing.Size(62, 18);
+            this.Arate0_L.TabIndex = 10;
+            this.Arate0_L.Text = "Arate0";
+            // 
+            // StartAmp_Reset
+            // 
+            this.StartAmp_Reset.Location = new System.Drawing.Point(436, 15);
+            this.StartAmp_Reset.Margin = new System.Windows.Forms.Padding(6);
+            this.StartAmp_Reset.Name = "StartAmp_Reset";
+            this.StartAmp_Reset.Size = new System.Drawing.Size(98, 30);
+            this.StartAmp_Reset.TabIndex = 4;
+            this.StartAmp_Reset.Text = "Reset";
+            this.StartAmp_Reset.UseVisualStyleBackColor = true;
+            this.StartAmp_Reset.Click += new System.EventHandler(this.StartAmp_Reset_Click);
+            // 
+            // Arate0_Reset
+            // 
+            this.Arate0_Reset.Location = new System.Drawing.Point(719, 15);
+            this.Arate0_Reset.Margin = new System.Windows.Forms.Padding(6);
+            this.Arate0_Reset.Name = "Arate0_Reset";
+            this.Arate0_Reset.Size = new System.Drawing.Size(98, 30);
+            this.Arate0_Reset.TabIndex = 6;
+            this.Arate0_Reset.Text = "Reset";
+            this.Arate0_Reset.UseVisualStyleBackColor = true;
+            this.Arate0_Reset.Click += new System.EventHandler(this.Arate0_Reset_Click);
+            // 
+            // StartAmp_L
+            // 
+            this.StartAmp_L.AutoSize = true;
+            this.StartAmp_L.Location = new System.Drawing.Point(271, 19);
+            this.StartAmp_L.Name = "StartAmp_L";
+            this.StartAmp_L.Size = new System.Drawing.Size(80, 18);
+            this.StartAmp_L.TabIndex = 9;
+            this.StartAmp_L.Text = "StartAmp";
+            // 
             // Arate1_LShow
             // 
             this.Arate1_LShow.AutoSize = true;
@@ -154,16 +212,6 @@
             this.BeginData_LShow.Size = new System.Drawing.Size(26, 18);
             this.BeginData_LShow.TabIndex = 20;
             this.BeginData_LShow.Text = "50";
-            // 
-            // Arate0_LShow
-            // 
-            this.Arate0_LShow.AutoSize = true;
-            this.Arate0_LShow.Location = new System.Drawing.Point(625, 21);
-            this.Arate0_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.Arate0_LShow.Name = "Arate0_LShow";
-            this.Arate0_LShow.Size = new System.Drawing.Size(26, 18);
-            this.Arate0_LShow.TabIndex = 19;
-            this.Arate0_LShow.Text = "50";
             // 
             // RootRate_DShow
             // 
@@ -292,24 +340,6 @@
             this.Arate1_L.TabIndex = 11;
             this.Arate1_L.Text = "Arate1";
             // 
-            // Arate0_L
-            // 
-            this.Arate0_L.AutoSize = true;
-            this.Arate0_L.Location = new System.Drawing.Point(554, 21);
-            this.Arate0_L.Name = "Arate0_L";
-            this.Arate0_L.Size = new System.Drawing.Size(62, 18);
-            this.Arate0_L.TabIndex = 10;
-            this.Arate0_L.Text = "Arate0";
-            // 
-            // StartAmp_L
-            // 
-            this.StartAmp_L.AutoSize = true;
-            this.StartAmp_L.Location = new System.Drawing.Point(271, 19);
-            this.StartAmp_L.Name = "StartAmp_L";
-            this.StartAmp_L.Size = new System.Drawing.Size(80, 18);
-            this.StartAmp_L.TabIndex = 9;
-            this.StartAmp_L.Text = "StartAmp";
-            // 
             // Arate1_Reset
             // 
             this.Arate1_Reset.Location = new System.Drawing.Point(1002, 15);
@@ -337,28 +367,6 @@
             this.Arate1TRB.Track = ((System.Drawing.Image)(resources.GetObject("Arate1TRB.Track")));
             this.Arate1TRB.Value = 50;
             this.Arate1TRB.Scroll += new System.EventHandler(this.Arate1TRB_Scroll);
-            // 
-            // Arate0_Reset
-            // 
-            this.Arate0_Reset.Location = new System.Drawing.Point(719, 15);
-            this.Arate0_Reset.Margin = new System.Windows.Forms.Padding(6);
-            this.Arate0_Reset.Name = "Arate0_Reset";
-            this.Arate0_Reset.Size = new System.Drawing.Size(98, 30);
-            this.Arate0_Reset.TabIndex = 6;
-            this.Arate0_Reset.Text = "Reset";
-            this.Arate0_Reset.UseVisualStyleBackColor = true;
-            this.Arate0_Reset.Click += new System.EventHandler(this.Arate0_Reset_Click);
-            // 
-            // StartAmp_Reset
-            // 
-            this.StartAmp_Reset.Location = new System.Drawing.Point(436, 15);
-            this.StartAmp_Reset.Margin = new System.Windows.Forms.Padding(6);
-            this.StartAmp_Reset.Name = "StartAmp_Reset";
-            this.StartAmp_Reset.Size = new System.Drawing.Size(98, 30);
-            this.StartAmp_Reset.TabIndex = 4;
-            this.StartAmp_Reset.Text = "Reset";
-            this.StartAmp_Reset.UseVisualStyleBackColor = true;
-            this.StartAmp_Reset.Click += new System.EventHandler(this.StartAmp_Reset_Click);
             // 
             // openFileDialog1
             // 
@@ -458,6 +466,10 @@
             this.Ort.HeaderText = "Ort";
             this.Ort.Name = "Ort";
             // 
+            // waveViewerBindingSource
+            // 
+            this.waveViewerBindingSource.DataSource = typeof(wt1.WaveViewer);
+            // 
             // NewArea
             // 
             this.NewArea.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -472,6 +484,7 @@
             // Ort_0
             // 
             this.Ort_0.AutoSize = true;
+            this.Ort_0.Checked = true;
             this.Ort_0.Location = new System.Drawing.Point(104, 12);
             this.Ort_0.Name = "Ort_0";
             this.Ort_0.Size = new System.Drawing.Size(69, 22);
@@ -479,13 +492,14 @@
             this.Ort_0.TabStop = true;
             this.Ort_0.Text = "Ort0";
             this.Ort_0.UseVisualStyleBackColor = true;
+            this.Ort_0.CheckedChanged += new System.EventHandler(this.Ort_0_CheckedChanged);
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.Ort__1);
             this.panel2.Controls.Add(this.Ort_1);
             this.panel2.Controls.Add(this.Ort_0);
-            this.panel2.Location = new System.Drawing.Point(1609, 249);
+            this.panel2.Location = new System.Drawing.Point(1609, 257);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(267, 45);
             this.panel2.TabIndex = 18;
@@ -497,9 +511,9 @@
             this.Ort__1.Name = "Ort__1";
             this.Ort__1.Size = new System.Drawing.Size(78, 22);
             this.Ort__1.TabIndex = 20;
-            this.Ort__1.TabStop = true;
             this.Ort__1.Text = "Ort-1";
             this.Ort__1.UseVisualStyleBackColor = true;
+            this.Ort__1.CheckedChanged += new System.EventHandler(this.Ort__1_CheckedChanged);
             // 
             // Ort_1
             // 
@@ -508,58 +522,56 @@
             this.Ort_1.Name = "Ort_1";
             this.Ort_1.Size = new System.Drawing.Size(69, 22);
             this.Ort_1.TabIndex = 19;
-            this.Ort_1.TabStop = true;
             this.Ort_1.Text = "Ort1";
             this.Ort_1.UseVisualStyleBackColor = true;
+            this.Ort_1.CheckedChanged += new System.EventHandler(this.Ort_1_CheckedChanged);
             // 
-            // label1
+            // Begin_LShow
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1698, 322);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 18);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "50";
+            this.Begin_LShow.AutoSize = true;
+            this.Begin_LShow.Location = new System.Drawing.Point(1698, 399);
+            this.Begin_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Begin_LShow.Name = "Begin_LShow";
+            this.Begin_LShow.Size = new System.Drawing.Size(26, 18);
+            this.Begin_LShow.TabIndex = 22;
+            this.Begin_LShow.Text = "50";
             // 
-            // label2
+            // Begin_L
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1609, 322);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 18);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "RootRate";
+            this.Begin_L.AutoSize = true;
+            this.Begin_L.Location = new System.Drawing.Point(1609, 399);
+            this.Begin_L.Name = "Begin_L";
+            this.Begin_L.Size = new System.Drawing.Size(53, 18);
+            this.Begin_L.TabIndex = 21;
+            this.Begin_L.Text = "Begin";
             // 
-            // button1
+            // Begin_Reset
             // 
-            this.button1.Location = new System.Drawing.Point(1775, 316);
-            this.button1.Margin = new System.Windows.Forms.Padding(6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 30);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Reset";
-            this.button1.UseVisualStyleBackColor = true;
+            this.Begin_Reset.Location = new System.Drawing.Point(1775, 393);
+            this.Begin_Reset.Margin = new System.Windows.Forms.Padding(6);
+            this.Begin_Reset.Name = "Begin_Reset";
+            this.Begin_Reset.Size = new System.Drawing.Size(98, 30);
+            this.Begin_Reset.TabIndex = 20;
+            this.Begin_Reset.Text = "Reset";
+            this.Begin_Reset.UseVisualStyleBackColor = true;
+            this.Begin_Reset.Click += new System.EventHandler(this.Begin_Reset_Click);
             // 
-            // skinTrackBar1
+            // BeginTRB
             // 
-            this.skinTrackBar1.BackColor = System.Drawing.Color.Transparent;
-            this.skinTrackBar1.Bar = ((System.Drawing.Image)(resources.GetObject("skinTrackBar1.Bar")));
-            this.skinTrackBar1.BarStyle = CCWin.SkinControl.HSLTrackBarStyle.Img;
-            this.skinTrackBar1.BaseColor = System.Drawing.Color.DimGray;
-            this.skinTrackBar1.Location = new System.Drawing.Point(1612, 332);
-            this.skinTrackBar1.Margin = new System.Windows.Forms.Padding(6);
-            this.skinTrackBar1.Name = "skinTrackBar1";
-            this.skinTrackBar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.skinTrackBar1.Size = new System.Drawing.Size(260, 69);
-            this.skinTrackBar1.TabIndex = 19;
-            this.skinTrackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.skinTrackBar1.Track = ((System.Drawing.Image)(resources.GetObject("skinTrackBar1.Track")));
-            this.skinTrackBar1.Value = 50;
-            // 
-            // waveViewerBindingSource
-            // 
-            this.waveViewerBindingSource.DataSource = typeof(wt1.WaveViewer);
+            this.BeginTRB.BackColor = System.Drawing.Color.Transparent;
+            this.BeginTRB.Bar = ((System.Drawing.Image)(resources.GetObject("BeginTRB.Bar")));
+            this.BeginTRB.BarStyle = CCWin.SkinControl.HSLTrackBarStyle.Img;
+            this.BeginTRB.BaseColor = System.Drawing.Color.DimGray;
+            this.BeginTRB.Location = new System.Drawing.Point(1612, 409);
+            this.BeginTRB.Margin = new System.Windows.Forms.Padding(6);
+            this.BeginTRB.Name = "BeginTRB";
+            this.BeginTRB.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.BeginTRB.Size = new System.Drawing.Size(260, 69);
+            this.BeginTRB.TabIndex = 19;
+            this.BeginTRB.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.BeginTRB.Track = ((System.Drawing.Image)(resources.GetObject("BeginTRB.Track")));
+            this.BeginTRB.Value = 50;
+            this.BeginTRB.Scroll += new System.EventHandler(this.BeginTRB_Scroll);
             // 
             // ExitBtn
             // 
@@ -571,17 +583,104 @@
             this.ExitBtn.UseVisualStyleBackColor = true;
             this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
+            // End_LShow
+            // 
+            this.End_LShow.AutoSize = true;
+            this.End_LShow.Location = new System.Drawing.Point(1698, 480);
+            this.End_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.End_LShow.Name = "End_LShow";
+            this.End_LShow.Size = new System.Drawing.Size(26, 18);
+            this.End_LShow.TabIndex = 27;
+            this.End_LShow.Text = "50";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1609, 480);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 18);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "End";
+            // 
+            // End_Reset
+            // 
+            this.End_Reset.Location = new System.Drawing.Point(1775, 474);
+            this.End_Reset.Margin = new System.Windows.Forms.Padding(6);
+            this.End_Reset.Name = "End_Reset";
+            this.End_Reset.Size = new System.Drawing.Size(98, 30);
+            this.End_Reset.TabIndex = 25;
+            this.End_Reset.Text = "Reset";
+            this.End_Reset.UseVisualStyleBackColor = true;
+            this.End_Reset.Click += new System.EventHandler(this.End_Reset_Click);
+            // 
+            // EndTRB
+            // 
+            this.EndTRB.BackColor = System.Drawing.Color.Transparent;
+            this.EndTRB.Bar = ((System.Drawing.Image)(resources.GetObject("EndTRB.Bar")));
+            this.EndTRB.BarStyle = CCWin.SkinControl.HSLTrackBarStyle.Img;
+            this.EndTRB.BaseColor = System.Drawing.Color.DimGray;
+            this.EndTRB.Location = new System.Drawing.Point(1612, 490);
+            this.EndTRB.Margin = new System.Windows.Forms.Padding(6);
+            this.EndTRB.Name = "EndTRB";
+            this.EndTRB.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.EndTRB.Size = new System.Drawing.Size(260, 69);
+            this.EndTRB.TabIndex = 24;
+            this.EndTRB.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.EndTRB.Track = ((System.Drawing.Image)(resources.GetObject("EndTRB.Track")));
+            this.EndTRB.Value = 50;
+            this.EndTRB.Scroll += new System.EventHandler(this.EndTRB_Scroll);
+            // 
+            // Initbegin_Set
+            // 
+            this.Initbegin_Set.AutoSize = true;
+            this.Initbegin_Set.Location = new System.Drawing.Point(1613, 314);
+            this.Initbegin_Set.Name = "Initbegin_Set";
+            this.Initbegin_Set.Size = new System.Drawing.Size(115, 22);
+            this.Initbegin_Set.TabIndex = 28;
+            this.Initbegin_Set.Text = "InitBegin";
+            this.Initbegin_Set.UseVisualStyleBackColor = true;
+            this.Initbegin_Set.CheckedChanged += new System.EventHandler(this.Initbegin_Set_CheckedChanged);
+            // 
+            // PreVoice_Set
+            // 
+            this.PreVoice_Set.AutoSize = true;
+            this.PreVoice_Set.Location = new System.Drawing.Point(1751, 314);
+            this.PreVoice_Set.Name = "PreVoice_Set";
+            this.PreVoice_Set.Size = new System.Drawing.Size(106, 22);
+            this.PreVoice_Set.TabIndex = 29;
+            this.PreVoice_Set.Text = "PreVoice";
+            this.PreVoice_Set.UseVisualStyleBackColor = true;
+            this.PreVoice_Set.CheckedChanged += new System.EventHandler(this.PreVoice_Set_CheckedChanged);
+            // 
+            // InitlastU_Set
+            // 
+            this.InitlastU_Set.AutoSize = true;
+            this.InitlastU_Set.Location = new System.Drawing.Point(1613, 351);
+            this.InitlastU_Set.Name = "InitlastU_Set";
+            this.InitlastU_Set.Size = new System.Drawing.Size(115, 22);
+            this.InitlastU_Set.TabIndex = 30;
+            this.InitlastU_Set.Text = "InitlastU";
+            this.InitlastU_Set.UseVisualStyleBackColor = true;
+            this.InitlastU_Set.CheckedChanged += new System.EventHandler(this.InitlastU_Set_CheckedChanged);
+            // 
             // Fm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1888, 658);
-            this.Controls.Add(this.ExitBtn);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.InitlastU_Set);
+            this.Controls.Add(this.PreVoice_Set);
+            this.Controls.Add(this.Initbegin_Set);
+            this.Controls.Add(this.End_LShow);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.skinTrackBar1);
+            this.Controls.Add(this.End_Reset);
+            this.Controls.Add(this.EndTRB);
+            this.Controls.Add(this.ExitBtn);
+            this.Controls.Add(this.Begin_LShow);
+            this.Controls.Add(this.Begin_L);
+            this.Controls.Add(this.Begin_Reset);
+            this.Controls.Add(this.BeginTRB);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.NewArea);
             this.Controls.Add(this.AreaGrid);
@@ -610,10 +709,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.BeginDataTRB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Arate1TRB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AreaGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.waveViewerBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.skinTrackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.waveViewerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BeginTRB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EndTRB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -659,11 +759,18 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton Ort_1;
         private System.Windows.Forms.RadioButton Ort__1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private CCWin.SkinControl.SkinTrackBar skinTrackBar1;
+        private System.Windows.Forms.Label Begin_LShow;
+        private System.Windows.Forms.Label Begin_L;
+        private System.Windows.Forms.Button Begin_Reset;
+        private CCWin.SkinControl.SkinTrackBar BeginTRB;
         private System.Windows.Forms.Button ExitBtn;
+        private System.Windows.Forms.Label End_LShow;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button End_Reset;
+        private CCWin.SkinControl.SkinTrackBar EndTRB;
+        private System.Windows.Forms.CheckBox Initbegin_Set;
+        private System.Windows.Forms.CheckBox PreVoice_Set;
+        private System.Windows.Forms.CheckBox InitlastU_Set;
     }
 }
 

@@ -239,7 +239,25 @@
   <metadata name="waveViewerBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>223, 17</value>
   </metadata>
-  <data name="skinTrackBar1.Bar" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <metadata name="AreaID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Begin.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="End.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="StartAmp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Ort.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="waveViewerBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>223, 17</value>
+  </metadata>
+  <data name="BeginTRB.Bar" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAHsAAABkCAIAAAApJdhmAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAAOFJREFUeF7t0DEBAAAMw6D5/+t3LriCBG6xGtca1xrXGtca1xrXGtca1xrXGtca
@@ -249,7 +267,27 @@
         V+nSjeMI4wAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="skinTrackBar1.Track" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="BeginTRB.Track" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAMYAAABeCAIAAAD3zPwkAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAPhJREFUeF7t0jEBAAAMw6D5F1dNM5ETNHCDlFLElCKmFDGliClFTCliShFTiphS
+        xJQiphQxpYgpRUwpYkoRU4qYUsSUIqYUMaWIKUVMKWJKEVOKmFLElCKmFDGliClFTCliShFTiphSxJQi
+        phQxpYgpRUwpYkoRU4qYUsSUIqYUMaWIKUVMKWJKEVOKmFLElCKmFDGliClFTCliShFTiphSxJQiphQx
+        pYgpRUwpYkoRU4qYUsSUIqYUMaWIKUVMKWJKEVOKmFLElCKmFDGliClFTCliShFTiphSxJQiphQxpYgp
+        RUwpYkoRU4qYUsSUIqYUMaWIKUVqe4C4jMrLxjiJAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="EndTRB.Bar" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAHsAAABkCAIAAAApJdhmAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAOFJREFUeF7t0DEBAAAMw6D5/+t3LriCBG6xGtca1xrXGtca1xrXGtca1xrXGtca
+        1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca
+        1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca
+        1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xrXGtca1xq3tgdS
+        V+nSjeMI4wAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="EndTRB.Track" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAMYAAABeCAIAAAD3zPwkAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAAPhJREFUeF7t0jEBAAAMw6D5F1dNM5ETNHCDlFLElCKmFDGliClFTCliShFTiphS

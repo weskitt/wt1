@@ -43,6 +43,23 @@ namespace wt1
             Both.Location = btnBothL;
             groupBox1.Location = gpL;
 
+            tVoice = new Voice();
+            tInfo = new VoiceModInfo
+            {
+                areaID = 2,
+                preVoice = false,
+                InitlastU = false,
+                Initbegin = true,
+                beginData = 0.5f,
+
+                begin = -0.8f,
+                end = 0.3f,
+                ort = -0.001f,//0不变，-1收缩，1膨胀
+                RootRate = 8,
+                Arate0 = 3,
+                Arate1 = -0.08f
+            };
+
         }
         
         private void Form1_Load(object sender, EventArgs e)
@@ -203,6 +220,52 @@ namespace wt1
         {
             this.Close();
             return;
+        }
+
+        private void BeginTRB_Scroll(object sender, EventArgs e)
+        {
+            Begin_LShow.Text = BeginTRB.Value.ToString();
+        }
+        private void Begin_Reset_Click(object sender, EventArgs e)
+        {
+            BeginTRB.Value = 50;
+            Begin_LShow.Text = BeginTRB.Value.ToString();
+        }
+
+        private void EndTRB_Scroll(object sender, EventArgs e)
+        {
+            End_LShow.Text = EndTRB.Value.ToString();
+        }
+        private void End_Reset_Click(object sender, EventArgs e)
+        {
+            EndTRB.Value = 50;
+            End_LShow.Text = EndTRB.Value.ToString();
+        }
+
+        private void Ort_0_CheckedChanged(object sender, EventArgs e)
+        {
+            tInfo.ort = 0f;
+        }
+        private void Ort__1_CheckedChanged(object sender, EventArgs e)
+        {
+            tInfo.ort = -0.001f;
+        }
+        private void Ort_1_CheckedChanged(object sender, EventArgs e)
+        {
+            tInfo.ort = 0.001f;
+        }
+
+        private void Initbegin_Set_CheckedChanged(object sender, EventArgs e)
+        {
+            tInfo.Initbegin = Initbegin_Set.Checked;
+        }
+        private void PreVoice_Set_CheckedChanged(object sender, EventArgs e)
+        {
+            tInfo.preVoice = PreVoice_Set.Checked;
+        }
+        private void InitlastU_Set_CheckedChanged(object sender, EventArgs e)
+        {
+            tInfo.InitlastU = Initbegin_Set.Checked;
         }
     }
 }
