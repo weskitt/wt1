@@ -219,9 +219,9 @@
             this.RootRate_DShow.Location = new System.Drawing.Point(1493, 21);
             this.RootRate_DShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.RootRate_DShow.Name = "RootRate_DShow";
-            this.RootRate_DShow.Size = new System.Drawing.Size(26, 18);
+            this.RootRate_DShow.Size = new System.Drawing.Size(17, 18);
             this.RootRate_DShow.TabIndex = 18;
-            this.RootRate_DShow.Text = "50";
+            this.RootRate_DShow.Text = "0";
             // 
             // RootRate_L
             // 
@@ -251,13 +251,14 @@
             this.RootRateTRB.BaseColor = System.Drawing.Color.DimGray;
             this.RootRateTRB.Location = new System.Drawing.Point(1408, 27);
             this.RootRateTRB.Margin = new System.Windows.Forms.Padding(6);
+            this.RootRateTRB.Maximum = 4000;
             this.RootRateTRB.Name = "RootRateTRB";
             this.RootRateTRB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.RootRateTRB.Size = new System.Drawing.Size(260, 69);
             this.RootRateTRB.TabIndex = 15;
             this.RootRateTRB.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.RootRateTRB.Track = ((System.Drawing.Image)(resources.GetObject("RootRateTRB.Track")));
-            this.RootRateTRB.Value = 50;
+            this.RootRateTRB.Value = 2000;
             this.RootRateTRB.Scroll += new System.EventHandler(this.RootRateTRB_Scroll);
             // 
             // BeginData_L

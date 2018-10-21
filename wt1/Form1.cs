@@ -58,6 +58,7 @@ namespace wt1
             Arate1_Ratio = (double)2 / Arate1TRB.Maximum;
             Mod_Ratio = (double)2 / BeginTRB.Maximum;
             Amp_Ratio = (double)1 / StartAmpTRB.Maximum;
+            Root_Ratio = (double)40 / RootRateTRB.Maximum;
         }
         
         private void Form1_Load(object sender, EventArgs e)
@@ -202,12 +203,15 @@ namespace wt1
         
         private void RootRateTRB_Scroll(object sender, EventArgs e)
         {
-            RootRate_DShow.Text = RootRateTRB.Value.ToString();
+            tInfo.RootRate= Math.Round(Root_Ratio * RootRateTRB.Value -20, 2);
+            RootRate_DShow.Text = tInfo.RootRate.ToString();
         }
         private void RootRate_Reset_Click(object sender, EventArgs e)
         {
-            RootRateTRB.Value = 50;
-            RootRate_DShow.Text = RootRateTRB.Value.ToString();
+            RootRateTRB.Value = RootRateTRB.Maximum / 2 ;
+
+            tInfo.RootRate = Math.Round(Root_Ratio * RootRateTRB.Value-20, 2);
+            RootRate_DShow.Text = tInfo.RootRate.ToString();
         }
 
         private void BeginDataTRB_Scroll(object sender, EventArgs e)
