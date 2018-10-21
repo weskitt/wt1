@@ -15,23 +15,28 @@ namespace wt1
             public int areaID;
 
         };
-        public class VoiceModInfo
+
+        public static double Mod_Ratio;
+        public static double Arate0_Ratio;
+        public static double Arate1_Ratio;
+        public static double Amp_Ratio;
+        public class VoiceModInfo 
         {
             public int areaID;
-            public float begin; //区域描述起点
-            public float end;   //区域描述终点
+            public double begin; //区域描述起点//-1  -----   1    0.01分辨率
+            public double end;   //区域描述终点
             //public int countEnd;
-            public float beginData;
+            public float beginData; //-1  -----   1    0.001分辨率
             public bool Initbegin = false;
             public bool preVoice = false;
-            public float startAmp;
+            public float startAmp; //-1  -----   1    0.001分辨率
             public bool InitlastU = false;
 
-            public float ort;
-            public float RootRate;
-            public float Arate0; //附加变化率，用于修改主rate，实现:变加速，变减速
-            public float Arate1;
-            public float Arate2;
+            public double ort;
+            public double RootRate;
+            public double Arate0; //-10  -----   10    0.1分辨率
+            public double Arate1;//-1  -----   1    0.001分辨率
+            public double Arate2;
             public float baseN;
 
             public void Fusion(SortedDictionary<int, BaseVoiceSamp> bvs, int index,ref float lastU)
@@ -55,7 +60,7 @@ namespace wt1
                     }
                     //counter += 1; //加速参数
                     Arate0 += Arate1;
-                    baseN = Arate0 * RootRate * ort;
+                    baseN = (float)(Arate0 * RootRate * ort);
                     bvs[index].value = lastU + baseN;
                     lastU = bvs[index].value;
                 }
@@ -64,9 +69,10 @@ namespace wt1
 
         public class Voice
         {
-            public string symbol; //符号，用于存储显示字符
+            //public string[] glyphs; //符号，用于存储显示字符 同音字
             public string pinyin; //符号发音
-            public int tone;  //声调
+            //public int tone;  //声调
+
 
             public SortedDictionary<int, VoiceModInfo> infos = new SortedDictionary<int, VoiceModInfo>();
             public List<VoiceModInfo> ModInfo = new List<VoiceModInfo>();
@@ -77,9 +83,9 @@ namespace wt1
 
         public static SortedDictionary<string, Voice> VoiceData = new SortedDictionary<string, Voice>();  //汉字， 发音数据
 
-        public static float General_x(int curX)
+        public static double General_x(int curX)
         {
-            return -1.0f + (curX / (float)(1920 - 1)) * 2.0f;
+            return -1.0f + (curX / (double)(1920 - 1)) * 2.0f;
         }
 
     }

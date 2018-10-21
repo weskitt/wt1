@@ -33,8 +33,9 @@ namespace wt1
         static List<Point> lp = new List<Point>();
         static string PCMPath = string.Empty;
         static Form fm;
-        static public bool isPCMInit =false;
+        public static bool isPCMInit =false;
         public static Point[] pcm;
+        static string wavName = string.Empty;
 
         public static void FuncInit(Panel panel, Form form)
         {
@@ -44,45 +45,45 @@ namespace wt1
             fm = form;
         }
         // FileStream读取文件
-        public static string FileStreamReadFile(string filePath)
-        {
-            byte[] data = new byte[100];
-            char[] charData = new char[100];
-            FileStream file = new FileStream(filePath, FileMode.Open);
+        //public static string FileStreamReadFile(string filePath)
+        //{
+        //    byte[] data = new byte[100];
+        //    char[] charData = new char[100];
+        //    FileStream file = new FileStream(filePath, FileMode.Open);
 
-            //文件指针指向0位置
-            file.Seek(0, SeekOrigin.Begin);
-            //读入两百个字节
-            file.Read(data, 0, (int)file.Length);
-            //提取字节数组
-            Decoder dec = Encoding.UTF8.GetDecoder();
-            dec.GetChars(data, 0, data.Length, charData, 0);
-            return Convert.ToString(charData);
-        }
+        //    //文件指针指向0位置
+        //    file.Seek(0, SeekOrigin.Begin);
+        //    //读入两百个字节
+        //    file.Read(data, 0, (int)file.Length);
+        //    //提取字节数组
+        //    Decoder dec = Encoding.UTF8.GetDecoder();
+        //    dec.GetChars(data, 0, data.Length, charData, 0);
+        //    return Convert.ToString(charData);
+        //}
 
-        // 用FileStream写文件
-        public static void FileStreamWriteFile(string filePath, string str)
-        {
-            byte[] byData;
-            char[] charData;
-            try
-            {
-                FileStream nFile = new FileStream(filePath + "love.txt", FileMode.Create);
-                //获得字符数组
-                charData = str.ToCharArray();
-                //初始化字节数组
-                byData = new byte[charData.Length];
-                //将字符数组转换为正确的字节格式
-                Encoder enc = Encoding.UTF8.GetEncoder();
-                enc.GetBytes(charData, 0, charData.Length, byData, 0, true);
-                nFile.Seek(0, SeekOrigin.Begin);
-                nFile.Write(byData, 0, byData.Length);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //// 用FileStream写文件
+        //public static void FileStreamWriteFile(string filePath, string str)
+        //{
+        //    byte[] byData;
+        //    char[] charData;
+        //    try
+        //    {
+        //        FileStream nFile = new FileStream(filePath + "love.txt", FileMode.Create);
+        //        //获得字符数组
+        //        charData = str.ToCharArray();
+        //        //初始化字节数组
+        //        byData = new byte[charData.Length];
+        //        //将字符数组转换为正确的字节格式
+        //        Encoder enc = Encoding.UTF8.GetEncoder();
+        //        enc.GetBytes(charData, 0, charData.Length, byData, 0, true);
+        //        nFile.Seek(0, SeekOrigin.Begin);
+        //        nFile.Write(byData, 0, byData.Length);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
 
         public static bool OpenWaveDialog()
@@ -98,6 +99,7 @@ namespace wt1
                 {
                     byte[] dataSizeByte = new byte[2];
                     PCMPath = openFileDialog.FileName;
+                    wavName = openFileDialog.SafeFileName;
 
                     var fsm = openFileDialog.OpenFile(); //FileStream fsm = new FileStream(filePath, FileMode.Open);
 
@@ -132,7 +134,7 @@ namespace wt1
             return isPCMInit;
         }
 
-        public static void DrawPCMWave()
+        public static string DrawPCMWave()
         {
             Pen pen = new Pen(Color.Green);
             SolidBrush bb = new SolidBrush(Color.Black);
@@ -142,6 +144,9 @@ namespace wt1
             gp.DrawLines(pen, pcm);
 
             fm.Text = PCMPath;
+
+            wavName = wavName.Replace(".wav", "");
+            return wavName;
         }
 
     }

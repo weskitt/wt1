@@ -16,7 +16,8 @@ namespace wt1
 
         public static VoiceModInfo tInfo;
         public static Voice tVoice;
-        //float lastD;
+        public static string chpy;
+        //double lastD;
 
         public SortedDictionary<int, BaseVoiceSamp> BaseSampSingle = new SortedDictionary<int, BaseVoiceSamp>();
         public SortedDictionary<int, BaseVoiceSamp> BaseSamps = new SortedDictionary<int, BaseVoiceSamp>();
@@ -109,7 +110,7 @@ namespace wt1
             {
             NewMod:
                 var bsv = BaseSampSingle[BSkeys[i]];
-                float SampIndex = General_x(bsv.index);
+                double SampIndex = General_x(bsv.index);
 
                 if (SampIndex >= tVoice.ModInfo[modIndex].begin && SampIndex < tVoice.ModInfo[modIndex].end)
                 {

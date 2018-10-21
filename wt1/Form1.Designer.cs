@@ -63,7 +63,6 @@
             this.End = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartAmp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ort = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.waveViewerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.NewArea = new System.Windows.Forms.Button();
             this.Ort_0 = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -81,6 +80,7 @@
             this.Initbegin_Set = new System.Windows.Forms.CheckBox();
             this.PreVoice_Set = new System.Windows.Forms.CheckBox();
             this.InitlastU_Set = new System.Windows.Forms.CheckBox();
+            this.waveViewerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RootRateTRB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Arate0TRB)).BeginInit();
@@ -88,10 +88,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.BeginDataTRB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Arate1TRB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AreaGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.waveViewerBindingSource)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BeginTRB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EndTRB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.waveViewerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -109,9 +109,9 @@
             this.StartAmp_LShow.Location = new System.Drawing.Point(360, 21);
             this.StartAmp_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.StartAmp_LShow.Name = "StartAmp_LShow";
-            this.StartAmp_LShow.Size = new System.Drawing.Size(26, 18);
+            this.StartAmp_LShow.Size = new System.Drawing.Size(17, 18);
             this.StartAmp_LShow.TabIndex = 3;
-            this.StartAmp_LShow.Text = "50";
+            this.StartAmp_LShow.Text = "0";
             // 
             // groupBox1
             // 
@@ -149,9 +149,9 @@
             this.Arate0_LShow.Location = new System.Drawing.Point(625, 21);
             this.Arate0_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.Arate0_LShow.Name = "Arate0_LShow";
-            this.Arate0_LShow.Size = new System.Drawing.Size(26, 18);
+            this.Arate0_LShow.Size = new System.Drawing.Size(17, 18);
             this.Arate0_LShow.TabIndex = 19;
-            this.Arate0_LShow.Text = "50";
+            this.Arate0_LShow.Text = "0";
             // 
             // Arate0_L
             // 
@@ -199,9 +199,9 @@
             this.Arate1_LShow.Location = new System.Drawing.Point(908, 21);
             this.Arate1_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.Arate1_LShow.Name = "Arate1_LShow";
-            this.Arate1_LShow.Size = new System.Drawing.Size(26, 18);
+            this.Arate1_LShow.Size = new System.Drawing.Size(17, 18);
             this.Arate1_LShow.TabIndex = 21;
-            this.Arate1_LShow.Text = "50";
+            this.Arate1_LShow.Text = "0";
             // 
             // BeginData_LShow
             // 
@@ -209,9 +209,9 @@
             this.BeginData_LShow.Location = new System.Drawing.Point(1217, 21);
             this.BeginData_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.BeginData_LShow.Name = "BeginData_LShow";
-            this.BeginData_LShow.Size = new System.Drawing.Size(26, 18);
+            this.BeginData_LShow.Size = new System.Drawing.Size(17, 18);
             this.BeginData_LShow.TabIndex = 20;
-            this.BeginData_LShow.Text = "50";
+            this.BeginData_LShow.Text = "0";
             // 
             // RootRate_DShow
             // 
@@ -277,13 +277,14 @@
             this.Arate0TRB.BaseColor = System.Drawing.Color.DimGray;
             this.Arate0TRB.Location = new System.Drawing.Point(557, 27);
             this.Arate0TRB.Margin = new System.Windows.Forms.Padding(6);
+            this.Arate0TRB.Maximum = 200;
             this.Arate0TRB.Name = "Arate0TRB";
             this.Arate0TRB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Arate0TRB.Size = new System.Drawing.Size(260, 69);
             this.Arate0TRB.TabIndex = 5;
             this.Arate0TRB.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.Arate0TRB.Track = ((System.Drawing.Image)(resources.GetObject("Arate0TRB.Track")));
-            this.Arate0TRB.Value = 50;
+            this.Arate0TRB.Value = 100;
             this.Arate0TRB.Scroll += new System.EventHandler(this.Arate0TRB_Scroll);
             // 
             // StartAmpTRB
@@ -294,13 +295,13 @@
             this.StartAmpTRB.BaseColor = System.Drawing.Color.DimGray;
             this.StartAmpTRB.Location = new System.Drawing.Point(274, 27);
             this.StartAmpTRB.Margin = new System.Windows.Forms.Padding(6);
+            this.StartAmpTRB.Maximum = 1000;
             this.StartAmpTRB.Name = "StartAmpTRB";
             this.StartAmpTRB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartAmpTRB.Size = new System.Drawing.Size(260, 69);
             this.StartAmpTRB.TabIndex = 1;
             this.StartAmpTRB.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.StartAmpTRB.Track = ((System.Drawing.Image)(resources.GetObject("StartAmpTRB.Track")));
-            this.StartAmpTRB.Value = 50;
             this.StartAmpTRB.Scroll += new System.EventHandler(this.StartAmpTRB_Scroll);
             // 
             // BeginData_Reset
@@ -322,13 +323,13 @@
             this.BeginDataTRB.BaseColor = System.Drawing.Color.DimGray;
             this.BeginDataTRB.Location = new System.Drawing.Point(1122, 27);
             this.BeginDataTRB.Margin = new System.Windows.Forms.Padding(6);
+            this.BeginDataTRB.Maximum = 1000;
             this.BeginDataTRB.Name = "BeginDataTRB";
             this.BeginDataTRB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BeginDataTRB.Size = new System.Drawing.Size(260, 69);
             this.BeginDataTRB.TabIndex = 12;
             this.BeginDataTRB.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.BeginDataTRB.Track = ((System.Drawing.Image)(resources.GetObject("BeginDataTRB.Track")));
-            this.BeginDataTRB.Value = 50;
             this.BeginDataTRB.Scroll += new System.EventHandler(this.BeginDataTRB_Scroll);
             // 
             // Arate1_L
@@ -359,13 +360,14 @@
             this.Arate1TRB.BaseColor = System.Drawing.Color.DimGray;
             this.Arate1TRB.Location = new System.Drawing.Point(840, 27);
             this.Arate1TRB.Margin = new System.Windows.Forms.Padding(6);
+            this.Arate1TRB.Maximum = 2000;
             this.Arate1TRB.Name = "Arate1TRB";
             this.Arate1TRB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Arate1TRB.Size = new System.Drawing.Size(260, 69);
             this.Arate1TRB.TabIndex = 7;
             this.Arate1TRB.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.Arate1TRB.Track = ((System.Drawing.Image)(resources.GetObject("Arate1TRB.Track")));
-            this.Arate1TRB.Value = 50;
+            this.Arate1TRB.Value = 1000;
             this.Arate1TRB.Scroll += new System.EventHandler(this.Arate1TRB_Scroll);
             // 
             // openFileDialog1
@@ -466,10 +468,6 @@
             this.Ort.HeaderText = "Ort";
             this.Ort.Name = "Ort";
             // 
-            // waveViewerBindingSource
-            // 
-            this.waveViewerBindingSource.DataSource = typeof(wt1.WaveViewer);
-            // 
             // NewArea
             // 
             this.NewArea.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -532,9 +530,9 @@
             this.Begin_LShow.Location = new System.Drawing.Point(1698, 399);
             this.Begin_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.Begin_LShow.Name = "Begin_LShow";
-            this.Begin_LShow.Size = new System.Drawing.Size(26, 18);
+            this.Begin_LShow.Size = new System.Drawing.Size(17, 18);
             this.Begin_LShow.TabIndex = 22;
-            this.Begin_LShow.Text = "50";
+            this.Begin_LShow.Text = "0";
             // 
             // Begin_L
             // 
@@ -564,13 +562,14 @@
             this.BeginTRB.BaseColor = System.Drawing.Color.DimGray;
             this.BeginTRB.Location = new System.Drawing.Point(1612, 409);
             this.BeginTRB.Margin = new System.Windows.Forms.Padding(6);
+            this.BeginTRB.Maximum = 200;
             this.BeginTRB.Name = "BeginTRB";
             this.BeginTRB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BeginTRB.Size = new System.Drawing.Size(260, 69);
             this.BeginTRB.TabIndex = 19;
             this.BeginTRB.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.BeginTRB.Track = ((System.Drawing.Image)(resources.GetObject("BeginTRB.Track")));
-            this.BeginTRB.Value = 50;
+            this.BeginTRB.Value = 100;
             this.BeginTRB.Scroll += new System.EventHandler(this.BeginTRB_Scroll);
             // 
             // ExitBtn
@@ -589,9 +588,9 @@
             this.End_LShow.Location = new System.Drawing.Point(1698, 480);
             this.End_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.End_LShow.Name = "End_LShow";
-            this.End_LShow.Size = new System.Drawing.Size(26, 18);
+            this.End_LShow.Size = new System.Drawing.Size(17, 18);
             this.End_LShow.TabIndex = 27;
-            this.End_LShow.Text = "50";
+            this.End_LShow.Text = "0";
             // 
             // label2
             // 
@@ -621,13 +620,14 @@
             this.EndTRB.BaseColor = System.Drawing.Color.DimGray;
             this.EndTRB.Location = new System.Drawing.Point(1612, 490);
             this.EndTRB.Margin = new System.Windows.Forms.Padding(6);
+            this.EndTRB.Maximum = 200;
             this.EndTRB.Name = "EndTRB";
             this.EndTRB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.EndTRB.Size = new System.Drawing.Size(260, 69);
             this.EndTRB.TabIndex = 24;
             this.EndTRB.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.EndTRB.Track = ((System.Drawing.Image)(resources.GetObject("EndTRB.Track")));
-            this.EndTRB.Value = 50;
+            this.EndTRB.Value = 100;
             this.EndTRB.Scroll += new System.EventHandler(this.EndTRB_Scroll);
             // 
             // Initbegin_Set
@@ -662,6 +662,10 @@
             this.InitlastU_Set.Text = "InitlastU";
             this.InitlastU_Set.UseVisualStyleBackColor = true;
             this.InitlastU_Set.CheckedChanged += new System.EventHandler(this.InitlastU_Set_CheckedChanged);
+            // 
+            // waveViewerBindingSource
+            // 
+            this.waveViewerBindingSource.DataSource = typeof(wt1.WaveViewer);
             // 
             // Fm1
             // 
@@ -709,11 +713,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.BeginDataTRB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Arate1TRB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AreaGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.waveViewerBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BeginTRB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EndTRB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.waveViewerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
