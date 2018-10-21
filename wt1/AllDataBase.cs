@@ -7,13 +7,12 @@ namespace wt1
 {
     public class AllDataBase
     {
-        public class BaseVoiceSamp
+        public class WaveRichPoint
         {
             public int index;
             public float value;
             public int invertPoint; //反转点 ，Y轴值
             public int areaID;
-
         };
 
         public static double Mod_Ratio;
@@ -21,47 +20,47 @@ namespace wt1
         public static double Arate1_Ratio;
         public static double Amp_Ratio;
         public static double Root_Ratio;
+
         public class VoiceModInfo 
         {
             public int areaID;
             public double begin; //区域描述起点//-1  -----   1    0.01分辨率
             public double end;   //区域描述终点
-            //public int countEnd;
-            public float beginData; //-1  -----   1    0.001分辨率
-            public bool Initbegin = false;
-            public bool preVoice = false;
+
+            public float beginData; //0  -----   1    0.001分辨率
+            public bool Initbegin; //弃用
+            public bool preVoice;//判断是否预发音前置区
             public float startAmp; //-1  -----   1    0.001分辨率
-            public bool InitlastU = false;
+            public bool InitlastU; //弃用
 
             public double ort;
             public double RootRate; //-20  -----   20    0.01分辨率
-            public double Arate0; //-10  -----   10    0.1分辨率
-            public double Arate1;//-1  -----   1    0.001分辨率
+            public double Arate;
+            public double Arate0;//-10---10  200  0.1分辨率
+            public double Arate1;//-1---1  2000  0.001分辨率
             //public double Arate2;
             //public float baseN;
 
-            public void Fusion(SortedDictionary<int, BaseVoiceSamp> bvs, int index,ref float lastU)
+            public void Fusion(SortedDictionary<int, WaveRichPoint> bvs, int index,ref float lastU)
             {
-                if (preVoice)
+                if (preVoice)   //判断是否前置区
                 {
-                    if (InitlastU)
-                    {
+                    if (lastU<0)
                         lastU = startAmp;
-                        InitlastU = false;
-                    }
+
                     bvs[index].value = lastU;
                     lastU = bvs[index].value;
                 }
                 else
                 {
-                    if (Initbegin)
+                    if (lastU<0)
                     {
+                        Arate = Arate0;
                         lastU = beginData;
-                        Initbegin = false;
                     }
-                    //counter += 1; //加速参数
-                    Arate0 += Arate1;
-                    float baseN = (float)(Arate0 * RootRate * ort);
+                    
+                    Arate += Arate1;
+                    float baseN = (float)(Arate * RootRate * ort);
                     bvs[index].value = lastU + baseN;
                     lastU = bvs[index].value;
                 }

@@ -47,70 +47,29 @@ namespace wt1
 
             chpy = string.Empty; //汉字拼音
             //tVoice = new Voice();
-            tInfo = new VoiceModInfo
-            {
-                preVoice = false,
-                Initbegin = false,
-                InitlastU = false,
-                areaID = 1
-            }; //创建新实例
+            //tInfo = new VoiceModInfo
+            //{
+            //    preVoice = false,
+            //    Initbegin = false,
+            //    InitlastU = false,
+            //    areaID = 1
+            //}; //创建新实例
 
             //精度相关
-            Arate0_Ratio = (double)20 / Arate0TRB.Maximum;
-            Arate1_Ratio = (double)2 / Arate1TRB.Maximum;
-            Mod_Ratio = (double)2 / BeginTRB.Maximum;
-            Amp_Ratio = (double)1 / StartAmpTRB.Maximum;
-            Root_Ratio = (double)40 / RootRateTRB.Maximum;
+            Arate0_Ratio = (double)20 / Arate0TRB.Maximum;      //-10---10   200      0.1分辨率
+            Arate1_Ratio = (double)2 / Arate1TRB.Maximum;        //-1---1       2000    0.001分辨率
+            Mod_Ratio = (double)2 / BeginTRB.Maximum;             //-1---1       200      0.01分辨率
+            Amp_Ratio = (double)1 / StartAmpTRB.Maximum;       // 0---1       1000    0.001分辨率
+            Root_Ratio = (double)40 / RootRateTRB.Maximum;    //-20---20   4000     0.01分辨率
 
-            tVoice = new Voice();
-            tInfo = new VoiceModInfo
-            {
-                areaID = 1,
-                preVoice = true,
-                InitlastU = true,
-                Initbegin = false,
 
-                startAmp = 0.03f,
-                begin = -1.0f,
-                end = -0.8f
-            };
-            tVoice.ModInfo.Add(tInfo);
-            
-            tInfo = new VoiceModInfo
-            {
-                areaID = 2,
-                preVoice = false,
-                InitlastU = false,
-                Initbegin = true,
-                beginData = 0.5f,
-
-                begin = -0.8f,
-                end = 0.3f,
-                ort = -0.001f,//0不变，-1收缩，1膨胀
-                RootRate = 8,
-                Arate0 = 3,
-                Arate1 = -0.08f
-            };
-            tVoice.ModInfo.Add(tInfo);
-
-            tInfo = new VoiceModInfo
-            {
-                areaID = 3,
-                preVoice = false,
-                InitlastU = false,
-                Initbegin = false,
-                begin = 0.03f,
-                end = 1.0f,
-                ort = 0.001f,//0不变，-1收缩，1膨胀
-                RootRate = 8,
-                Arate0 = 3, //收缩时， 为负-则外凸， 为正-则内凹
-                Arate1 = -0.08f
-            };
-            tVoice.ModInfo.Add(tInfo);
         }
 
         public void LoadDefaultMod()
         {
+
+
+
             int rowCount = 0;
             foreach (var item in tVoice.ModInfo)
             {
@@ -124,6 +83,8 @@ namespace wt1
                 ModSelect.Items.Add(item.areaID.ToString()+"-Begin:" + Math.Round(item.begin, 2));
             }
             AreaGrid.ClearSelection();
+
+
         }
 
         public void Panel1_Paint(object sender, PaintEventArgs e)
@@ -145,15 +106,15 @@ namespace wt1
             var g = panel1.CreateGraphics();
             Pen p = new Pen(Color.Green);
             SolidBrush bb = new SolidBrush(Color.Black);
-            WaveViewer waveViewer = new WaveViewer();
+            //WaveViewer waveViewer = new WaveViewer();
             Rectangle DrawRect = new Rectangle(0, 0, panel1.Width, panel1.Height);
 
             g.FillRectangle(bb, DrawRect);
             g.DrawLine(p, 0, DrawRect.Height / 2, DrawRect.Width, DrawRect.Height / 2);
-            
 
-            waveViewer.GerneralWave();
-            waveViewer.BsToVertex(ref DrawRect);
+
+            GerneralWave();
+            BsToVertex(ref DrawRect);
             g.DrawLines(p, pointFs);
             this.Text = "由GerneralWave()函数生成";
         }
@@ -359,6 +320,9 @@ namespace wt1
             CurModIndex = Convert.ToInt16(chIndex.ToString()) - 1;
             CurMod = tVoice.ModInfo[CurModIndex];
 
+            var tSA = Math.Round(CurMod.startAmp, 3);
+            StartAmpTRB.Value = (int)(tSA / Amp_Ratio);
+            StartAmp_LShow.Text = tSA.ToString();
 
 
 

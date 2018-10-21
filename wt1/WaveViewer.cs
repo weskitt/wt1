@@ -7,12 +7,14 @@ using static wt1.AllDataBase;
 
 namespace wt1
 {
-    public class WaveViewer
+    public static class WaveViewer
     {
-        public int PCMSamCount;
-        public int BaseSamCount;
-        public float lastU;
+        public static int PCMSamCount;
+        public static int BaseSamCount;
+        public static float preIter;
+        public static float dataIter;
         public static bool isGeneralShow =false;
+        public static bool isInitExample = false;
 
         public static VoiceModInfo tInfo;
         public static Voice tVoice;
@@ -21,12 +23,61 @@ namespace wt1
         public static VoiceModInfo CurMod;
         //double lastD;
 
-        public SortedDictionary<int, BaseVoiceSamp> BaseSampSingle = new SortedDictionary<int, BaseVoiceSamp>();
-        public SortedDictionary<int, BaseVoiceSamp> BaseSamps = new SortedDictionary<int, BaseVoiceSamp>();
-        public List<PointF> listPoints = new List<PointF>();
+        public static SortedDictionary<int, WaveRichPoint> BaseWaveSingle = new SortedDictionary<int, WaveRichPoint>();
+        public static SortedDictionary<int, WaveRichPoint> BaseSamps = new SortedDictionary<int, WaveRichPoint>();
+        public static List<PointF> listPoints = new List<PointF>();
         public static PointF[] pointFs;
 
-        public void GerneralWave()
+        public static void InitExample()
+        {
+            tVoice = new Voice();
+            tInfo = new VoiceModInfo
+            {
+                areaID = 1,
+                preVoice = true,
+                InitlastU = true,
+                Initbegin = false,
+
+                startAmp = 0.03f,
+                begin = -1.0f,
+                end = -0.8f
+            };
+            tVoice.ModInfo.Add(tInfo);
+
+            tInfo = new VoiceModInfo
+            {
+                areaID = 2,
+                preVoice = false,
+                InitlastU = false,
+                Initbegin = true,
+                beginData = 0.5f,
+
+                begin = -0.8f,
+                end = 0.3f,
+                ort = -0.001f,//0不变，-1收缩，1膨胀
+                RootRate = 8,
+                Arate0 = 3,
+                Arate1 = -0.08f
+            };
+            tVoice.ModInfo.Add(tInfo);
+
+            tInfo = new VoiceModInfo
+            {
+                areaID = 3,
+                preVoice = false,
+                InitlastU = false,
+                Initbegin = false,
+                begin = 0.03f,
+                end = 1.0f,
+                ort = 0.001f,//0不变，-1收缩，1膨胀
+                RootRate = 8,
+                Arate0 = 3, //收缩时， 为负-则外凸， 为正-则内凹
+                Arate1 = -0.08f
+            };
+            tVoice.ModInfo.Add(tInfo);
+        }
+
+        public static void GerneralWave()
         {
 
             //bsiter.Current.Key;
@@ -38,9 +89,11 @@ namespace wt1
             int PairCount = 1920 / PackStep;
             BaseSamCount = PairCount * 2;
 
+            BaseWaveSingle = new SortedDictionary<int, WaveRichPoint>();
+
             for (int i = 0; i < PairCount; i++)
             {
-                BaseVoiceSamp t_bvs = new BaseVoiceSamp
+                WaveRichPoint t_bvs = new WaveRichPoint
                 {
                     index = i * PackStep,
                     value = preAmp,
@@ -48,30 +101,36 @@ namespace wt1
                     areaID = 0
                 };
                 //BaseSamps[t_bvs.index] = t_bvs; //重复，覆盖
-                BaseSampSingle.Add(t_bvs.index, t_bvs); //
-                //BSkeys.Add(t_bvs.index);
+                BaseWaveSingle.Add(t_bvs.index, t_bvs);
             }
 
             /******************************************************************/
             //塑形计算   数据修饰.
-
-
-
-
-            lastU = preAmp;
+            if (!isInitExample)
+            {
+                InitExample();
+                isInitExample = true;
+            }
+            
+            preIter = -1;
+            dataIter = -1;
             int modIndex = 0;
             //var bsiter = BaseSampSingle.GetEnumerator();
-            var BSkeys = new List<int>(BaseSampSingle.Keys);
+            var BSkeys = new List<int>(BaseWaveSingle.Keys);
 
             for (int i = 0; i < BSkeys.Count; i++)
             {
             NewMod:
-                var bsv = BaseSampSingle[BSkeys[i]];
+                var bsv = BaseWaveSingle[BSkeys[i]];
                 double SampIndex = General_x(bsv.index);
 
                 if (SampIndex >= tVoice.ModInfo[modIndex].begin && SampIndex < tVoice.ModInfo[modIndex].end)
                 {
-                    tVoice.ModInfo[modIndex].Fusion(BaseSampSingle, BSkeys[i], ref lastU);
+                    if (tVoice.ModInfo[modIndex].preVoice)
+                        tVoice.ModInfo[modIndex].Fusion(BaseWaveSingle, BSkeys[i], ref preIter);
+                    else
+                        tVoice.ModInfo[modIndex].Fusion(BaseWaveSingle, BSkeys[i], ref dataIter);
+
                 }
                 else
                 {
@@ -83,9 +142,10 @@ namespace wt1
             /******************************************************************/
             //数据补完
             //一:补全逆转数据
-            foreach (var samp in BaseSampSingle)
+            BaseSamps = new SortedDictionary<int, WaveRichPoint>(); 
+            foreach (var samp in BaseWaveSingle)
             {
-                BaseVoiceSamp t_bvs = new BaseVoiceSamp
+                WaveRichPoint t_bvs = new WaveRichPoint
                 {
                     index = samp.Value.index + diffStep,
                     invertPoint = samp.Value.invertPoint,
@@ -98,8 +158,10 @@ namespace wt1
             
         }
 
-        public void BsToVertex(ref Rectangle rect)
+        public static void BsToVertex(ref Rectangle rect)
         {
+            listPoints = new List<PointF>();
+
             foreach (var bs in BaseSamps)
             {
                 PointF point = new PointF
@@ -107,9 +169,6 @@ namespace wt1
                     X = bs.Value.index * rect.Width / 1920,
                     Y = bs.Value.value * (rect.Height / 2) + rect.Height / 2
                 };
-
-
-
                 listPoints.Add(point);
             }
 
