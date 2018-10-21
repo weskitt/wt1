@@ -21,21 +21,23 @@ namespace wt1
     {
         public Fm1()
         {
-            
             InitializeComponent();
-            
+
             this.Width = 1910;
             this.Height = 1030;
-
-            panel1.Width = 1600;
-            panel1.Height = 900;
+        }
+        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            panel1.Width = 1440;
+            panel1.Height = 810;
 
             Point btnSize = new Point(OpenBtn.Width, OpenBtn.Height);
-            Point btnOpenL = new Point(0, 908);
-            Point btnSwL = new Point(btnSize.X, 908);
-            Point btnGenL = new Point(0, btnSize.Y + 908);
-            Point btnBothL = new Point(btnSize.X, btnSize.Y + 908);
-            Point gpL = new Point(btnSize.X * 2, 900);
+            Point btnOpenL = new Point(0, 818);
+            Point btnSwL = new Point(btnSize.X, 818);
+            Point btnGenL = new Point(0, btnSize.Y + 818);
+            Point btnBothL = new Point(btnSize.X, btnSize.Y + 818);
+            Point gpL = new Point(btnSize.X * 2, 810);
 
             OpenBtn.Location = btnOpenL;
             Switch.Location = btnSwL;
@@ -44,7 +46,7 @@ namespace wt1
             groupBox1.Location = gpL;
 
             chpy = string.Empty; //汉字拼音
-            tVoice = new Voice();
+            //tVoice = new Voice();
             tInfo = new VoiceModInfo
             {
                 preVoice = false,
@@ -59,21 +61,32 @@ namespace wt1
             Mod_Ratio = (double)2 / BeginTRB.Maximum;
             Amp_Ratio = (double)1 / StartAmpTRB.Maximum;
             Root_Ratio = (double)40 / RootRateTRB.Maximum;
+
+            
         }
-        
-        private void Form1_Load(object sender, EventArgs e)
+
+        public void LoadDefaultMod()
         {
+            int rowCount = 0;
+            foreach (var item in tVoice.ModInfo)
+            {
+                rowCount = AreaGrid.Rows.Add();
+                AreaGrid.Rows[rowCount].Cells["AreaID"].Value = item.areaID;
+                AreaGrid.Rows[rowCount].Cells["Begin"].Value = Math.Round(item.begin, 2);
+                AreaGrid.Rows[rowCount].Cells["End"].Value = Math.Round(item.end, 2);
+                AreaGrid.Rows[rowCount].Cells["StartAmp"].Value = Math.Round(item.startAmp, 2);
+                AreaGrid.Rows[rowCount].Cells["Ort"].Value = Math.Round(item.ort, 3);
 
+                ModSelect.Items.Add(item.areaID.ToString()+"-Begin:" + Math.Round(item.begin, 2));
+            }
+            AreaGrid.ClearSelection();
         }
-
 
         public void Panel1_Paint(object sender, PaintEventArgs e)
         {
             DrawGerneralData();
             isGeneralShow = false;
         }
-
-
         
         private void OpenBtn_Click(object sender, EventArgs e)
         {
@@ -283,6 +296,23 @@ namespace wt1
         private void InitlastU_Set_CheckedChanged(object sender, EventArgs e)
         {
             tInfo.InitlastU = Initbegin_Set.Checked;
+        }
+
+        private void LoadMod_Click(object sender, EventArgs e)
+        {
+            LoadDefaultMod();
+            LoadMod.Enabled = false;
+        }
+
+        private void AreaGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            AreaGrid.ClearSelection();
+        }
+
+        private void ModSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            char chIndex = ModSelect.SelectedItem.ToString().ElementAt(0);
+            int ModIndex = Convert.ToInt16(chIndex.ToString());
         }
     }
 }

@@ -37,7 +37,7 @@ namespace wt1
             public double RootRate; //-20  -----   20    0.01分辨率
             public double Arate0; //-10  -----   10    0.1分辨率
             public double Arate1;//-1  -----   1    0.001分辨率
-            public double Arate2;
+            //public double Arate2;
             //public float baseN;
 
             public void Fusion(SortedDictionary<int, BaseVoiceSamp> bvs, int index,ref float lastU)

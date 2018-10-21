@@ -30,6 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fm1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.StartAmp_LShow = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -58,11 +68,6 @@
             this.Switch = new System.Windows.Forms.Button();
             this.Both = new System.Windows.Forms.Button();
             this.AreaGrid = new System.Windows.Forms.DataGridView();
-            this.AreaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Begin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.End = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StartAmp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NewArea = new System.Windows.Forms.Button();
             this.Ort_0 = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -80,6 +85,13 @@
             this.Initbegin_Set = new System.Windows.Forms.CheckBox();
             this.PreVoice_Set = new System.Windows.Forms.CheckBox();
             this.InitlastU_Set = new System.Windows.Forms.CheckBox();
+            this.LoadMod = new System.Windows.Forms.Button();
+            this.AreaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Begin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.End = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartAmp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModSelect = new System.Windows.Forms.ComboBox();
             this.waveViewerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RootRateTRB)).BeginInit();
@@ -99,7 +111,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1600, 559);
+            this.panel1.Size = new System.Drawing.Size(1440, 810);
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
@@ -135,7 +147,7 @@
             this.groupBox1.Controls.Add(this.Arate1_L);
             this.groupBox1.Controls.Add(this.Arate1_Reset);
             this.groupBox1.Controls.Add(this.Arate1TRB);
-            this.groupBox1.Location = new System.Drawing.Point(205, 556);
+            this.groupBox1.Location = new System.Drawing.Point(205, 822);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
@@ -377,7 +389,7 @@
             // 
             // OpenBtn
             // 
-            this.OpenBtn.Location = new System.Drawing.Point(0, 571);
+            this.OpenBtn.Location = new System.Drawing.Point(0, 837);
             this.OpenBtn.Margin = new System.Windows.Forms.Padding(6);
             this.OpenBtn.Name = "OpenBtn";
             this.OpenBtn.Size = new System.Drawing.Size(105, 30);
@@ -388,7 +400,7 @@
             // 
             // General
             // 
-            this.General.Location = new System.Drawing.Point(0, 601);
+            this.General.Location = new System.Drawing.Point(0, 867);
             this.General.Margin = new System.Windows.Forms.Padding(6);
             this.General.Name = "General";
             this.General.Size = new System.Drawing.Size(105, 30);
@@ -399,7 +411,7 @@
             // 
             // Switch
             // 
-            this.Switch.Location = new System.Drawing.Point(105, 571);
+            this.Switch.Location = new System.Drawing.Point(105, 837);
             this.Switch.Margin = new System.Windows.Forms.Padding(6);
             this.Switch.Name = "Switch";
             this.Switch.Size = new System.Drawing.Size(98, 30);
@@ -410,7 +422,7 @@
             // 
             // Both
             // 
-            this.Both.Location = new System.Drawing.Point(105, 601);
+            this.Both.Location = new System.Drawing.Point(105, 867);
             this.Both.Margin = new System.Windows.Forms.Padding(6);
             this.Both.Name = "Both";
             this.Both.Size = new System.Drawing.Size(98, 30);
@@ -420,7 +432,17 @@
             // 
             // AreaGrid
             // 
-            this.AreaGrid.AutoGenerateColumns = false;
+            this.AreaGrid.AllowUserToAddRows = false;
+            this.AreaGrid.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.AreaGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.AreaGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.AreaGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AreaGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AreaID,
@@ -428,53 +450,42 @@
             this.End,
             this.StartAmp,
             this.Ort});
-            this.AreaGrid.DataSource = this.waveViewerBindingSource;
-            this.AreaGrid.Location = new System.Drawing.Point(1609, 52);
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.AreaGrid.DefaultCellStyle = dataGridViewCellStyle8;
+            this.AreaGrid.Location = new System.Drawing.Point(1449, 48);
             this.AreaGrid.Name = "AreaGrid";
+            this.AreaGrid.ReadOnly = true;
+            this.AreaGrid.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.AreaGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.AreaGrid.RowHeadersVisible = false;
+            this.AreaGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.AreaGrid.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.AreaGrid.RowTemplate.Height = 30;
-            this.AreaGrid.Size = new System.Drawing.Size(275, 191);
+            this.AreaGrid.Size = new System.Drawing.Size(435, 396);
             this.AreaGrid.TabIndex = 15;
-            // 
-            // AreaID
-            // 
-            this.AreaID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.AreaID.Frozen = true;
-            this.AreaID.HeaderText = "AreaID";
-            this.AreaID.Name = "AreaID";
-            this.AreaID.ReadOnly = true;
-            this.AreaID.Width = 51;
-            // 
-            // Begin
-            // 
-            this.Begin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Begin.HeaderText = "Begin";
-            this.Begin.Name = "Begin";
-            // 
-            // End
-            // 
-            this.End.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.End.HeaderText = "End";
-            this.End.Name = "End";
-            // 
-            // StartAmp
-            // 
-            this.StartAmp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.StartAmp.HeaderText = "StartAmp";
-            this.StartAmp.Name = "StartAmp";
-            // 
-            // Ort
-            // 
-            this.Ort.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Ort.HeaderText = "Ort";
-            this.Ort.Name = "Ort";
+            this.AreaGrid.TabStop = false;
+            this.AreaGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AreaGrid_CellClick);
             // 
             // NewArea
             // 
             this.NewArea.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.NewArea.Location = new System.Drawing.Point(1609, 12);
+            this.NewArea.Location = new System.Drawing.Point(1449, 12);
             this.NewArea.Name = "NewArea";
-            this.NewArea.Size = new System.Drawing.Size(98, 30);
+            this.NewArea.Size = new System.Drawing.Size(81, 30);
             this.NewArea.TabIndex = 16;
             this.NewArea.Text = "NewArea";
             this.NewArea.UseVisualStyleBackColor = false;
@@ -498,7 +509,7 @@
             this.panel2.Controls.Add(this.Ort__1);
             this.panel2.Controls.Add(this.Ort_1);
             this.panel2.Controls.Add(this.Ort_0);
-            this.panel2.Location = new System.Drawing.Point(1609, 257);
+            this.panel2.Location = new System.Drawing.Point(1449, 450);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(267, 45);
             this.panel2.TabIndex = 18;
@@ -528,7 +539,7 @@
             // Begin_LShow
             // 
             this.Begin_LShow.AutoSize = true;
-            this.Begin_LShow.Location = new System.Drawing.Point(1698, 399);
+            this.Begin_LShow.Location = new System.Drawing.Point(1535, 531);
             this.Begin_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.Begin_LShow.Name = "Begin_LShow";
             this.Begin_LShow.Size = new System.Drawing.Size(17, 18);
@@ -538,7 +549,7 @@
             // Begin_L
             // 
             this.Begin_L.AutoSize = true;
-            this.Begin_L.Location = new System.Drawing.Point(1609, 399);
+            this.Begin_L.Location = new System.Drawing.Point(1446, 531);
             this.Begin_L.Name = "Begin_L";
             this.Begin_L.Size = new System.Drawing.Size(53, 18);
             this.Begin_L.TabIndex = 21;
@@ -546,7 +557,7 @@
             // 
             // Begin_Reset
             // 
-            this.Begin_Reset.Location = new System.Drawing.Point(1775, 393);
+            this.Begin_Reset.Location = new System.Drawing.Point(1612, 525);
             this.Begin_Reset.Margin = new System.Windows.Forms.Padding(6);
             this.Begin_Reset.Name = "Begin_Reset";
             this.Begin_Reset.Size = new System.Drawing.Size(98, 30);
@@ -561,7 +572,7 @@
             this.BeginTRB.Bar = ((System.Drawing.Image)(resources.GetObject("BeginTRB.Bar")));
             this.BeginTRB.BarStyle = CCWin.SkinControl.HSLTrackBarStyle.Img;
             this.BeginTRB.BaseColor = System.Drawing.Color.DimGray;
-            this.BeginTRB.Location = new System.Drawing.Point(1612, 409);
+            this.BeginTRB.Location = new System.Drawing.Point(1449, 541);
             this.BeginTRB.Margin = new System.Windows.Forms.Padding(6);
             this.BeginTRB.Maximum = 200;
             this.BeginTRB.Name = "BeginTRB";
@@ -575,9 +586,9 @@
             // 
             // ExitBtn
             // 
-            this.ExitBtn.Location = new System.Drawing.Point(1778, 12);
+            this.ExitBtn.Location = new System.Drawing.Point(1832, 11);
             this.ExitBtn.Name = "ExitBtn";
-            this.ExitBtn.Size = new System.Drawing.Size(98, 30);
+            this.ExitBtn.Size = new System.Drawing.Size(52, 30);
             this.ExitBtn.TabIndex = 23;
             this.ExitBtn.Text = "Exit";
             this.ExitBtn.UseVisualStyleBackColor = true;
@@ -586,7 +597,7 @@
             // End_LShow
             // 
             this.End_LShow.AutoSize = true;
-            this.End_LShow.Location = new System.Drawing.Point(1698, 480);
+            this.End_LShow.Location = new System.Drawing.Point(1535, 634);
             this.End_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.End_LShow.Name = "End_LShow";
             this.End_LShow.Size = new System.Drawing.Size(17, 18);
@@ -596,7 +607,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1609, 480);
+            this.label2.Location = new System.Drawing.Point(1447, 634);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 18);
             this.label2.TabIndex = 26;
@@ -604,7 +615,7 @@
             // 
             // End_Reset
             // 
-            this.End_Reset.Location = new System.Drawing.Point(1775, 474);
+            this.End_Reset.Location = new System.Drawing.Point(1612, 628);
             this.End_Reset.Margin = new System.Windows.Forms.Padding(6);
             this.End_Reset.Name = "End_Reset";
             this.End_Reset.Size = new System.Drawing.Size(98, 30);
@@ -619,7 +630,7 @@
             this.EndTRB.Bar = ((System.Drawing.Image)(resources.GetObject("EndTRB.Bar")));
             this.EndTRB.BarStyle = CCWin.SkinControl.HSLTrackBarStyle.Img;
             this.EndTRB.BaseColor = System.Drawing.Color.DimGray;
-            this.EndTRB.Location = new System.Drawing.Point(1612, 490);
+            this.EndTRB.Location = new System.Drawing.Point(1449, 644);
             this.EndTRB.Margin = new System.Windows.Forms.Padding(6);
             this.EndTRB.Maximum = 200;
             this.EndTRB.Name = "EndTRB";
@@ -634,7 +645,7 @@
             // Initbegin_Set
             // 
             this.Initbegin_Set.AutoSize = true;
-            this.Initbegin_Set.Location = new System.Drawing.Point(1613, 314);
+            this.Initbegin_Set.Location = new System.Drawing.Point(1722, 473);
             this.Initbegin_Set.Name = "Initbegin_Set";
             this.Initbegin_Set.Size = new System.Drawing.Size(115, 22);
             this.Initbegin_Set.TabIndex = 28;
@@ -645,7 +656,7 @@
             // PreVoice_Set
             // 
             this.PreVoice_Set.AutoSize = true;
-            this.PreVoice_Set.Location = new System.Drawing.Point(1751, 314);
+            this.PreVoice_Set.Location = new System.Drawing.Point(1722, 450);
             this.PreVoice_Set.Name = "PreVoice_Set";
             this.PreVoice_Set.Size = new System.Drawing.Size(106, 22);
             this.PreVoice_Set.TabIndex = 29;
@@ -656,13 +667,87 @@
             // InitlastU_Set
             // 
             this.InitlastU_Set.AutoSize = true;
-            this.InitlastU_Set.Location = new System.Drawing.Point(1613, 351);
+            this.InitlastU_Set.Location = new System.Drawing.Point(1722, 501);
             this.InitlastU_Set.Name = "InitlastU_Set";
             this.InitlastU_Set.Size = new System.Drawing.Size(115, 22);
             this.InitlastU_Set.TabIndex = 30;
             this.InitlastU_Set.Text = "InitlastU";
             this.InitlastU_Set.UseVisualStyleBackColor = true;
             this.InitlastU_Set.CheckedChanged += new System.EventHandler(this.InitlastU_Set_CheckedChanged);
+            // 
+            // LoadMod
+            // 
+            this.LoadMod.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.LoadMod.Location = new System.Drawing.Point(1536, 12);
+            this.LoadMod.Name = "LoadMod";
+            this.LoadMod.Size = new System.Drawing.Size(98, 30);
+            this.LoadMod.TabIndex = 31;
+            this.LoadMod.Text = "Load Mod";
+            this.LoadMod.UseVisualStyleBackColor = false;
+            this.LoadMod.Click += new System.EventHandler(this.LoadMod_Click);
+            // 
+            // AreaID
+            // 
+            this.AreaID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.AreaID.DefaultCellStyle = dataGridViewCellStyle3;
+            this.AreaID.Frozen = true;
+            this.AreaID.HeaderText = "ID";
+            this.AreaID.Name = "AreaID";
+            this.AreaID.ReadOnly = true;
+            this.AreaID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.AreaID.Width = 51;
+            // 
+            // Begin
+            // 
+            this.Begin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Begin.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Begin.HeaderText = "Begin";
+            this.Begin.Name = "Begin";
+            this.Begin.ReadOnly = true;
+            this.Begin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // End
+            // 
+            this.End.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.End.DefaultCellStyle = dataGridViewCellStyle5;
+            this.End.HeaderText = "End";
+            this.End.Name = "End";
+            this.End.ReadOnly = true;
+            this.End.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // StartAmp
+            // 
+            this.StartAmp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.StartAmp.DefaultCellStyle = dataGridViewCellStyle6;
+            this.StartAmp.HeaderText = "StartAmp";
+            this.StartAmp.Name = "StartAmp";
+            this.StartAmp.ReadOnly = true;
+            this.StartAmp.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Ort
+            // 
+            this.Ort.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Ort.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Ort.HeaderText = "Ort";
+            this.Ort.Name = "Ort";
+            this.Ort.ReadOnly = true;
+            this.Ort.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ModSelect
+            // 
+            this.ModSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ModSelect.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ModSelect.FormattingEnabled = true;
+            this.ModSelect.Location = new System.Drawing.Point(1640, 12);
+            this.ModSelect.Name = "ModSelect";
+            this.ModSelect.Size = new System.Drawing.Size(155, 29);
+            this.ModSelect.TabIndex = 33;
+            this.ModSelect.SelectedIndexChanged += new System.EventHandler(this.ModSelect_SelectedIndexChanged);
             // 
             // waveViewerBindingSource
             // 
@@ -673,7 +758,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1888, 658);
+            this.ClientSize = new System.Drawing.Size(1888, 928);
+            this.Controls.Add(this.ModSelect);
+            this.Controls.Add(this.LoadMod);
             this.Controls.Add(this.InitlastU_Set);
             this.Controls.Add(this.PreVoice_Set);
             this.Controls.Add(this.Initbegin_Set);
@@ -751,11 +838,6 @@
         private System.Windows.Forms.DataGridView AreaGrid;
         private System.Windows.Forms.BindingSource waveViewerBindingSource;
         private System.Windows.Forms.Button NewArea;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AreaID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Begin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn End;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StartAmp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ort;
         private System.Windows.Forms.Label RootRate_DShow;
         private System.Windows.Forms.Label Arate1_LShow;
         private System.Windows.Forms.Label BeginData_LShow;
@@ -776,6 +858,13 @@
         private System.Windows.Forms.CheckBox Initbegin_Set;
         private System.Windows.Forms.CheckBox PreVoice_Set;
         private System.Windows.Forms.CheckBox InitlastU_Set;
+        private System.Windows.Forms.Button LoadMod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AreaID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Begin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn End;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StartAmp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ort;
+        private System.Windows.Forms.ComboBox ModSelect;
     }
 }
 
