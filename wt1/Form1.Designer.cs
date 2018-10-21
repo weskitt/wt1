@@ -475,6 +475,7 @@
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.AreaGrid.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.AreaGrid.RowTemplate.Height = 30;
+            this.AreaGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AreaGrid.Size = new System.Drawing.Size(435, 396);
             this.AreaGrid.TabIndex = 15;
             this.AreaGrid.TabStop = false;
@@ -740,7 +741,8 @@
             // 
             // ModSelect
             // 
-            this.ModSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ModSelect.BackColor = System.Drawing.SystemColors.Window;
+            this.ModSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ModSelect.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ModSelect.FormattingEnabled = true;
             this.ModSelect.Location = new System.Drawing.Point(1640, 12);

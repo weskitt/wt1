@@ -17,6 +17,8 @@ namespace wt1
         public static VoiceModInfo tInfo;
         public static Voice tVoice;
         public static string chpy;
+        public static int CurModIndex;
+        public static VoiceModInfo CurMod;
         //double lastD;
 
         public SortedDictionary<int, BaseVoiceSamp> BaseSampSingle = new SortedDictionary<int, BaseVoiceSamp>();
@@ -54,52 +56,7 @@ namespace wt1
             //塑形计算   数据修饰.
 
 
-            tVoice = new Voice();
-            tInfo = new VoiceModInfo
-            {
-                areaID = 1,
-                preVoice = true,
-                InitlastU = true,
-                Initbegin = false,
 
-                startAmp = 0.03f,
-                begin = -1.0f,
-                end = -0.8f
-            };
-            tVoice.ModInfo.Add(tInfo);
-
-
-            tInfo = new VoiceModInfo
-            {
-                areaID = 2,
-                preVoice = false,
-                InitlastU = false,
-                Initbegin = true,
-                beginData = 0.5f,
-
-                begin = -0.8f,
-                end = 0.3f,
-                ort = -0.001f,//0不变，-1收缩，1膨胀
-                RootRate = 8,
-                Arate0 = 3,
-                Arate1 = -0.08f
-            };
-            tVoice.ModInfo.Add(tInfo);
-
-            tInfo = new VoiceModInfo
-            {
-                areaID = 3,
-                preVoice = false,
-                InitlastU = false,
-                Initbegin = false,
-                begin = 0.03f,
-                end = 1.0f,
-                ort = 0.001f,//0不变，-1收缩，1膨胀
-                RootRate = 8,
-                Arate0 = 3, //收缩时， 为负-则外凸， 为正-则内凹
-                Arate1 = -0.08f
-            };
-            tVoice.ModInfo.Add(tInfo);
 
             lastU = preAmp;
             int modIndex = 0;

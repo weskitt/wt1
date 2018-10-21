@@ -62,7 +62,51 @@ namespace wt1
             Amp_Ratio = (double)1 / StartAmpTRB.Maximum;
             Root_Ratio = (double)40 / RootRateTRB.Maximum;
 
+            tVoice = new Voice();
+            tInfo = new VoiceModInfo
+            {
+                areaID = 1,
+                preVoice = true,
+                InitlastU = true,
+                Initbegin = false,
+
+                startAmp = 0.03f,
+                begin = -1.0f,
+                end = -0.8f
+            };
+            tVoice.ModInfo.Add(tInfo);
             
+            tInfo = new VoiceModInfo
+            {
+                areaID = 2,
+                preVoice = false,
+                InitlastU = false,
+                Initbegin = true,
+                beginData = 0.5f,
+
+                begin = -0.8f,
+                end = 0.3f,
+                ort = -0.001f,//0不变，-1收缩，1膨胀
+                RootRate = 8,
+                Arate0 = 3,
+                Arate1 = -0.08f
+            };
+            tVoice.ModInfo.Add(tInfo);
+
+            tInfo = new VoiceModInfo
+            {
+                areaID = 3,
+                preVoice = false,
+                InitlastU = false,
+                Initbegin = false,
+                begin = 0.03f,
+                end = 1.0f,
+                ort = 0.001f,//0不变，-1收缩，1膨胀
+                RootRate = 8,
+                Arate0 = 3, //收缩时， 为负-则外凸， 为正-则内凹
+                Arate1 = -0.08f
+            };
+            tVoice.ModInfo.Add(tInfo);
         }
 
         public void LoadDefaultMod()
@@ -175,69 +219,69 @@ namespace wt1
 
         private void Arate0TRB_Scroll(object sender, EventArgs e)
         {
-            tInfo.Arate0 = Math.Round(Arate0_Ratio * Arate0TRB.Value - 10, 1);
-            Arate0_LShow.Text = tInfo.Arate0.ToString();
+            CurMod.Arate0 = Math.Round(Arate0_Ratio * Arate0TRB.Value - 10, 1);
+            Arate0_LShow.Text = CurMod.Arate0.ToString();
         }
         private void Arate0_Reset_Click(object sender, EventArgs e)
         {
             Arate0TRB.Value = Arate0TRB.Maximum/2;
 
-            tInfo.Arate0 = Math.Round(Arate0_Ratio * Arate0TRB.Value - 10, 1);
-            Arate0_LShow.Text = tInfo.Arate0.ToString();
+            CurMod.Arate0 = Math.Round(Arate0_Ratio * Arate0TRB.Value - 10, 1);
+            Arate0_LShow.Text = CurMod.Arate0.ToString();
         }
 
         private void Arate1TRB_Scroll(object sender, EventArgs e)
         {
-            tInfo.Arate1 = Math.Round(Arate1_Ratio * Arate1TRB.Value - 1, 3);
-            Arate1_LShow.Text = tInfo.Arate1.ToString();
+            CurMod.Arate1 = Math.Round(Arate1_Ratio * Arate1TRB.Value - 1, 3);
+            Arate1_LShow.Text = CurMod.Arate1.ToString();
         }
         private void Arate1_Reset_Click(object sender, EventArgs e)
         {
             Arate1TRB.Value = Arate1TRB.Maximum / 2;
 
-            tInfo.Arate1 = Math.Round(Arate1_Ratio * Arate1TRB.Value - 1, 3);
+            CurMod.Arate1 = Math.Round(Arate1_Ratio * Arate1TRB.Value - 1, 3);
 
-            Arate1_LShow.Text = tInfo.Arate1.ToString();
+            Arate1_LShow.Text = CurMod.Arate1.ToString();
         }
 
 
         private void StartAmpTRB_Scroll(object sender, EventArgs e)
         {
-            tInfo.startAmp = (float)Math.Round(Amp_Ratio * StartAmpTRB.Value, 3);
-            StartAmp_LShow.Text= tInfo.startAmp.ToString();
+            CurMod.startAmp = (float)Math.Round(Amp_Ratio * StartAmpTRB.Value, 3);
+            StartAmp_LShow.Text= CurMod.startAmp.ToString();
         }
         private void StartAmp_Reset_Click(object sender, EventArgs e)
         {
             StartAmpTRB.Value = StartAmpTRB.Minimum;
 
-            tInfo.startAmp = (float)Math.Round(Amp_Ratio * StartAmpTRB.Value, 3);
-            StartAmp_LShow.Text = tInfo.startAmp.ToString();
+            CurMod.startAmp = (float)Math.Round(Amp_Ratio * StartAmpTRB.Value, 3);
+            StartAmp_LShow.Text = CurMod.startAmp.ToString();
         }
         
         private void RootRateTRB_Scroll(object sender, EventArgs e)
         {
-            tInfo.RootRate= Math.Round(Root_Ratio * RootRateTRB.Value -20, 2);
-            RootRate_DShow.Text = tInfo.RootRate.ToString();
+            CurMod.RootRate= Math.Round(Root_Ratio * RootRateTRB.Value -20, 2);
+            RootRate_DShow.Text = CurMod.RootRate.ToString();
         }
         private void RootRate_Reset_Click(object sender, EventArgs e)
         {
             RootRateTRB.Value = RootRateTRB.Maximum / 2 ;
 
-            tInfo.RootRate = Math.Round(Root_Ratio * RootRateTRB.Value-20, 2);
-            RootRate_DShow.Text = tInfo.RootRate.ToString();
+            CurMod.RootRate = Math.Round(Root_Ratio * RootRateTRB.Value-20, 2);
+            RootRate_DShow.Text = CurMod.RootRate.ToString();
         }
 
         private void BeginDataTRB_Scroll(object sender, EventArgs e)
         {
-            tInfo.beginData = (float)Math.Round(Amp_Ratio * BeginDataTRB.Value, 3);
-            BeginData_LShow.Text = tInfo.beginData.ToString();
+            CurMod.beginData = (float)Math.Round(Amp_Ratio * BeginDataTRB.Value, 3);
+            BeginData_LShow.Text = CurMod.beginData.ToString();
         }
         private void BeginData_Reset_Click(object sender, EventArgs e)
         {
             BeginDataTRB.Value = BeginDataTRB.Minimum; ;
 
-            tInfo.beginData = (float)Math.Round(Amp_Ratio * BeginDataTRB.Value, 3);
-            BeginData_LShow.Text = tInfo.beginData.ToString();
+            CurMod.beginData = (float)Math.Round(Amp_Ratio * BeginDataTRB.Value, 3);
+            BeginData_LShow.Text = CurMod.beginData.ToString();
         }
 
         private void ExitBtn_Click(object sender, EventArgs e)
@@ -248,54 +292,54 @@ namespace wt1
 
         private void BeginTRB_Scroll(object sender, EventArgs e)
         {
-            tInfo.begin = Math.Round(Mod_Ratio * BeginTRB.Value - 1, 2);
-            Begin_LShow.Text = tInfo.begin.ToString();
+            CurMod.begin = Math.Round(Mod_Ratio * BeginTRB.Value - 1, 2);
+            Begin_LShow.Text = CurMod.begin.ToString();
         }
         private void Begin_Reset_Click(object sender, EventArgs e)
         {
             BeginTRB.Value = BeginTRB.Maximum / 2;
 
-            tInfo.begin = Math.Round(Mod_Ratio * BeginTRB.Value - 1, 2);
-            Begin_LShow.Text = tInfo.begin.ToString();
+            CurMod.begin = Math.Round(Mod_Ratio * BeginTRB.Value - 1, 2);
+            Begin_LShow.Text = CurMod.begin.ToString();
         }
 
         private void EndTRB_Scroll(object sender, EventArgs e)
         {
-            tInfo.end = Math.Round(Mod_Ratio * EndTRB.Value - 1, 2);
-            End_LShow.Text = tInfo.end.ToString();
+            CurMod.end = Math.Round(Mod_Ratio * EndTRB.Value - 1, 2);
+            End_LShow.Text = CurMod.end.ToString();
         }
         private void End_Reset_Click(object sender, EventArgs e)
         {
             EndTRB.Value = EndTRB.Maximum / 2;
 
-            tInfo.end = Math.Round(Mod_Ratio * EndTRB.Value - 1, 2);
-            End_LShow.Text = tInfo.end.ToString();
+            CurMod.end = Math.Round(Mod_Ratio * EndTRB.Value - 1, 2);
+            End_LShow.Text = CurMod.end.ToString();
         }
 
         private void Ort_0_CheckedChanged(object sender, EventArgs e)
         {
-            tInfo.ort = 0f;
+            CurMod.ort = 0f;
         }
         private void Ort__1_CheckedChanged(object sender, EventArgs e)
         {
-            tInfo.ort = -0.001f;
+            CurMod.ort = -0.001f;
         }
         private void Ort_1_CheckedChanged(object sender, EventArgs e)
         {
-            tInfo.ort = 0.001f;
+            CurMod.ort = 0.001f;
         }
 
         private void Initbegin_Set_CheckedChanged(object sender, EventArgs e)
         {
-            tInfo.Initbegin = Initbegin_Set.Checked;
+            CurMod.Initbegin = Initbegin_Set.Checked;
         }
         private void PreVoice_Set_CheckedChanged(object sender, EventArgs e)
         {
-            tInfo.preVoice = PreVoice_Set.Checked;
+            CurMod.preVoice = PreVoice_Set.Checked;
         }
         private void InitlastU_Set_CheckedChanged(object sender, EventArgs e)
         {
-            tInfo.InitlastU = Initbegin_Set.Checked;
+            CurMod.InitlastU = Initbegin_Set.Checked;
         }
 
         private void LoadMod_Click(object sender, EventArgs e)
@@ -306,13 +350,20 @@ namespace wt1
 
         private void AreaGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            AreaGrid.ClearSelection();
+            //AreaGrid.ClearSelection();
         }
 
         private void ModSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
             char chIndex = ModSelect.SelectedItem.ToString().ElementAt(0);
-            int ModIndex = Convert.ToInt16(chIndex.ToString());
+            CurModIndex = Convert.ToInt16(chIndex.ToString()) - 1;
+            CurMod = tVoice.ModInfo[CurModIndex];
+
+
+
+
+            AreaGrid.CurrentCell = AreaGrid[0, CurModIndex];
+            AreaGrid.Enabled = false;
         }
     }
 }
