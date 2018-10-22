@@ -68,6 +68,11 @@
             this.Switch = new System.Windows.Forms.Button();
             this.Both = new System.Windows.Forms.Button();
             this.AreaGrid = new System.Windows.Forms.DataGridView();
+            this.AreaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Begin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.End = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartAmp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NewArea = new System.Windows.Forms.Button();
             this.Ort_0 = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -86,11 +91,6 @@
             this.PreVoice_Set = new System.Windows.Forms.CheckBox();
             this.InitlastU_Set = new System.Windows.Forms.CheckBox();
             this.LoadMod = new System.Windows.Forms.Button();
-            this.AreaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Begin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.End = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StartAmp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModSelect = new System.Windows.Forms.ComboBox();
             this.waveViewerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
@@ -481,6 +481,58 @@
             this.AreaGrid.TabStop = false;
             this.AreaGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AreaGrid_CellClick);
             // 
+            // AreaID
+            // 
+            this.AreaID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.AreaID.DefaultCellStyle = dataGridViewCellStyle3;
+            this.AreaID.Frozen = true;
+            this.AreaID.HeaderText = "ID";
+            this.AreaID.Name = "AreaID";
+            this.AreaID.ReadOnly = true;
+            this.AreaID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.AreaID.Width = 51;
+            // 
+            // Begin
+            // 
+            this.Begin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Begin.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Begin.HeaderText = "Begin";
+            this.Begin.Name = "Begin";
+            this.Begin.ReadOnly = true;
+            this.Begin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // End
+            // 
+            this.End.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.End.DefaultCellStyle = dataGridViewCellStyle5;
+            this.End.HeaderText = "End";
+            this.End.Name = "End";
+            this.End.ReadOnly = true;
+            this.End.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // StartAmp
+            // 
+            this.StartAmp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.StartAmp.DefaultCellStyle = dataGridViewCellStyle6;
+            this.StartAmp.HeaderText = "StartAmp";
+            this.StartAmp.Name = "StartAmp";
+            this.StartAmp.ReadOnly = true;
+            this.StartAmp.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Ort
+            // 
+            this.Ort.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Ort.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Ort.HeaderText = "Ort";
+            this.Ort.Name = "Ort";
+            this.Ort.ReadOnly = true;
+            this.Ort.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // NewArea
             // 
             this.NewArea.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -686,58 +738,6 @@
             this.LoadMod.Text = "Load Mod";
             this.LoadMod.UseVisualStyleBackColor = false;
             this.LoadMod.Click += new System.EventHandler(this.LoadMod_Click);
-            // 
-            // AreaID
-            // 
-            this.AreaID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.AreaID.DefaultCellStyle = dataGridViewCellStyle3;
-            this.AreaID.Frozen = true;
-            this.AreaID.HeaderText = "ID";
-            this.AreaID.Name = "AreaID";
-            this.AreaID.ReadOnly = true;
-            this.AreaID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.AreaID.Width = 51;
-            // 
-            // Begin
-            // 
-            this.Begin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Begin.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Begin.HeaderText = "Begin";
-            this.Begin.Name = "Begin";
-            this.Begin.ReadOnly = true;
-            this.Begin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // End
-            // 
-            this.End.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.End.DefaultCellStyle = dataGridViewCellStyle5;
-            this.End.HeaderText = "End";
-            this.End.Name = "End";
-            this.End.ReadOnly = true;
-            this.End.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // StartAmp
-            // 
-            this.StartAmp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.StartAmp.DefaultCellStyle = dataGridViewCellStyle6;
-            this.StartAmp.HeaderText = "StartAmp";
-            this.StartAmp.Name = "StartAmp";
-            this.StartAmp.ReadOnly = true;
-            this.StartAmp.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Ort
-            // 
-            this.Ort.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Ort.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Ort.HeaderText = "Ort";
-            this.Ort.Name = "Ort";
-            this.Ort.ReadOnly = true;
-            this.Ort.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ModSelect
             // 
