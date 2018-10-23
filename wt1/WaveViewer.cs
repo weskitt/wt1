@@ -33,7 +33,7 @@ namespace wt1
             tVoice = new Voice();
             tInfo = new VoiceModInfo
             {
-                areaID = 1,
+                areaID = 0,
                 preVoice = true,
                 startAmp = 0.03f,
                 begin = -1.0f,
@@ -43,7 +43,7 @@ namespace wt1
 
             tInfo = new VoiceModInfo
             {
-                areaID = 2,
+                areaID = 1,
                 preVoice = false,
                 beginData = 0.5f,
                 begin = -0.8f,
@@ -57,7 +57,7 @@ namespace wt1
 
             tInfo = new VoiceModInfo
             {
-                areaID = 3,
+                areaID = 2,
                 preVoice = false,
 
                 begin = 0.03f,
@@ -108,7 +108,7 @@ namespace wt1
             preIter = -1;
             dataIter = -1;
             int modIndex = 0;
-            //var bsiter = BaseSampSingle.GetEnumerator();
+
             var BSkeys = new List<int>(BaseWaveSingle.Keys);
 
             for (int i = 0; i < BSkeys.Count; i++)

@@ -45,6 +45,8 @@ namespace wt1
             Both.Location = btnBothL;
             groupBox1.Location = gpL;
 
+            InitBefor(false);
+
             chpy = string.Empty; //汉字拼音
             //tVoice = new Voice();
             //tInfo = new VoiceModInfo
@@ -61,15 +63,29 @@ namespace wt1
             Mod_Ratio = (double)2 / BeginTRB.Maximum;             //-1---1       200      0.01分辨率
             Amp_Ratio = (double)1 / StartAmpTRB.Maximum;       // 0---1       1000    0.001分辨率
             Root_Ratio = (double)40 / RootRateTRB.Maximum;    //-20---20   4000     0.01分辨率
+            
+        }
 
-
+        public void InitBefor(bool ready)
+        {
+            StartAmpTRB.Enabled = ready;
+            Arate0TRB.Enabled = ready;
+            Arate1TRB.Enabled = ready;
+            BeginDataTRB.Enabled = ready;
+            RootRateTRB.Enabled = ready;
+            BeginTRB.Enabled = ready;
+            EndTRB.Enabled = ready;
+            Ort_0.Enabled = ready;
+            Ort_1.Enabled = ready;
+            Ort__1.Enabled = ready;
+            PreVoice_Set.Enabled = ready;
         }
 
         public void LoadDefaultMod()
         {
-
-
-
+            InitExample();
+            AreaGrid.Rows.Clear();
+            ModSelect.Items.Clear();
             int rowCount = 0;
             foreach (var item in tVoice.ModInfo)
             {
@@ -83,8 +99,7 @@ namespace wt1
                 ModSelect.Items.Add(item.areaID.ToString()+"-Begin:" + Math.Round(item.begin, 2));
             }
             AreaGrid.ClearSelection();
-
-
+            ModSelect.SelectedIndex = 1;
         }
 
         public void Panel1_Paint(object sender, PaintEventArgs e)
@@ -171,8 +186,6 @@ namespace wt1
 
             tInfo = new VoiceModInfo() {
                 preVoice=false,
-                Initbegin=false,
-                InitlastU=false,
                 areaID = (tVoice.ModInfo.Count + 1)
             };//初始化实例
         }
@@ -289,24 +302,17 @@ namespace wt1
         {
             CurMod.ort = 0.001f;
         }
-
-        private void Initbegin_Set_CheckedChanged(object sender, EventArgs e)
-        {
-            CurMod.Initbegin = Initbegin_Set.Checked;
-        }
         private void PreVoice_Set_CheckedChanged(object sender, EventArgs e)
         {
             CurMod.preVoice = PreVoice_Set.Checked;
         }
-        private void InitlastU_Set_CheckedChanged(object sender, EventArgs e)
-        {
-            CurMod.InitlastU = Initbegin_Set.Checked;
-        }
 
         private void LoadMod_Click(object sender, EventArgs e)
         {
+
             LoadDefaultMod();
-            LoadMod.Enabled = false;
+            InitBefor(true);
+            //LoadMod.Enabled = false;
         }
 
         private void AreaGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -317,14 +323,48 @@ namespace wt1
         private void ModSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
             char chIndex = ModSelect.SelectedItem.ToString().ElementAt(0);
-            CurModIndex = Convert.ToInt16(chIndex.ToString()) - 1;
+            CurModIndex = Convert.ToInt16(chIndex.ToString());
             CurMod = tVoice.ModInfo[CurModIndex];
 
             var tSA = Math.Round(CurMod.startAmp, 3);
             StartAmpTRB.Value = (int)(tSA / Amp_Ratio);
             StartAmp_LShow.Text = tSA.ToString();
 
+            var tA0 = Math.Round(CurMod.Arate0, 1);
+            Arate0TRB.Value = (int)((tA0 + 10) / Arate0_Ratio);
+            Arate0_LShow.Text = tA0.ToString();
 
+            var tA1= Math.Round(CurMod.Arate1, 3);
+            Arate1TRB.Value = (int)((tA1 + 1) / Arate1_Ratio);
+            Arate1_LShow.Text = tA1.ToString();
+
+            var tBD = Math.Round(CurMod.beginData, 3);
+            BeginDataTRB.Value = (int)(tBD / Amp_Ratio);
+            BeginData_LShow.Text = tBD.ToString();
+            
+            var tRR = Math.Round(CurMod.RootRate, 2);
+            RootRateTRB.Value = (int)((tRR + 20) / Root_Ratio);
+            RootRate_DShow.Text = tRR.ToString();
+
+            var tB = Math.Round(CurMod.begin, 2);
+            BeginTRB.Value = (int)((tB + 1) / Mod_Ratio);
+            Begin_LShow.Text = tB.ToString();
+
+            var tE = Math.Round(CurMod.end, 2);
+            EndTRB.Value = (int)((tE + 1) / Mod_Ratio);
+            End_LShow.Text = tE.ToString();
+
+            if (CurMod.ort == 0)
+                Ort_0.Checked = true;
+            else if (CurMod.ort == 0.001f)
+                Ort_1.Checked = true;
+            else
+                Ort__1.Checked = true;
+
+            if (CurMod.preVoice)
+                PreVoice_Set.Checked = true;
+            else
+                PreVoice_Set.Checked = false;
 
             AreaGrid.CurrentCell = AreaGrid[0, CurModIndex];
             AreaGrid.Enabled = false;
