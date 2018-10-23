@@ -196,68 +196,26 @@ namespace wt1
             CurMod.Arate0 = Math.Round(Arate0_Ratio * Arate0TRB.Value - 10, 1);
             Arate0_LShow.Text = CurMod.Arate0.ToString();
         }
-        private void Arate0_Reset_Click(object sender, EventArgs e)
-        {
-            Arate0TRB.Value = Arate0TRB.Maximum/2;
-
-            CurMod.Arate0 = Math.Round(Arate0_Ratio * Arate0TRB.Value - 10, 1);
-            Arate0_LShow.Text = CurMod.Arate0.ToString();
-        }
-
         private void Arate1TRB_Scroll(object sender, EventArgs e)
         {
             CurMod.Arate1 = Math.Round(Arate1_Ratio * Arate1TRB.Value - 1, 3);
             Arate1_LShow.Text = CurMod.Arate1.ToString();
         }
-        private void Arate1_Reset_Click(object sender, EventArgs e)
-        {
-            Arate1TRB.Value = Arate1TRB.Maximum / 2;
-
-            CurMod.Arate1 = Math.Round(Arate1_Ratio * Arate1TRB.Value - 1, 3);
-
-            Arate1_LShow.Text = CurMod.Arate1.ToString();
-        }
-
-
         private void StartAmpTRB_Scroll(object sender, EventArgs e)
         {
             CurMod.startAmp = (float)Math.Round(Amp_Ratio * StartAmpTRB.Value, 3);
             StartAmp_LShow.Text= CurMod.startAmp.ToString();
         }
-        private void StartAmp_Reset_Click(object sender, EventArgs e)
-        {
-            StartAmpTRB.Value = StartAmpTRB.Minimum;
-
-            CurMod.startAmp = (float)Math.Round(Amp_Ratio * StartAmpTRB.Value, 3);
-            StartAmp_LShow.Text = CurMod.startAmp.ToString();
-        }
-        
         private void RootRateTRB_Scroll(object sender, EventArgs e)
         {
             CurMod.RootRate= Math.Round(Root_Ratio * RootRateTRB.Value -20, 2);
             RootRate_DShow.Text = CurMod.RootRate.ToString();
         }
-        private void RootRate_Reset_Click(object sender, EventArgs e)
-        {
-            RootRateTRB.Value = RootRateTRB.Maximum / 2 ;
-
-            CurMod.RootRate = Math.Round(Root_Ratio * RootRateTRB.Value-20, 2);
-            RootRate_DShow.Text = CurMod.RootRate.ToString();
-        }
-
         private void BeginDataTRB_Scroll(object sender, EventArgs e)
         {
             CurMod.beginData = (float)Math.Round(Amp_Ratio * BeginDataTRB.Value, 3);
             BeginData_LShow.Text = CurMod.beginData.ToString();
         }
-        private void BeginData_Reset_Click(object sender, EventArgs e)
-        {
-            BeginDataTRB.Value = BeginDataTRB.Minimum; ;
-
-            CurMod.beginData = (float)Math.Round(Amp_Ratio * BeginDataTRB.Value, 3);
-            BeginData_LShow.Text = CurMod.beginData.ToString();
-        }
-
         private void ExitBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -269,27 +227,11 @@ namespace wt1
             CurMod.begin = Math.Round(Mod_Ratio * BeginTRB.Value - 1, 2);
             Begin_LShow.Text = CurMod.begin.ToString();
         }
-        private void Begin_Reset_Click(object sender, EventArgs e)
-        {
-            BeginTRB.Value = BeginTRB.Maximum / 2;
-
-            CurMod.begin = Math.Round(Mod_Ratio * BeginTRB.Value - 1, 2);
-            Begin_LShow.Text = CurMod.begin.ToString();
-        }
-
         private void EndTRB_Scroll(object sender, EventArgs e)
         {
             CurMod.end = Math.Round(Mod_Ratio * EndTRB.Value - 1, 2);
             End_LShow.Text = CurMod.end.ToString();
         }
-        private void End_Reset_Click(object sender, EventArgs e)
-        {
-            EndTRB.Value = EndTRB.Maximum / 2;
-
-            CurMod.end = Math.Round(Mod_Ratio * EndTRB.Value - 1, 2);
-            End_LShow.Text = CurMod.end.ToString();
-        }
-
         private void Ort_0_CheckedChanged(object sender, EventArgs e)
         {
             CurMod.ort = 0f;

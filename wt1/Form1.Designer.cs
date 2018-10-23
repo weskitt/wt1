@@ -29,37 +29,32 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fm1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.StartAmp_LShow = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Arate0_LShow = new System.Windows.Forms.Label();
             this.Arate0_L = new System.Windows.Forms.Label();
-            this.StartAmp_Reset = new System.Windows.Forms.Button();
-            this.Arate0_Reset = new System.Windows.Forms.Button();
             this.StartAmp_L = new System.Windows.Forms.Label();
             this.Arate1_LShow = new System.Windows.Forms.Label();
             this.BeginData_LShow = new System.Windows.Forms.Label();
             this.RootRate_DShow = new System.Windows.Forms.Label();
             this.RootRate_L = new System.Windows.Forms.Label();
-            this.RootRate_Reset = new System.Windows.Forms.Button();
             this.RootRateTRB = new CCWin.SkinControl.SkinTrackBar();
             this.BeginData_L = new System.Windows.Forms.Label();
             this.Arate0TRB = new CCWin.SkinControl.SkinTrackBar();
             this.StartAmpTRB = new CCWin.SkinControl.SkinTrackBar();
-            this.BeginData_Reset = new System.Windows.Forms.Button();
             this.BeginDataTRB = new CCWin.SkinControl.SkinTrackBar();
             this.Arate1_L = new System.Windows.Forms.Label();
-            this.Arate1_Reset = new System.Windows.Forms.Button();
             this.Arate1TRB = new CCWin.SkinControl.SkinTrackBar();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.OpenBtn = new System.Windows.Forms.Button();
@@ -79,12 +74,10 @@
             this.Ort_1 = new System.Windows.Forms.RadioButton();
             this.Begin_LShow = new System.Windows.Forms.Label();
             this.Begin_L = new System.Windows.Forms.Label();
-            this.Begin_Reset = new System.Windows.Forms.Button();
             this.BeginTRB = new CCWin.SkinControl.SkinTrackBar();
             this.ExitBtn = new System.Windows.Forms.Button();
             this.End_LShow = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.End_Reset = new System.Windows.Forms.Button();
             this.EndTRB = new CCWin.SkinControl.SkinTrackBar();
             this.PreVoice_Set = new System.Windows.Forms.CheckBox();
             this.LoadMod = new System.Windows.Forms.Button();
@@ -125,22 +118,17 @@
             this.groupBox1.Controls.Add(this.Arate0_LShow);
             this.groupBox1.Controls.Add(this.Arate0_L);
             this.groupBox1.Controls.Add(this.StartAmp_LShow);
-            this.groupBox1.Controls.Add(this.StartAmp_Reset);
-            this.groupBox1.Controls.Add(this.Arate0_Reset);
             this.groupBox1.Controls.Add(this.StartAmp_L);
             this.groupBox1.Controls.Add(this.Arate1_LShow);
             this.groupBox1.Controls.Add(this.BeginData_LShow);
             this.groupBox1.Controls.Add(this.RootRate_DShow);
             this.groupBox1.Controls.Add(this.RootRate_L);
-            this.groupBox1.Controls.Add(this.RootRate_Reset);
             this.groupBox1.Controls.Add(this.RootRateTRB);
             this.groupBox1.Controls.Add(this.BeginData_L);
             this.groupBox1.Controls.Add(this.Arate0TRB);
             this.groupBox1.Controls.Add(this.StartAmpTRB);
-            this.groupBox1.Controls.Add(this.BeginData_Reset);
             this.groupBox1.Controls.Add(this.BeginDataTRB);
             this.groupBox1.Controls.Add(this.Arate1_L);
-            this.groupBox1.Controls.Add(this.Arate1_Reset);
             this.groupBox1.Controls.Add(this.Arate1TRB);
             this.groupBox1.Location = new System.Drawing.Point(205, 822);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
@@ -168,28 +156,6 @@
             this.Arate0_L.Size = new System.Drawing.Size(62, 18);
             this.Arate0_L.TabIndex = 10;
             this.Arate0_L.Text = "Arate0";
-            // 
-            // StartAmp_Reset
-            // 
-            this.StartAmp_Reset.Location = new System.Drawing.Point(436, 15);
-            this.StartAmp_Reset.Margin = new System.Windows.Forms.Padding(6);
-            this.StartAmp_Reset.Name = "StartAmp_Reset";
-            this.StartAmp_Reset.Size = new System.Drawing.Size(98, 30);
-            this.StartAmp_Reset.TabIndex = 4;
-            this.StartAmp_Reset.Text = "Reset";
-            this.StartAmp_Reset.UseVisualStyleBackColor = true;
-            this.StartAmp_Reset.Click += new System.EventHandler(this.StartAmp_Reset_Click);
-            // 
-            // Arate0_Reset
-            // 
-            this.Arate0_Reset.Location = new System.Drawing.Point(719, 15);
-            this.Arate0_Reset.Margin = new System.Windows.Forms.Padding(6);
-            this.Arate0_Reset.Name = "Arate0_Reset";
-            this.Arate0_Reset.Size = new System.Drawing.Size(98, 30);
-            this.Arate0_Reset.TabIndex = 6;
-            this.Arate0_Reset.Text = "Reset";
-            this.Arate0_Reset.UseVisualStyleBackColor = true;
-            this.Arate0_Reset.Click += new System.EventHandler(this.Arate0_Reset_Click);
             // 
             // StartAmp_L
             // 
@@ -238,17 +204,6 @@
             this.RootRate_L.Size = new System.Drawing.Size(80, 18);
             this.RootRate_L.TabIndex = 17;
             this.RootRate_L.Text = "RootRate";
-            // 
-            // RootRate_Reset
-            // 
-            this.RootRate_Reset.Location = new System.Drawing.Point(1569, 13);
-            this.RootRate_Reset.Margin = new System.Windows.Forms.Padding(6);
-            this.RootRate_Reset.Name = "RootRate_Reset";
-            this.RootRate_Reset.Size = new System.Drawing.Size(98, 30);
-            this.RootRate_Reset.TabIndex = 16;
-            this.RootRate_Reset.Text = "Reset";
-            this.RootRate_Reset.UseVisualStyleBackColor = true;
-            this.RootRate_Reset.Click += new System.EventHandler(this.RootRate_Reset_Click);
             // 
             // RootRateTRB
             // 
@@ -312,17 +267,6 @@
             this.StartAmpTRB.Track = ((System.Drawing.Image)(resources.GetObject("StartAmpTRB.Track")));
             this.StartAmpTRB.Scroll += new System.EventHandler(this.StartAmpTRB_Scroll);
             // 
-            // BeginData_Reset
-            // 
-            this.BeginData_Reset.Location = new System.Drawing.Point(1284, 13);
-            this.BeginData_Reset.Margin = new System.Windows.Forms.Padding(6);
-            this.BeginData_Reset.Name = "BeginData_Reset";
-            this.BeginData_Reset.Size = new System.Drawing.Size(98, 30);
-            this.BeginData_Reset.TabIndex = 13;
-            this.BeginData_Reset.Text = "Reset";
-            this.BeginData_Reset.UseVisualStyleBackColor = true;
-            this.BeginData_Reset.Click += new System.EventHandler(this.BeginData_Reset_Click);
-            // 
             // BeginDataTRB
             // 
             this.BeginDataTRB.BackColor = System.Drawing.Color.Transparent;
@@ -348,17 +292,6 @@
             this.Arate1_L.Size = new System.Drawing.Size(62, 18);
             this.Arate1_L.TabIndex = 11;
             this.Arate1_L.Text = "Arate1";
-            // 
-            // Arate1_Reset
-            // 
-            this.Arate1_Reset.Location = new System.Drawing.Point(1002, 15);
-            this.Arate1_Reset.Margin = new System.Windows.Forms.Padding(6);
-            this.Arate1_Reset.Name = "Arate1_Reset";
-            this.Arate1_Reset.Size = new System.Drawing.Size(98, 30);
-            this.Arate1_Reset.TabIndex = 8;
-            this.Arate1_Reset.Text = "Reset";
-            this.Arate1_Reset.UseVisualStyleBackColor = true;
-            this.Arate1_Reset.Click += new System.EventHandler(this.Arate1_Reset_Click);
             // 
             // Arate1TRB
             // 
@@ -429,15 +362,15 @@
             // 
             this.AreaGrid.AllowUserToAddRows = false;
             this.AreaGrid.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.AreaGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.AreaGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.AreaGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.AreaGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.AreaGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AreaGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AreaID,
@@ -445,30 +378,30 @@
             this.End,
             this.StartAmp,
             this.Ort});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.AreaGrid.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.AreaGrid.DefaultCellStyle = dataGridViewCellStyle18;
             this.AreaGrid.Location = new System.Drawing.Point(1449, 48);
             this.AreaGrid.Name = "AreaGrid";
             this.AreaGrid.ReadOnly = true;
             this.AreaGrid.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.AreaGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.AreaGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.AreaGrid.RowHeadersVisible = false;
             this.AreaGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.AreaGrid.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.AreaGrid.RowsDefaultCellStyle = dataGridViewCellStyle20;
             this.AreaGrid.RowTemplate.Height = 30;
             this.AreaGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AreaGrid.Size = new System.Drawing.Size(435, 396);
@@ -479,8 +412,8 @@
             // AreaID
             // 
             this.AreaID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.AreaID.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.AreaID.DefaultCellStyle = dataGridViewCellStyle13;
             this.AreaID.Frozen = true;
             this.AreaID.HeaderText = "ID";
             this.AreaID.Name = "AreaID";
@@ -491,8 +424,8 @@
             // Begin
             // 
             this.Begin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Begin.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Begin.DefaultCellStyle = dataGridViewCellStyle14;
             this.Begin.HeaderText = "Begin";
             this.Begin.Name = "Begin";
             this.Begin.ReadOnly = true;
@@ -501,8 +434,8 @@
             // End
             // 
             this.End.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.End.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.End.DefaultCellStyle = dataGridViewCellStyle15;
             this.End.HeaderText = "End";
             this.End.Name = "End";
             this.End.ReadOnly = true;
@@ -511,8 +444,8 @@
             // StartAmp
             // 
             this.StartAmp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.StartAmp.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.StartAmp.DefaultCellStyle = dataGridViewCellStyle16;
             this.StartAmp.HeaderText = "StartAmp";
             this.StartAmp.Name = "StartAmp";
             this.StartAmp.ReadOnly = true;
@@ -521,8 +454,8 @@
             // Ort
             // 
             this.Ort.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Ort.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Ort.DefaultCellStyle = dataGridViewCellStyle17;
             this.Ort.HeaderText = "Ort";
             this.Ort.Name = "Ort";
             this.Ort.ReadOnly = true;
@@ -587,7 +520,7 @@
             // Begin_LShow
             // 
             this.Begin_LShow.AutoSize = true;
-            this.Begin_LShow.Location = new System.Drawing.Point(1535, 531);
+            this.Begin_LShow.Location = new System.Drawing.Point(1580, 528);
             this.Begin_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.Begin_LShow.Name = "Begin_LShow";
             this.Begin_LShow.Size = new System.Drawing.Size(17, 18);
@@ -597,22 +530,11 @@
             // Begin_L
             // 
             this.Begin_L.AutoSize = true;
-            this.Begin_L.Location = new System.Drawing.Point(1446, 531);
+            this.Begin_L.Location = new System.Drawing.Point(1499, 528);
             this.Begin_L.Name = "Begin_L";
             this.Begin_L.Size = new System.Drawing.Size(53, 18);
             this.Begin_L.TabIndex = 21;
             this.Begin_L.Text = "Begin";
-            // 
-            // Begin_Reset
-            // 
-            this.Begin_Reset.Location = new System.Drawing.Point(1612, 525);
-            this.Begin_Reset.Margin = new System.Windows.Forms.Padding(6);
-            this.Begin_Reset.Name = "Begin_Reset";
-            this.Begin_Reset.Size = new System.Drawing.Size(98, 30);
-            this.Begin_Reset.TabIndex = 20;
-            this.Begin_Reset.Text = "Reset";
-            this.Begin_Reset.UseVisualStyleBackColor = true;
-            this.Begin_Reset.Click += new System.EventHandler(this.Begin_Reset_Click);
             // 
             // BeginTRB
             // 
@@ -620,7 +542,7 @@
             this.BeginTRB.Bar = ((System.Drawing.Image)(resources.GetObject("BeginTRB.Bar")));
             this.BeginTRB.BarStyle = CCWin.SkinControl.HSLTrackBarStyle.Img;
             this.BeginTRB.BaseColor = System.Drawing.Color.DimGray;
-            this.BeginTRB.Location = new System.Drawing.Point(1449, 541);
+            this.BeginTRB.Location = new System.Drawing.Point(1612, 504);
             this.BeginTRB.Margin = new System.Windows.Forms.Padding(6);
             this.BeginTRB.Maximum = 200;
             this.BeginTRB.Name = "BeginTRB";
@@ -645,7 +567,7 @@
             // End_LShow
             // 
             this.End_LShow.AutoSize = true;
-            this.End_LShow.Location = new System.Drawing.Point(1535, 634);
+            this.End_LShow.Location = new System.Drawing.Point(1580, 609);
             this.End_LShow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.End_LShow.Name = "End_LShow";
             this.End_LShow.Size = new System.Drawing.Size(17, 18);
@@ -655,22 +577,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1447, 634);
+            this.label2.Location = new System.Drawing.Point(1512, 609);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 18);
             this.label2.TabIndex = 26;
             this.label2.Text = "End";
-            // 
-            // End_Reset
-            // 
-            this.End_Reset.Location = new System.Drawing.Point(1612, 628);
-            this.End_Reset.Margin = new System.Windows.Forms.Padding(6);
-            this.End_Reset.Name = "End_Reset";
-            this.End_Reset.Size = new System.Drawing.Size(98, 30);
-            this.End_Reset.TabIndex = 25;
-            this.End_Reset.Text = "Reset";
-            this.End_Reset.UseVisualStyleBackColor = true;
-            this.End_Reset.Click += new System.EventHandler(this.End_Reset_Click);
             // 
             // EndTRB
             // 
@@ -678,7 +589,7 @@
             this.EndTRB.Bar = ((System.Drawing.Image)(resources.GetObject("EndTRB.Bar")));
             this.EndTRB.BarStyle = CCWin.SkinControl.HSLTrackBarStyle.Img;
             this.EndTRB.BaseColor = System.Drawing.Color.DimGray;
-            this.EndTRB.Location = new System.Drawing.Point(1449, 644);
+            this.EndTRB.Location = new System.Drawing.Point(1612, 585);
             this.EndTRB.Margin = new System.Windows.Forms.Padding(6);
             this.EndTRB.Maximum = 200;
             this.EndTRB.Name = "EndTRB";
@@ -735,12 +646,10 @@
             this.Controls.Add(this.PreVoice_Set);
             this.Controls.Add(this.End_LShow);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.End_Reset);
             this.Controls.Add(this.EndTRB);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.Begin_LShow);
             this.Controls.Add(this.Begin_L);
-            this.Controls.Add(this.Begin_Reset);
             this.Controls.Add(this.BeginTRB);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.NewArea);
@@ -784,24 +693,19 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label StartAmp_LShow;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button StartAmp_Reset;
         private System.Windows.Forms.Button OpenBtn;
         private System.Windows.Forms.Button General;
         private System.Windows.Forms.Button Switch;
         private System.Windows.Forms.Button Both;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button Arate0_Reset;
         private CCWin.SkinControl.SkinTrackBar Arate0TRB;
         private System.Windows.Forms.Label Arate1_L;
         private System.Windows.Forms.Label Arate0_L;
         private System.Windows.Forms.Label StartAmp_L;
-        private System.Windows.Forms.Button Arate1_Reset;
         private CCWin.SkinControl.SkinTrackBar Arate1TRB;
         private System.Windows.Forms.Label RootRate_L;
-        private System.Windows.Forms.Button RootRate_Reset;
         private CCWin.SkinControl.SkinTrackBar RootRateTRB;
         private System.Windows.Forms.Label BeginData_L;
-        private System.Windows.Forms.Button BeginData_Reset;
         private CCWin.SkinControl.SkinTrackBar BeginDataTRB;
         private System.Windows.Forms.DataGridView AreaGrid;
         private System.Windows.Forms.Button NewArea;
@@ -815,12 +719,10 @@
         private System.Windows.Forms.RadioButton Ort__1;
         private System.Windows.Forms.Label Begin_LShow;
         private System.Windows.Forms.Label Begin_L;
-        private System.Windows.Forms.Button Begin_Reset;
         private CCWin.SkinControl.SkinTrackBar BeginTRB;
         private System.Windows.Forms.Button ExitBtn;
         private System.Windows.Forms.Label End_LShow;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button End_Reset;
         private CCWin.SkinControl.SkinTrackBar EndTRB;
         private System.Windows.Forms.CheckBox PreVoice_Set;
         private System.Windows.Forms.Button LoadMod;
