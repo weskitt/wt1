@@ -35,15 +35,20 @@ namespace wt1
 
             public double ort;
             public double RootRate; //-20  -----   20    0.01分辨率
-            public double Arate=99999;
+            public double Arate;
             public double Arate0;//-10---10  200  0.1分辨率
             public double Arate1;//-1---1  2000  0.001分辨率
             //public double Arate2;
             //public float baseN;
 
+
+            public void ArateReset()
+            {
+                Arate = Arate0;
+            }
             public void Fusion(SortedDictionary<int, WaveRichPoint> bvs, int index,ref float lastU)
             {
-                if (preVoice)   //判断是否前置区
+                if (preVoice)   //判断是否是前置区
                 {
                     if (lastU<0)
                         lastU = startAmp;
@@ -55,9 +60,6 @@ namespace wt1
                 {
                     if (lastU<0)
                         lastU = beginData;
-
-                    if (Arate==99999)
-                        Arate = Arate0;
                     
                     Arate += Arate1;
                     float baseN = (float)(Arate * RootRate * ort);

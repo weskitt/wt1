@@ -35,9 +35,6 @@ namespace wt1
             {
                 areaID = 1,
                 preVoice = true,
-                InitlastU = true,
-                Initbegin = false,
-
                 startAmp = 0.03f,
                 begin = -1.0f,
                 end = -0.8f
@@ -48,10 +45,7 @@ namespace wt1
             {
                 areaID = 2,
                 preVoice = false,
-                InitlastU = false,
-                Initbegin = true,
                 beginData = 0.5f,
-
                 begin = -0.8f,
                 end = 0.3f,
                 ort = -0.001f,//0不变，-1收缩，1膨胀
@@ -65,8 +59,7 @@ namespace wt1
             {
                 areaID = 3,
                 preVoice = false,
-                InitlastU = false,
-                Initbegin = false,
+
                 begin = 0.03f,
                 end = 1.0f,
                 ort = 0.001f,//0不变，-1收缩，1膨胀
@@ -134,7 +127,9 @@ namespace wt1
                 }
                 else
                 {
-                    ++modIndex;
+                    //仅适用于preVoice前置区无Arate的情况
+                    ++modIndex;  //切换mod
+                    tVoice.ModInfo[modIndex].ArateReset();  //使用下个mod前重置Arate
                     goto NewMod;
                 }
             }
