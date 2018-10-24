@@ -11,8 +11,8 @@ namespace wt1
     {
         public static int PCMSamCount;
         public static int BaseSamCount;
-        public static float preIter;
-        public static float dataIter;
+        public static double preIter;
+        public static double dataIter;
         public static bool isGeneralShow =false;
         public static bool isInitExample = false;
 
@@ -162,7 +162,7 @@ namespace wt1
                 PointF point = new PointF
                 {
                     X = bs.Value.index * rect.Width / 1920,
-                    Y = bs.Value.value * (rect.Height / 2) + rect.Height / 2
+                    Y = (float)(bs.Value.value * (rect.Height / 2) + rect.Height / 2)
                 };
                 listPoints.Add(point);
             }

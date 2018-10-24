@@ -44,6 +44,8 @@ namespace wt1
             General.Location = btnGenL;
             Both.Location = btnBothL;
             groupBox1.Location = gpL;
+            
+
 
             InitBefor(false);
 
@@ -63,6 +65,27 @@ namespace wt1
             Mod_Ratio = (double)2 / BeginTRB.Maximum;             //-1---1       200      0.01分辨率
             Amp_Ratio = (double)1 / StartAmpTRB.Maximum;       // 0---1       1000    0.001分辨率
             Root_Ratio = (double)40 / RootRateTRB.Maximum;    //-20---20   4000     0.01分辨率
+            
+        }
+
+        //
+        public void ScrollConv(CCWin.SkinControl.SkinTrackBar scrollData, ref double modData, Scroll scroll, bool invert)//invert true:double,  false:int
+        {
+
+            int scrollMax = scroll.ScrollMax;
+            double modMin = scroll.ModMin;
+            double modMax = scroll.ModMax;
+            int modAcc = scroll.ModAcc;
+
+            double ratio = Math.Round((modMax - modMin) / scrollMax, modAcc);
+
+            if (invert)
+                modData = Math.Round(ratio * scrollData.Value + modMin, modAcc);
+            else
+            {
+                modData = Math.Round(modData, modAcc);
+                scrollData.Value = (int)((modData - modMin) / ratio);
+            }
             
         }
 
@@ -193,27 +216,32 @@ namespace wt1
 
         private void Arate0TRB_Scroll(object sender, EventArgs e)
         {
-            CurMod.Arate0 = Math.Round(Arate0_Ratio * Arate0TRB.Value - 10, 1);
+            //CurMod.Arate0 = Math.Round(Arate0_Ratio * Arate0TRB.Value - 10, 1);
+            ScrollConv(Arate0TRB, ref CurMod.Arate0, Arate0, true);
             Arate0_LShow.Text = CurMod.Arate0.ToString();
         }
         private void Arate1TRB_Scroll(object sender, EventArgs e)
         {
-            CurMod.Arate1 = Math.Round(Arate1_Ratio * Arate1TRB.Value - 1, 3);
+            //CurMod.Arate1 = Math.Round(Arate1_Ratio * Arate1TRB.Value - 1, 3);
+            ScrollConv(Arate1TRB, ref CurMod.Arate1, Arate1, true);
             Arate1_LShow.Text = CurMod.Arate1.ToString();
         }
         private void StartAmpTRB_Scroll(object sender, EventArgs e)
         {
-            CurMod.startAmp = (float)Math.Round(Amp_Ratio * StartAmpTRB.Value, 3);
+            //CurMod.startAmp = (float)Math.Round(Amp_Ratio * StartAmpTRB.Value, 3);
+            ScrollConv(StartAmpTRB, ref CurMod.startAmp, Amp, true);
             StartAmp_LShow.Text= CurMod.startAmp.ToString();
         }
         private void RootRateTRB_Scroll(object sender, EventArgs e)
         {
-            CurMod.RootRate= Math.Round(Root_Ratio * RootRateTRB.Value -20, 2);
+            //CurMod.RootRate= Math.Round(Root_Ratio * RootRateTRB.Value -20, 2);
+            ScrollConv(RootRateTRB, ref CurMod.RootRate, Root, true);
             RootRate_DShow.Text = CurMod.RootRate.ToString();
         }
         private void BeginDataTRB_Scroll(object sender, EventArgs e)
         {
-            CurMod.beginData = (float)Math.Round(Amp_Ratio * BeginDataTRB.Value, 3);
+            //CurMod.beginData = (float)Math.Round(Amp_Ratio * BeginDataTRB.Value, 3);
+            ScrollConv(BeginDataTRB, ref CurMod.beginData, Amp, true);
             BeginData_LShow.Text = CurMod.beginData.ToString();
         }
         private void ExitBtn_Click(object sender, EventArgs e)
@@ -268,33 +296,27 @@ namespace wt1
             CurModIndex = Convert.ToInt16(chIndex.ToString());
             CurMod = tVoice.ModInfo[CurModIndex];
 
-            var tSA = Math.Round(CurMod.startAmp, 3);
-            StartAmpTRB.Value = (int)(tSA / Amp_Ratio);
-            StartAmp_LShow.Text = tSA.ToString();
-
-            var tA0 = Math.Round(CurMod.Arate0, 1);
-            Arate0TRB.Value = (int)((tA0 + 10) / Arate0_Ratio);
-            Arate0_LShow.Text = tA0.ToString();
-
-            var tA1= Math.Round(CurMod.Arate1, 3);
-            Arate1TRB.Value = (int)((tA1 + 1) / Arate1_Ratio);
-            Arate1_LShow.Text = tA1.ToString();
-
-            var tBD = Math.Round(CurMod.beginData, 3);
-            BeginDataTRB.Value = (int)(tBD / Amp_Ratio);
-            BeginData_LShow.Text = tBD.ToString();
+            ScrollConv(StartAmpTRB, ref CurMod.startAmp, Amp, false);
+            StartAmp_LShow.Text = CurMod.startAmp.ToString();
+           
+            ScrollConv(Arate0TRB, ref CurMod.Arate0, Arate0, false);
+            Arate0_LShow.Text = CurMod.Arate0.ToString();
             
-            var tRR = Math.Round(CurMod.RootRate, 2);
-            RootRateTRB.Value = (int)((tRR + 20) / Root_Ratio);
-            RootRate_DShow.Text = tRR.ToString();
+            ScrollConv(Arate1TRB, ref CurMod.Arate1, Arate1, false);
+            Arate1_LShow.Text = CurMod.Arate1.ToString();
 
-            var tB = Math.Round(CurMod.begin, 2);
-            BeginTRB.Value = (int)((tB + 1) / Mod_Ratio);
-            Begin_LShow.Text = tB.ToString();
+            ScrollConv(BeginDataTRB, ref CurMod.beginData, Amp, false);
+            BeginData_LShow.Text = CurMod.beginData.ToString();
 
-            var tE = Math.Round(CurMod.end, 2);
-            EndTRB.Value = (int)((tE + 1) / Mod_Ratio);
-            End_LShow.Text = tE.ToString();
+            ScrollConv(RootRateTRB, ref CurMod.RootRate, Root, false);
+            RootRate_DShow.Text = CurMod.RootRate.ToString();
+
+            ScrollConv(BeginTRB, ref CurMod.begin, Mod, false);
+            Begin_LShow.Text = CurMod.begin.ToString();
+
+
+            ScrollConv(EndTRB, ref CurMod.end, Mod, false);
+            End_LShow.Text = CurMod.end.ToString();
 
             if (CurMod.ort == 0)
                 Ort_0.Checked = true;

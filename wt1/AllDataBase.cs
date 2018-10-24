@@ -10,12 +10,33 @@ namespace wt1
         public class WaveRichPoint
         {
             public int index;
-            public float value;
+            public double value;
             public int invertPoint; //反转点 ，Y轴值
             public int areaID;
         };
+        public struct Scroll
+        {
+            public int ScrollMax;
+            public double ModMin;
+            public double ModMax;
+            public int ModAcc; //精度
 
-        public static double Mod_Ratio;
+            public Scroll(int scrollMax, double modMin, double modMax, int modAcc)
+            {
+                ScrollMax = scrollMax;
+                ModMin = modMin;
+                ModMax = modMax;
+                ModAcc = modAcc;
+            }
+        }
+
+        public static Scroll Mod    =  new Scroll(200,  -1,    1,   2);
+        public static Scroll Arate0 = new Scroll(200,   -10,  10, 1);
+        public static Scroll Arate1 = new Scroll(2000, -1,    1,    3);
+        public static Scroll Amp    = new Scroll(1000, 0,     1,    3);
+        public static Scroll Root    = new Scroll(4000, -20,  20,  2);
+
+        public static double Mod_Ratio; 
         public static double Arate0_Ratio;
         public static double Arate1_Ratio;
         public static double Amp_Ratio;
@@ -24,14 +45,13 @@ namespace wt1
         public class VoiceModInfo 
         {
             public int areaID;
+            public bool preVoice;//判断是否预发音前置区
+
             public double begin; //区域描述起点//-1  -----   1    0.01分辨率
             public double end;   //区域描述终点
 
-            public float beginData; //0  -----   1    0.001分辨率
-            public bool Initbegin; //弃用
-            public bool preVoice;//判断是否预发音前置区
-            public float startAmp; //-1  -----   1    0.001分辨率
-            public bool InitlastU; //弃用
+            public double beginData; //0  -----   1    0.001分辨率
+            public double startAmp; //-1  -----   1    0.001分辨率
 
             public double ort;
             public double RootRate; //-20  -----   20    0.01分辨率
@@ -46,7 +66,7 @@ namespace wt1
             {
                 Arate = Arate0;
             }
-            public void Fusion(SortedDictionary<int, WaveRichPoint> bvs, int index,ref float lastU)
+            public void Fusion(SortedDictionary<int, WaveRichPoint> bvs, int index,ref double lastU)
             {
                 if (preVoice)   //判断是否是前置区
                 {
@@ -62,7 +82,7 @@ namespace wt1
                         lastU = beginData;
                     
                     Arate += Arate1;
-                    float baseN = (float)(Arate * RootRate * ort);
+                    double baseN = (Arate * RootRate * ort);
                     bvs[index].value = lastU + baseN;
                     lastU = bvs[index].value;
                 }
