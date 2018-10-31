@@ -9,8 +9,10 @@ namespace wt1
 {
     public static class WaveViewer
     {
+        public static Image imageNoSelected;
+
         public static int PCMSamCount;
-        public static int BaseSamCount;
+        public static int BasePointCount;
         public static double preIter;
         public static double dataIter;
         public static bool isGeneralShow =false;
@@ -75,20 +77,22 @@ namespace wt1
 
             //bsiter.Current.Key;
             //创建base基本数据
-            float preAmp = 0.000000001f;
+            double preAmp = 0.000000001f;
             int diffStep = 1;
-            int T_step = 28;
-            int PackStep = diffStep + T_step;
-            int PairCount = 1920 / PackStep;
-            BaseSamCount = PairCount * 2;
+            int T_step = 20;
+            //int PackStep = diffStep + T_step;
+
+            int PairCount = Dpanel.ScrollMax / T_step;
+            BasePointCount = PairCount * 2;  //预置基本点数量
 
             BaseWaveSingle = new SortedDictionary<int, WaveRichPoint>();
 
+            WaveRichPoint t_bvs;
             for (int i = 0; i < PairCount; i++)
             {
-                WaveRichPoint t_bvs = new WaveRichPoint
+                t_bvs = new WaveRichPoint
                 {
-                    index = i * PackStep,
+                    index = i * T_step,
                     value = preAmp,
                     invertPoint = 0,
                     areaID = 0
@@ -114,6 +118,7 @@ namespace wt1
             for (int i = 0; i < BSkeys.Count; i++)
             {
             NewMod:
+                
                 var bsv = BaseWaveSingle[BSkeys[i]];
                 double SampIndex = General_x(bsv.index);
 
@@ -140,7 +145,7 @@ namespace wt1
             BaseSamps = new SortedDictionary<int, WaveRichPoint>(); 
             foreach (var samp in BaseWaveSingle)
             {
-                WaveRichPoint t_bvs = new WaveRichPoint
+                t_bvs = new WaveRichPoint
                 {
                     index = samp.Value.index + diffStep,
                     invertPoint = samp.Value.invertPoint,
@@ -161,7 +166,7 @@ namespace wt1
             {
                 PointF point = new PointF
                 {
-                    X = bs.Value.index * rect.Width / 1920,
+                    X = bs.Value.index,
                     Y = (float)(bs.Value.value * (rect.Height / 2) + rect.Height / 2)
                 };
                 listPoints.Add(point);

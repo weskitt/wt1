@@ -7,6 +7,8 @@ namespace wt1
 {
     public class AllDataBase
     {
+        
+
         public class WaveRichPoint
         {
             public int index;
@@ -30,11 +32,12 @@ namespace wt1
             }
         }
 
-        public static Scroll Mod    =  new Scroll(200,  -1,    1,   2);
-        public static Scroll Arate0 = new Scroll(200,   -10,  10, 1);
-        public static Scroll Arate1 = new Scroll(2000, -1,    1,    3);
-        public static Scroll Amp    = new Scroll(1000, 0,     1,    3);
-        public static Scroll Root    = new Scroll(4000, -20,  20,  2);
+        public static Scroll Mod    =  new Scroll(200,  -1,   1,   2);
+        public static Scroll Arate0 = new Scroll(200,   -10, 10, 1);
+        public static Scroll Arate1 = new Scroll(2000, -1,  1,    3);
+        public static Scroll Amp    = new Scroll(1000,   0,  1,    3);
+        public static Scroll Root    = new Scroll(4000, -20, 20,  2);
+        public static Scroll Dpanel = new Scroll(1440, -1,  1,    2);
 
         public static double Mod_Ratio; 
         public static double Arate0_Ratio;

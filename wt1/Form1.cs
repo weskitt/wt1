@@ -67,8 +67,7 @@ namespace wt1
             Root_Ratio = (double)40 / RootRateTRB.Maximum;    //-20---20   4000     0.01分辨率
             
         }
-
-        //
+        
         public void ScrollConv(CCWin.SkinControl.SkinTrackBar scrollData, ref double modData, Scroll scroll, bool invert)//invert true:double,  false:int
         {
 
@@ -87,6 +86,39 @@ namespace wt1
                 scrollData.Value = (int)((modData - modMin) / ratio);
             }
             
+        }
+
+        public void ScrollConv(ref int scrollData, ref double modData, Scroll scroll, bool invert)//invert true:double,  false:int
+        {
+
+            int scrollMax = scroll.ScrollMax;
+            double modMin = scroll.ModMin;
+            double modMax = scroll.ModMax;
+            int modAcc = scroll.ModAcc;
+
+            double ratio = Math.Round((modMax - modMin) / scrollMax, modAcc);
+
+            if (invert)
+                modData = Math.Round(ratio * scrollData + modMin, modAcc);
+            else
+            {
+                modData = Math.Round(modData, modAcc);
+                scrollData = (int)((modData - modMin) / ratio);
+            }
+
+        }
+
+        public void DrawSelectArea(double begin, double end)
+        {
+
+
+            var g = panel1.CreateGraphics();
+            //Pen p = new Pen(Color.Green);
+            SolidBrush bb = new SolidBrush(Color.FromArgb(120, Color.Red));
+            //WaveViewer waveViewer = new WaveViewer();
+            Rectangle DrawRect = new Rectangle(0, 0, panel1.Width, panel1.Height);
+
+            g.FillRectangle(bb, DrawRect);
         }
 
         public void InitBefor(bool ready)
@@ -332,6 +364,7 @@ namespace wt1
 
             AreaGrid.CurrentCell = AreaGrid[0, CurModIndex];
             AreaGrid.Enabled = false;
+            DrawSelectArea(CurMod.begin, CurMod.end);
         }
     }
 }
