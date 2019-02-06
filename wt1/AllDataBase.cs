@@ -45,7 +45,7 @@ namespace wt1
         public static double Amp_Ratio;
         public static double Root_Ratio;
 
-        public class VoiceModInfo 
+        public class VoiceModInfo //以复数形式储存于单个Voice中
         {
             public int areaID;
             public bool preVoice;//判断是否预发音前置区
@@ -106,7 +106,7 @@ namespace wt1
         };
 
 
-        public static SortedDictionary<string, Voice> VoiceData = new SortedDictionary<string, Voice>();  //汉字， 发音数据
+        public static SortedDictionary<string, Voice> VoiceData = new SortedDictionary<string, Voice>();  //汉字， 发音数据库
 
         public static double General_x(int curX)
         {

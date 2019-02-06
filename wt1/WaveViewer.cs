@@ -62,7 +62,7 @@ namespace wt1
                 areaID = 2,
                 preVoice = false,
 
-                begin = 0.03f,
+                begin = 0.3f,
                 end = 1.0f,
                 ort = 0.001f,//0不变，-1收缩，1膨胀
                 RootRate = 8,

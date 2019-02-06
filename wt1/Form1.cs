@@ -96,27 +96,29 @@ namespace wt1
             double modMax = scroll.ModMax;
             int modAcc = scroll.ModAcc;
 
-            double ratio = Math.Round((modMax - modMin) / scrollMax, modAcc);
+            double ratio = (modMax - modMin) / scrollMax;
 
             if (invert)
                 modData = Math.Round(ratio * scrollData + modMin, modAcc);
             else
-            {
-                modData = Math.Round(modData, modAcc);
-                scrollData = (int)((modData - modMin) / ratio);
-            }
+                scrollData = (int)Math.Round(((modData - modMin) / ratio), 0);
 
         }
 
         public void DrawSelectArea(double begin, double end)
         {
+            DrawGerneralData();
+            isGeneralShow = false;
 
+            int A = 0, B = 0;
+            ScrollConv(ref A, ref begin, Dpanel, false);
+            ScrollConv(ref B, ref end, Dpanel, false);
 
             var g = panel1.CreateGraphics();
             //Pen p = new Pen(Color.Green);
-            SolidBrush bb = new SolidBrush(Color.FromArgb(120, Color.Red));
+            SolidBrush bb = new SolidBrush(Color.FromArgb(50, Color.YellowGreen));
             //WaveViewer waveViewer = new WaveViewer();
-            Rectangle DrawRect = new Rectangle(0, 0, panel1.Width, panel1.Height);
+            Rectangle DrawRect = new Rectangle(A, 0, B, panel1.Height);
 
             g.FillRectangle(bb, DrawRect);
         }
