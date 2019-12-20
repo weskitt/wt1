@@ -22,97 +22,23 @@ namespace wt1
         public Fm1()
         {
             InitializeComponent();
-
-            this.Width = 1800;
-            this.Height = 1000;
         }
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            panel1.Width = (int)(this.Width*0.8);
-            panel1.Height = (int)(this.Height * 0.8);
-
-            Point btnSize = new Point(OpenBtn.Width, OpenBtn.Height);
-            Point btnOpenL = new Point(0, 718);
-            Point btnSwL = new Point(btnSize.X, 718);
-            Point btnGenL = new Point(0, btnSize.Y + 718);
-            Point btnBothL = new Point(btnSize.X, btnSize.Y + 718);
-            Point gpL = new Point(btnSize.X * 2, 710);
-
-            OpenBtn.Location = btnOpenL;
-            Switch.Location = btnSwL;
-            General.Location = btnGenL;
-            Both.Location = btnBothL;
-            
-
-
             chpy = string.Empty; //汉字拼音
-            //tVoice = new Voice();
-            //tInfo = new VoiceModInfo
-            //{
-            //    preVoice = false,
-            //    Initbegin = false,
-            //    InitlastU = false,
-            //    areaID = 1
-            //}; //创建新实例
-
+            /*
+              tVoice = new Voice();
+              tInfo = new VoiceModInfo
+              {
+                  preVoice = false,
+                  Initbegin = false,
+                  InitlastU = false,
+                  areaID = 1
+              }; //创建新实例
+            */
         }
-        
-        public void ScrollConv(CCWin.SkinControl.SkinTrackBar scrollData, ref double modData, Scroll scroll, bool invert)//invert true:double,  false:int
-        {
-
-            int scrollMax = scroll.ScrollMax;
-            double modMin = scroll.ModMin;
-            double modMax = scroll.ModMax;
-            int modAcc = scroll.ModAcc;
-
-            double ratio = Math.Round((modMax - modMin) / scrollMax, modAcc);
-
-            if (invert)
-                modData = Math.Round(ratio * scrollData.Value + modMin, modAcc);
-            else
-            {
-                modData = Math.Round(modData, modAcc);
-                scrollData.Value = (int)((modData - modMin) / ratio);
-            }
-            
-        }
-
-        public void ScrollConv(ref int scrollData, ref double modData, Scroll scroll, bool invert)//invert true:double,  false:int
-        {
-
-            int scrollMax = scroll.ScrollMax;
-            double modMin = scroll.ModMin;
-            double modMax = scroll.ModMax;
-            int modAcc = scroll.ModAcc;
-
-            double ratio = (modMax - modMin) / scrollMax;
-
-            if (invert)
-                modData = Math.Round(ratio * scrollData + modMin, modAcc);
-            else
-                scrollData = (int)Math.Round(((modData - modMin) / ratio), 0);
-
-        }
-
-        public void DrawSelectArea(double begin, double end)
-        {
-            DrawGerneralData();
-            isGeneralShow = false;
-
-            int A = 0, B = 0;
-            ScrollConv(ref A, ref begin, Dpanel, false);
-            ScrollConv(ref B, ref end, Dpanel, false);
-
-            var g = panel1.CreateGraphics();
-            //Pen p = new Pen(Color.Green);
-            SolidBrush bb = new SolidBrush(Color.FromArgb(50, Color.YellowGreen));
-            //WaveViewer waveViewer = new WaveViewer();
-            Rectangle DrawRect = new Rectangle(A, 0, B, panel1.Height);
-
-            g.FillRectangle(bb, DrawRect);
-        }
-
+    
         public void Panel1_Paint(object sender, PaintEventArgs e)
         {
             DrawGerneralData();
@@ -181,30 +107,6 @@ namespace wt1
                 this.Close();
                 return;
             }
-        }
-
-        private void ExitBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            return;
-        }
-
-        private void Ort_0_CheckedChanged(object sender, EventArgs e)
-        {
-            CurMod.ort = 0f;
-        }
-        private void Ort__1_CheckedChanged(object sender, EventArgs e)
-        {
-            CurMod.ort = -0.001f;
-        }
-        private void Ort_1_CheckedChanged(object sender, EventArgs e)
-        {
-            CurMod.ort = 0.001f;
-        }
-
-        private void AreaGrid_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //AreaGrid.ClearSelection();
         }
 
     }
