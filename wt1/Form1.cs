@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using CCWin;
 using MathNet;
 using System.IO;
-using static wt1.AllDataBase;
+//using static wt1.AllDataBase;
 using static wt1.Funcs;
 using static wt1.WaveViewer;
 //using System.Runtime.InteropServices;
@@ -19,24 +19,12 @@ namespace wt1
 {
     public partial class Fm1 : Form
     {
-        public Fm1()
-        {
-            InitializeComponent();
-        }
-        
+        public Fm1() => InitializeComponent();
+
+        private Funcs funcs = new Funcs();
         private void Form1_Load(object sender, EventArgs e)
         {
             chpy = string.Empty; //汉字拼音
-            /*
-              tVoice = new Voice();
-              tInfo = new VoiceModInfo
-              {
-                  preVoice = false,
-                  Initbegin = false,
-                  InitlastU = false,
-                  areaID = 1
-              }; //创建新实例
-            */
         }
     
         public void Panel1_Paint(object sender, PaintEventArgs e)
@@ -47,9 +35,8 @@ namespace wt1
         
         private void OpenBtn_Click(object sender, EventArgs e)
         {
-            FuncInit(panel1, this);
-            OpenWaveDialog();
-            chpy = DrawPCMWave();
+            funcs.OpenWaveFile();
+            chpy = funcs.DrawOriginData(panel1, this);
             isGeneralShow = true;
         }
 
@@ -88,12 +75,11 @@ namespace wt1
             {
                 if(!isPCMInit)
                 {
-                    FuncInit(panel1, this);
-                    if (OpenWaveDialog()) chpy = DrawPCMWave();
+                    if (funcs.OpenWaveFile()) chpy = funcs.DrawOriginData(panel1, this);
                     else goto End;
                 }
                 else
-                    DrawPCMWave();
+                    funcs.DrawOriginData(panel1, this);
 
                 isGeneralShow = !isGeneralShow;
             }
