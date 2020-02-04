@@ -29,6 +29,7 @@ namespace wt1
             public string WavPath;
             public string WavName;
             public ArrayList dataArray;
+            public Point[] dataPoint;
         };
 
         public WAVE_s wavs = new WAVE_s();
@@ -58,7 +59,7 @@ namespace wt1
                     byte[] data = new byte[wavs.dataSize];//读取数据
                     fsm.Seek(44, SeekOrigin.Begin);
                     fsm.Read(data, 0, wavs.dataSize);
-                    wavs.dataSize -= 1;
+                    wavs.dataSize /= 2;
                     WaveAzProcess(data); 
                 }
             }
@@ -67,9 +68,13 @@ namespace wt1
         public bool WaveAzProcess(byte[] data)
         {
             wavs.dataArray = new ArrayList();
+            int t = 0;
             for (int i = 0; i < wavs.dataSize; i++)
-                wavs.dataArray.Add(BitConverter.ToInt16(data, i));
-
+            {
+                wavs.dataArray.Add(BitConverter.ToInt16(data, t));
+                t += 2;
+            }
+                
             isPCMInit = true;
             return true;
         }
@@ -78,15 +83,21 @@ namespace wt1
             var gp = panel.CreateGraphics();
             var drawRect = new Rectangle(0, 0, panel.Width, panel.Height);
             var fm = form;
-            Pen pen = new Pen(Color.Green);
-            SolidBrush bb = new SolidBrush(Color.Black);
+            var pen = new Pen(Color.Green);
+            var bb = new SolidBrush(Color.Black);
+
+            var dataPoint = new Point[wavs.dataSize];
+            for (int i = 0; i < wavs.dataSize; i++)
+            {
+                dataPoint[i].X = i * panel.Width / wavs.dataSize;
+                dataPoint[i].Y = (Int16)wavs.dataArray[i] / 50 + drawRect.Height / 2;
+                //dataPoint[i].Y = (Int16)wavs.dataArray[i]*panel.Height/Int16.MaxValue+ drawRect.Height/2 ;
+            }
+
 
             gp.FillRectangle(bb, drawRect);
-
-            gp.DrawLines(pen, pcm);
-
+            gp.DrawLines(pen, dataPoint);
             fm.Text = wavs.WavPath;
-
             wavs.WavName =wavs. WavName.Replace(".wav", "");
             return wavs.WavName;
         }

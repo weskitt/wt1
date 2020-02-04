@@ -39,10 +39,10 @@
             // panel1
             // 
             this.panel1.AutoSize = true;
-            this.panel1.Location = new System.Drawing.Point(5, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.panel1.Location = new System.Drawing.Point(5, 5);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1416, 865);
+            this.panel1.Size = new System.Drawing.Size(1416, 860);
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
