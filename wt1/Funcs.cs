@@ -76,17 +76,52 @@ namespace wt1
         public bool WaveAzProcess()
         {
             int index = 0;
-
+            Int16 tmpData = 0;
+            int diff = 0;
+            bool upFlag = false;
+            bool downFlag = false;
+            bool keyFlag = false;
+            ArrayList tmpListA  = new ArrayList();
+            ArrayList tmpListB  = new ArrayList();
             foreach (Int16 item in wavs.dataArray)
             {
-
+                if (item != 0 && tmpData != 0)
+                {
+                    diff = item - tmpData;
+                    if (diff>0)//步入递增
+                    {
+                        upFlag = true;
+                        if (downFlag) //判断前面是否有递减标记,触发记录
+                        {
+                            keyFlag = true;
+                            downFlag = false;//关闭标记，避免再次触发记录
+                        }
+                    }
+                    else if (diff<0)//步入递减
+                    {
+                        downFlag = true;
+                        if (upFlag) //判断前面是否递增标记,触发记录
+                        {
+                            keyFlag = true;
+                            upFlag = false;//关闭标记，避免再次触发记录
+                        }
+                        
+                    }
+                    else if (diff==0)
+                    {
+                        keyFlag = true;
+                        upFlag = false;
+                        downFlag = false;
+                    }
+                }
+                if (keyFlag)
+                {
+                    keyFlag =false;
+                    tmpListA.Add(index-1);
+                }  
+                tmpData = item;
                 ++index;
             }
- 
-            
-
-
-
             return true;
         }
         public string DrawOriginData(Panel panel, Form form)
@@ -101,6 +136,7 @@ namespace wt1
             for (int i = 0; i < wavs.dataSize; i++)
             {
                 dataPoint[i].X = i * panel.Width / wavs.dataSize;
+                //dataPoint[i].X = i;
                 dataPoint[i].Y = (Int16)wavs.dataArray[i] / 50 + drawRect.Height / 2;
                 //dataPoint[i].Y = (Int16)wavs.dataArray[i]*panel.Height/Int16.MaxValue+ drawRect.Height/2 ;
             }
