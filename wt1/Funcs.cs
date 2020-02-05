@@ -94,7 +94,7 @@ namespace wt1
                         if (downFlag) //判断前面是否有递减标记,触发记录
                         {
                             keyFlag = true;
-                            downFlag = false;//关闭标记，避免再次触发记录
+                            downFlag = false;//关闭标记，避免再次触发记录 得到
                         }
                     }
                     else if (diff<0)//步入递减
