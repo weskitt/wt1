@@ -35,7 +35,7 @@ namespace wt1
         
         private void OpenBtn_Click(object sender, EventArgs e)
         {
-            funcs.OpenWaveFile();
+            funcs.ReadWaveFile();
             chpy = funcs.DrawOriginData(panel1, this);
             isGeneralShow = true;
         }
@@ -75,7 +75,7 @@ namespace wt1
             {
                 if(!isPCMInit)
                 {
-                    if (funcs.OpenWaveFile()) chpy = funcs.DrawOriginData(panel1, this);
+                    if (funcs.ReadWaveFile()) chpy = funcs.DrawOriginData(panel1, this);
                     else goto End;
                 }
                 else

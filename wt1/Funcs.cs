@@ -30,13 +30,13 @@ namespace wt1
             public string WavName;
             public ArrayList dataArray;
             public Point[] dataPoint;
+            public int cycle;
         };
 
         public WAVE_s wavs = new WAVE_s();
         public static bool isPCMInit =false;
-        public static Point[] pcm;
 
-        public  bool OpenWaveFile()
+        public  bool ReadWaveFile() 
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -60,22 +60,33 @@ namespace wt1
                     fsm.Seek(44, SeekOrigin.Begin);
                     fsm.Read(data, 0, wavs.dataSize);
                     wavs.dataSize /= 2;
-                    WaveAzProcess(data); 
+
+                    wavs.dataArray = new ArrayList();
+                    int t = 0;
+                    for (int i = 0; i < wavs.dataSize; i++)
+                    {
+                        wavs.dataArray.Add(BitConverter.ToInt16(data, t));
+                        t += 2;
+                    }
+                    isPCMInit = true;
                 }
             }
             return true;
         }
-        public bool WaveAzProcess(byte[] data)
+        public bool WaveAzProcess()
         {
-            wavs.dataArray = new ArrayList();
-            int t = 0;
-            for (int i = 0; i < wavs.dataSize; i++)
+            int index = 0;
+
+            foreach (Int16 item in wavs.dataArray)
             {
-                wavs.dataArray.Add(BitConverter.ToInt16(data, t));
-                t += 2;
+
+                ++index;
             }
-                
-            isPCMInit = true;
+ 
+            
+
+
+
             return true;
         }
         public string DrawOriginData(Panel panel, Form form)
