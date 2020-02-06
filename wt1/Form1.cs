@@ -29,7 +29,7 @@ namespace wt1
     
         public void Panel1_Paint(object sender, PaintEventArgs e)
         {
-            DrawGerneralData();
+            //funcs.DrawGerneralData(panel1, this);
             isGeneralShow = false;
         }
         
@@ -60,7 +60,7 @@ namespace wt1
 
         private void General_Click(object sender, EventArgs e)
         {
-            DrawGerneralData();
+            funcs.DrawGerneralData(panel1, this);
             isGeneralShow = false;
         }
 
@@ -68,7 +68,7 @@ namespace wt1
         {
             if (isGeneralShow)
             {
-                DrawGerneralData();
+                funcs.DrawGerneralData(panel1, this);
                 isGeneralShow = !isGeneralShow;
             }
             else

@@ -28,7 +28,7 @@ namespace wt1
             public short dataSize;         //2byte,数据块大小  
             public string WavPath;
             public string WavName;
-            public ArrayList dataArray;
+            public ArrayList dataArray, keyArray, keyLocArray;
             public Point[] dataPoint;
             public int cycle;
         };
@@ -36,6 +36,19 @@ namespace wt1
         public WAVE_s wavs = new WAVE_s();
         public static bool isPCMInit =false;
 
+        public bool Paint(Panel panel, Point[] points)
+        {
+            var gp = panel.CreateGraphics();
+            var drawRect = new Rectangle(0, 0, panel.Width, panel.Height);
+            var pen = new Pen(Color.Green);
+            var bb = new SolidBrush(Color.Black);
+
+            gp.FillRectangle(bb, drawRect);
+            gp.DrawLines(pen,points);
+            gp.DrawLine(pen, 0, drawRect.Height / 2, drawRect.Width, drawRect.Height / 2);
+
+            return true;
+        }
         public  bool ReadWaveFile() 
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -60,7 +73,7 @@ namespace wt1
                     fsm.Seek(44, SeekOrigin.Begin);
                     fsm.Read(data, 0, wavs.dataSize);
                     wavs.dataSize /= 2;
-
+                    wavs.WavName = wavs.WavName.Replace(".wav", "");
                     wavs.dataArray = new ArrayList();
                     int t = 0;
                     for (int i = 0; i < wavs.dataSize; i++)
@@ -69,20 +82,20 @@ namespace wt1
                         t += 2;
                     }
                     isPCMInit = true;
+                    WaveAzProcess();
                 }
             }
             return true;
         }
         public bool WaveAzProcess()
         {
-            int index = 0;
+            int diff, index = 0;
             Int16 tmpData = 0;
-            int diff = 0;
             bool upFlag = false;
             bool downFlag = false;
             bool keyFlag = false;
-            ArrayList tmpListA  = new ArrayList();
-            ArrayList tmpListB  = new ArrayList();
+            wavs.keyLocArray  = new ArrayList();
+            wavs.keyArray  = new ArrayList();
             foreach (Int16 item in wavs.dataArray)
             {
                 if (item != 0 && tmpData != 0)
@@ -116,9 +129,12 @@ namespace wt1
                 }
                 if (keyFlag)
                 {
-                    keyFlag =false;
-                    tmpListA.Add(index-1);
-                }  
+                    keyFlag = false;
+                    //if ((Int16)wavs.dataArray[index-1]>0) //记录大于零的数据，方便计算周期
+                    wavs.keyLocArray.Add(index - 1);
+                    wavs.keyArray.Add((wavs.dataArray[index - 1]));
+                }
+                else wavs.keyArray.Add((Int16)0);
                 tmpData = item;
                 ++index;
             }
@@ -126,28 +142,26 @@ namespace wt1
         }
         public string DrawOriginData(Panel panel, Form form)
         {
-            var gp = panel.CreateGraphics();
-            var drawRect = new Rectangle(0, 0, panel.Width, panel.Height);
-            var fm = form;
-            var pen = new Pen(Color.Green);
-            var bb = new SolidBrush(Color.Black);
-
             var dataPoint = new Point[wavs.dataSize];
             for (int i = 0; i < wavs.dataSize; i++)
             {
                 dataPoint[i].X = i * panel.Width / wavs.dataSize;
-                //dataPoint[i].X = i;
-                dataPoint[i].Y = (Int16)wavs.dataArray[i] / 50 + drawRect.Height / 2;
-                //dataPoint[i].Y = (Int16)wavs.dataArray[i]*panel.Height/Int16.MaxValue+ drawRect.Height/2 ;
+                dataPoint[i].Y = (Int16)wavs.dataArray[i] / 50 + panel.Height / 2;
             }
-
-
-            gp.FillRectangle(bb, drawRect);
-            gp.DrawLines(pen, dataPoint);
-            fm.Text = wavs.WavPath;
-            wavs.WavName =wavs. WavName.Replace(".wav", "");
+            Paint(panel, dataPoint);
+            form.Text = wavs.WavPath;
             return wavs.WavName;
         }
-
+        public void DrawGerneralData(Panel panel, Form form)
+        {
+            var dataPoint = new Point[wavs.keyArray.Count];
+            for (int i = 0; i < wavs.keyArray.Count; i++)
+            {
+                dataPoint[i].X = i * panel.Width / wavs.keyArray.Count;
+                dataPoint[i].Y = (Int16)wavs.keyArray[i] / 50 + panel.Height / 2;
+            }
+            Paint(panel, dataPoint);
+            form.Text = "由GerneralWave()函数生成";
+        }
     }
 }
