@@ -10,9 +10,7 @@ using System.Windows.Forms;
 using CCWin;
 using MathNet;
 using System.IO;
-//using static wt1.AllDataBase;
-using static wt1.Funcs;
-using static wt1.WaveViewer;
+//using static wt1.Funcs;
 //using System.Runtime.InteropServices;
 
 namespace wt1
@@ -22,68 +20,50 @@ namespace wt1
         public Fm1() => InitializeComponent();
 
         private Funcs funcs = new Funcs();
+        private string chpy=null;
+        private bool drawOriginFlag;
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            chpy = string.Empty; //汉字拼音
+
         }
     
-        public void Panel1_Paint(object sender, PaintEventArgs e)
+        private void Panel1_Paint(object sender, PaintEventArgs e)
         {
-            //funcs.DrawGerneralData(panel1, this);
-            isGeneralShow = false;
+            if (funcs.ReadWaveFile())
+                chpy = funcs.DrawOriginData(panel1, this);
+            drawOriginFlag = true;
         }
         
         private void OpenBtn_Click(object sender, EventArgs e)
         {
-            funcs.ReadWaveFile();
-            chpy = funcs.DrawOriginData(panel1, this);
-            isGeneralShow = true;
+            if (funcs.ReadWaveFile())
+                chpy = funcs.DrawOriginData(panel1, this);
+            drawOriginFlag = true;
         }
 
-        private void DrawGerneralData()
-        {
-            var g = panel1.CreateGraphics();
-            Pen p = new Pen(Color.Green);
-            SolidBrush bb = new SolidBrush(Color.Black);
-            //WaveViewer waveViewer = new WaveViewer();
-            Rectangle DrawRect = new Rectangle(0, 0, panel1.Width, panel1.Height);
-
-            g.FillRectangle(bb, DrawRect);
-            g.DrawLine(p, 0, DrawRect.Height / 2, DrawRect.Width, DrawRect.Height / 2);
-
-
-            GerneralWave();
-            BsToVertex(ref DrawRect);
-            g.DrawLines(p, pointFs);
-            this.Text = "由GerneralWave()函数生成";
-        }
 
         private void General_Click(object sender, EventArgs e)
         {
             funcs.DrawGerneralData(panel1, this);
-            isGeneralShow = false;
+            drawOriginFlag = false;
         }
 
         private void Switch_Click(object sender, EventArgs e)
         {
-            if (isGeneralShow)
+            if (chpy!=null)
             {
-                funcs.DrawGerneralData(panel1, this);
-                isGeneralShow = !isGeneralShow;
+                if (drawOriginFlag)
+                    funcs.DrawOriginData(panel1, this);
+                else
+                    funcs.DrawGerneralData(panel1, this);
+                drawOriginFlag = !drawOriginFlag;
             }
             else
             {
-                if(!isPCMInit)
-                {
-                    if (funcs.ReadWaveFile()) chpy = funcs.DrawOriginData(panel1, this);
-                    else goto End;
-                }
-                else
-                    funcs.DrawOriginData(panel1, this);
-
-                isGeneralShow = !isGeneralShow;
+                if (funcs.ReadWaveFile())
+                    chpy = funcs.DrawOriginData(panel1, this);
             }
-        End:;
         }
 
         private void Fm1_KeyPress(object sender, KeyPressEventArgs e)

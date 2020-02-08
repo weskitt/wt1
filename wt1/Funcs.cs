@@ -5,13 +5,14 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections;
+using System.Web.UI;
 //using System.Collections.Generic;
 
 namespace wt1
-{
-    public class Funcs : AllDataBase
+{ 
+    public class Funcs
     {
-        public struct WAVE_s
+        internal class WAVE_s
         {
             public char[] riff_id;            //---4byte,资源交换文件标志:RIFF 
             public int chunkSize;          //4byte,从下个地址到文件结尾的总字节数(不含前8个字节)  
@@ -28,23 +29,30 @@ namespace wt1
             public short dataSize;         //2byte,数据块大小  
             public string WavPath;
             public string WavName;
-            public ArrayList dataArray, keyArray, keyLocArray;
+            public ArrayList dataArray, keyArray, keyLocArray, keyDiffArray;
             public Point[] dataPoint;
-            public int cycle;
+            public int period;
         };
 
-        public WAVE_s wavs = new WAVE_s();
+        internal WAVE_s wavs = new WAVE_s();
         public static bool isPCMInit =false;
 
-        public bool Paint(Panel panel, Point[] points)
+        public bool Paint(Panel panel, ArrayList dataArray)
         {
             var gp = panel.CreateGraphics();
             var drawRect = new Rectangle(0, 0, panel.Width, panel.Height);
             var pen = new Pen(Color.Green);
             var bb = new SolidBrush(Color.Black);
+            var dataPoint = new Point[dataArray.Count];
+
+            for (int i = 0; i < dataArray.Count; i++)
+            {
+                dataPoint[i].X = i * panel.Width / dataArray.Count;
+                dataPoint[i].Y = (Int16)dataArray[i] / 50 + panel.Height / 2;
+            }
 
             gp.FillRectangle(bb, drawRect);
-            gp.DrawLines(pen,points);
+            gp.DrawLines(pen, dataPoint);
             gp.DrawLine(pen, 0, drawRect.Height / 2, drawRect.Width, drawRect.Height / 2);
 
             return true;
@@ -87,21 +95,21 @@ namespace wt1
             }
             return true;
         }
-        public bool WaveAzProcess()
+        public void SplitKeydata()
         {
             int diff, index = 0;
             Int16 tmpData = 0;
             bool upFlag = false;
             bool downFlag = false;
             bool keyFlag = false;
-            wavs.keyLocArray  = new ArrayList();
-            wavs.keyArray  = new ArrayList();
+            wavs.keyLocArray = new ArrayList();
+            wavs.keyArray = new ArrayList();
             foreach (Int16 item in wavs.dataArray)
             {
                 if (item != 0 && tmpData != 0)
                 {
                     diff = item - tmpData;
-                    if (diff>0)//步入递增
+                    if (diff > 0)//步入递增
                     {
                         upFlag = true;
                         if (downFlag) //判断前面是否有递减标记,触发记录
@@ -110,7 +118,7 @@ namespace wt1
                             downFlag = false;//关闭标记，避免再次触发记录 得到
                         }
                     }
-                    else if (diff<0)//步入递减
+                    else if (diff < 0)//步入递减
                     {
                         downFlag = true;
                         if (upFlag) //判断前面是否递增标记,触发记录
@@ -118,9 +126,9 @@ namespace wt1
                             keyFlag = true;
                             upFlag = false;//关闭标记，避免再次触发记录
                         }
-                        
+
                     }
-                    else if (diff==0)
+                    else if (diff == 0)
                     {
                         keyFlag = true;
                         upFlag = false;
@@ -138,29 +146,47 @@ namespace wt1
                 tmpData = item;
                 ++index;
             }
+        }
+        public void AnalyzePeriod() 
+        {
+            int tmpA=0;
+            wavs.keyDiffArray = new ArrayList();
+            for (int index = 0; index < wavs.keyArray.Count; index++)
+            {
+                var perd = new Period();
+                var item = (short)wavs.keyArray[index];
+                if (item != 0 && tmpA != 0)
+                {
+                    perd.diff = item - tmpA;
+                    perd.index = index-1;
+                }
+                wavs.keyDiffArray.Add(perd);
+                tmpA = item;
+            }
+
+            var periodTemplateArray = new ArrayList();
+            foreach (Period item in wavs.keyDiffArray)
+            {
+
+                periodTemplateArray.Add(item);
+            }
+        }
+        public bool WaveAzProcess()
+        {
+            SplitKeydata(); //分离极点数据出来
+            AnalyzePeriod();//分析周期
             return true;
         }
         public string DrawOriginData(Panel panel, Form form)
         {
-            var dataPoint = new Point[wavs.dataSize];
-            for (int i = 0; i < wavs.dataSize; i++)
-            {
-                dataPoint[i].X = i * panel.Width / wavs.dataSize;
-                dataPoint[i].Y = (Int16)wavs.dataArray[i] / 50 + panel.Height / 2;
-            }
-            Paint(panel, dataPoint);
+            Paint(panel, wavs.dataArray);
             form.Text = wavs.WavPath;
             return wavs.WavName;
         }
         public void DrawGerneralData(Panel panel, Form form)
         {
-            var dataPoint = new Point[wavs.keyArray.Count];
-            for (int i = 0; i < wavs.keyArray.Count; i++)
-            {
-                dataPoint[i].X = i * panel.Width / wavs.keyArray.Count;
-                dataPoint[i].Y = (Int16)wavs.keyArray[i] / 50 + panel.Height / 2;
-            }
-            Paint(panel, dataPoint);
+
+            Paint(panel, wavs.keyArray);
             form.Text = "由GerneralWave()函数生成";
         }
     }

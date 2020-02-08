@@ -5,10 +5,15 @@ using System.Text;
 
 namespace wt1
 {
-    public class AllDataBase
-    {
-        
 
+    internal class Period
+    {
+        public int index, diff, weight;
+    }
+    public class Base
+    {
+
+        private bool isGeneralShow = false;
         public class WaveRichPoint
         {
             public int index;
@@ -107,6 +112,8 @@ namespace wt1
 
 
         public static SortedDictionary<string, Voice> VoiceData = new SortedDictionary<string, Voice>();  //汉字， 发音数据库
+
+        public bool IsGeneralShow { get => isGeneralShow; set => isGeneralShow = value; }
 
         public static double General_x(int curX)
         {
