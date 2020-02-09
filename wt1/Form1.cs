@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CCWin;
-using MathNet;
-using System.IO;
-//using static wt1.Funcs;
-//using System.Runtime.InteropServices;
 
 namespace wt1
 {
@@ -21,19 +9,7 @@ namespace wt1
 
         private Funcs funcs = new Funcs();
         private string chpy=null;
-        private bool drawOriginFlag;
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-    
-        private void Panel1_Paint(object sender, PaintEventArgs e)
-        {
-            if (funcs.ReadWaveFile())
-                chpy = funcs.DrawOriginData(panel1, this);
-            drawOriginFlag = true;
-        }
+        private bool drawOriginFlag=false;
         
         private void OpenBtn_Click(object sender, EventArgs e)
         {
@@ -41,7 +17,6 @@ namespace wt1
                 chpy = funcs.DrawOriginData(panel1, this);
             drawOriginFlag = true;
         }
-
 
         private void General_Click(object sender, EventArgs e)
         {
