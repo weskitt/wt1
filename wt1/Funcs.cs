@@ -9,7 +9,7 @@ namespace wt1
     public class Funcs
     {
         internal WAVE_s wavs = new WAVE_s();
-        public static bool isPCMInit =false;
+        //public static bool isPCMInit =false;
 
         public bool Paint(Panel panel, ArrayList dataArray)
         {
@@ -63,7 +63,7 @@ namespace wt1
                         wavs.dataArray.Add(BitConverter.ToInt16(data, t));
                         t += 2;
                     }
-                    isPCMInit = true;
+                    //isPCMInit = true;
                     WaveAzProcess();
                 }
             }

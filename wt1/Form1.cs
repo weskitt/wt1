@@ -17,13 +17,14 @@ namespace wt1
                 chpy = funcs.DrawOriginData(panel1, this);
             drawOriginFlag = true;
         }
-
         private void General_Click(object sender, EventArgs e)
         {
-            funcs.DrawGerneralData(panel1, this);
-            drawOriginFlag = false;
+            if (chpy != null)
+            {
+                funcs.DrawGerneralData(panel1, this);
+                drawOriginFlag = false;
+            }
         }
-
         private void Switch_Click(object sender, EventArgs e)
         {
             if (chpy!=null)
@@ -40,7 +41,6 @@ namespace wt1
                     chpy = funcs.DrawOriginData(panel1, this);
             }
         }
-
         private void Fm1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar==(char)Keys.Escape)
@@ -49,6 +49,5 @@ namespace wt1
                 return;
             }
         }
-
     }
 }
