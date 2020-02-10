@@ -17,11 +17,13 @@ namespace wt1
             var pen = new Pen(Color.Green);
             var bb = new SolidBrush(Color.Black);
             var dataPoint = new Point[dataArray.Count];
-
-            for (int i = 0; i < dataArray.Count; i++)
+            int index = 0;
+            foreach (SampleData item in dataArray)
             {
-                dataPoint[i].X = i * panel.Width / dataArray.Count;
-                dataPoint[i].Y = (Int16)dataArray[i] / 50 + panel.Height / 2;
+                dataPoint[index].X = item.index * panel.Width / 6552;
+                //dataPoint[index].X = item.index-500;
+                dataPoint[index].Y = item.value / 50 + panel.Height / 2;
+                ++index;
             }
 
             gp.FillRectangle(bb, drawRect);
@@ -61,18 +63,25 @@ namespace wt1
                     SampleData spd;
                     for (int i = 0; i < wavs.dataSize; i++)
                     {
-                        tmpdata = BitConverter.ToInt16(data, t);
-                        if (tmpdata!=0){
-                            spd = new SampleData(tmpdata, i);
-                            wavs.dataArray.Add(spd);
-                        }
+                        //tmpdata = BitConverter.ToInt16(data, t);
+                        //if (tmpdata!=0){
+                        //    spd = new SampleData(tmpdata, i);
+                        //    wavs.dataArray.Add(spd);
+                        //}
+                        spd = new SampleData( BitConverter.ToInt16(data, t) ,  i);
+                        wavs.dataArray.Add(spd);
                         t += 2;
                     }
-                    //isPCMInit = true;
                     WaveAzProcess();
                 }
             }
             return true;
+        }
+        public int Compet(int a, int b)
+        { 
+            if ((a - b) > 0) return 1;
+            else if ((a - b) < 0) return -1;
+            else  return 0;
         }
         public void SplitKeydata()
         {
@@ -82,11 +91,11 @@ namespace wt1
             bool keyFlag = false;
             const int Down = -1;
             const int UP = 1;
-            const int Plain = 0;
+            const int Zero = 0;
             wavs.keyArray = new ArrayList();
             foreach (SampleData item in wavs.dataArray)
             {
-                switch(item.value - tmpData.value)
+                switch(Compet(item.value , tmpData.value))
                 {
                     case UP://步入递增
                         upFlag = true;
@@ -104,8 +113,9 @@ namespace wt1
                             upFlag = false;//关闭标记，避免再次触发记录
                         }
                         break;
-                    case Plain://等值
-                        keyFlag = true;
+                    case Zero://等值
+                        if(tmpData.value != 0) 
+                            keyFlag = true;
                         upFlag = false;
                         downFlag = false;
                         break;
@@ -121,7 +131,7 @@ namespace wt1
         }
         public void AnalyzePeriod() 
         {
-            SampleData tmpA = new SampleData();
+            var tmpA = new SampleData();
             wavs.keyDiffArray = new ArrayList();
 
             foreach (SampleData item in wavs.keyArray)
@@ -136,11 +146,27 @@ namespace wt1
             }
 
             int minimum = 100;//最低周期保守值
+            bool upFlag = false;
+            bool downFlag = false;
+            var tmpB = new Period();
             var periodTemplateArray = new ArrayList();
             foreach (Period item in wavs.keyDiffArray)
             {
+                if (item.diff > tmpB.diff)
+                {
+                    tmpB = item;
+                    upFlag = true;
+                    if (downFlag)
+                    {
 
-                periodTemplateArray.Add(item);
+                        periodTemplateArray.Add(tmpB);
+                    }
+                }
+                else if ((item.diff - tmpB.diff) < 0)
+                {
+
+                }
+                tmpB = item;
             }
         }
         public bool WaveAzProcess()
