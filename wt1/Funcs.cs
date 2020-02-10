@@ -8,9 +8,8 @@ namespace wt1
 {
     public class Funcs
     {
+        
         internal WAVE_s wavs = new WAVE_s();
-        //public static bool isPCMInit =false;
-
         public bool Paint(Panel panel, ArrayList dataArray)
         {
             var gp = panel.CreateGraphics();
@@ -58,9 +57,15 @@ namespace wt1
                     wavs.WavName = wavs.WavName.Replace(".wav", "");
                     wavs.dataArray = new ArrayList();
                     int t = 0;
+                    int tmpdata;
+                    SampleData spd;
                     for (int i = 0; i < wavs.dataSize; i++)
                     {
-                        wavs.dataArray.Add(BitConverter.ToInt16(data, t));
+                        tmpdata = BitConverter.ToInt16(data, t);
+                        if (tmpdata!=0){
+                            spd = new SampleData(tmpdata, i);
+                            wavs.dataArray.Add(spd);
+                        }
                         t += 2;
                     }
                     //isPCMInit = true;
@@ -71,73 +76,66 @@ namespace wt1
         }
         public void SplitKeydata()
         {
-            int diff, index = 0;
-            Int16 tmpData = 0;
+            var tmpData=new SampleData();
             bool upFlag = false;
             bool downFlag = false;
             bool keyFlag = false;
-            wavs.keyLocArray = new ArrayList();
+            const int Down = -1;
+            const int UP = 1;
+            const int Plain = 0;
             wavs.keyArray = new ArrayList();
-            foreach (Int16 item in wavs.dataArray)
+            foreach (SampleData item in wavs.dataArray)
             {
-                if (item != 0 && tmpData != 0)
+                switch(item.value - tmpData.value)
                 {
-                    diff = item - tmpData;
-                    if (diff > 0)//步入递增
-                    {
+                    case UP://步入递增
                         upFlag = true;
                         if (downFlag) //判断前面是否有递减标记,触发记录
                         {
                             keyFlag = true;
                             downFlag = false;//关闭标记，避免再次触发记录 得到
                         }
-                    }
-                    else if (diff < 0)//步入递减
-                    {
+                        break;
+                    case Down://步入递减
                         downFlag = true;
                         if (upFlag) //判断前面是否递增标记,触发记录
                         {
                             keyFlag = true;
                             upFlag = false;//关闭标记，避免再次触发记录
                         }
-
-                    }
-                    else if (diff == 0)
-                    {
+                        break;
+                    case Plain://等值
                         keyFlag = true;
                         upFlag = false;
                         downFlag = false;
-                    }
+                        break;
                 }
+
                 if (keyFlag)
                 {
                     keyFlag = false;
-                    //if ((Int16)wavs.dataArray[index-1]>0) //记录大于零的数据，方便计算周期
-                    wavs.keyLocArray.Add(index - 1);
-                    wavs.keyArray.Add((wavs.dataArray[index - 1]));
+                    wavs.keyArray.Add(tmpData);
                 }
-                else wavs.keyArray.Add((Int16)0);
                 tmpData = item;
-                ++index;
             }
         }
         public void AnalyzePeriod() 
         {
-            int tmpA=0;
+            SampleData tmpA = new SampleData();
             wavs.keyDiffArray = new ArrayList();
-            for (int index = 0; index < wavs.keyArray.Count; index++)
+
+            foreach (SampleData item in wavs.keyArray)
             {
-                var perd = new Period();
-                var item = (short)wavs.keyArray[index];
-                if (item != 0 && tmpA != 0)
+                var perd = new Period
                 {
-                    perd.diff = item - tmpA;
-                    perd.index = index-1;
-                }
+                    diff = Math.Abs(item.value - tmpA.value),
+                    index = tmpA.index
+                };
                 wavs.keyDiffArray.Add(perd);
                 tmpA = item;
             }
 
+            int minimum = 100;//最低周期保守值
             var periodTemplateArray = new ArrayList();
             foreach (Period item in wavs.keyDiffArray)
             {
