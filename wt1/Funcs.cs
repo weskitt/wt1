@@ -146,7 +146,7 @@ namespace wt1
             }
 
             int minimum = 100;//最低周期保守值
-            bool upFlag = false;
+            //bool upFlag = false;
             bool downFlag = false;
             var tmpB = new Period();
             var periodTemplateArray = new ArrayList();
@@ -155,16 +155,16 @@ namespace wt1
                 if (item.diff > tmpB.diff)
                 {
                     tmpB = item;
-                    upFlag = true;
+                    //upFlag = true;
                     if (downFlag)
                     {
-
+                        downFlag = false;
                         periodTemplateArray.Add(tmpB);
                     }
                 }
-                else if ((item.diff - tmpB.diff) < 0)
+                else if (item.diff < tmpB.diff )
                 {
-
+                    downFlag = true;
                 }
                 tmpB = item;
             }
