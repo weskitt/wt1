@@ -1,22 +1,65 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace wt1
 {
 
+    public struct SampleData
+    {
+        public int value, location;
+        public SampleData(int value=0, int loc = 0)
+        {
+            this.value = value;
+            this.location = loc;
+        }
+
+        //public static bool operator > (SampleData left, SampleData right)
+        //{
+        //    if (left.value > right.value)
+        //        return true;
+        //    else
+        //        return false;
+        //}
+        //public static bool operator < (SampleData left, SampleData right)
+        //{
+        //    return !(left > right);
+        //}
+        //public static bool operator ==(SampleData left, SampleData right)
+        //{
+        //    if (left.value == right.value)
+        //        return true;
+        //    else
+        //        return false;
+        //}
+        //public static bool operator !=(SampleData left, SampleData right)
+        //{
+        //    return !(left == right);
+        //}
+
+        //public override bool Equals(object obj)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
+
+        //public override int GetHashCode()
+        //{
+        //    throw new System.NotImplementedException();
+        //}
+    }
+    public class SampleCompare : IComparer<SampleData>
+    {
+        public int Compare(SampleData x, SampleData y)
+        {
+            return y.value - x.value;
+        }
+    }
     internal struct Period
     {
         internal int index, diff, weight;
     }
-    internal struct SampleData
-    {
-        internal int value, index;
-        public SampleData(int value=0, int index=0)
-        {
-            this.value = value;
-            this.index = index;
-        }
-    }
+
+
     internal class WAVE_s
     {
         /*
@@ -36,7 +79,7 @@ namespace wt1
         public short dataSize;         //2byte,数据块大小  
         public string WavPath;
         public string WavName;
-        public ArrayList dataArray, keyArray, keyLocArray, keyDiffArray;
+        public ArrayList dataArray, keyArray, tmpArray, keyDiffArray;
         public Point[] dataPoint;
         public int period;
     };

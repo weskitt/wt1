@@ -3,6 +3,8 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections;
+using System.Collections.Specialized;
+using System.Collections.Generic;
 
 namespace wt1
 {
@@ -10,7 +12,7 @@ namespace wt1
     {
         
         internal WAVE_s wavs = new WAVE_s();
-        public bool Paint(Panel panel, ArrayList dataArray)
+        public static void Paint(Panel panel, ArrayList dataArray, int dataCount)
         {
             var gp = panel.CreateGraphics();
             var drawRect = new Rectangle(0, 0, panel.Width, panel.Height);
@@ -20,8 +22,8 @@ namespace wt1
             int index = 0;
             foreach (SampleData item in dataArray)
             {
-                dataPoint[index].X = item.index * panel.Width / 6552;
-                //dataPoint[index].X = item.index-500;
+                dataPoint[index].X = item.location * panel.Width / dataCount ;
+                //dataPoint[index].X = item.index-3000;
                 dataPoint[index].Y = item.value / 50 + panel.Height / 2;
                 ++index;
             }
@@ -30,7 +32,6 @@ namespace wt1
             gp.DrawLines(pen, dataPoint);
             gp.DrawLine(pen, 0, drawRect.Height / 2, drawRect.Width, drawRect.Height / 2);
 
-            return true;
         }
         public  bool ReadWaveFile() 
         {
@@ -59,15 +60,9 @@ namespace wt1
                     wavs.WavName = wavs.WavName.Replace(".wav", "");
                     wavs.dataArray = new ArrayList();
                     int t = 0;
-                    int tmpdata;
                     SampleData spd;
                     for (int i = 0; i < wavs.dataSize; i++)
                     {
-                        //tmpdata = BitConverter.ToInt16(data, t);
-                        //if (tmpdata!=0){
-                        //    spd = new SampleData(tmpdata, i);
-                        //    wavs.dataArray.Add(spd);
-                        //}
                         spd = new SampleData( BitConverter.ToInt16(data, t) ,  i);
                         wavs.dataArray.Add(spd);
                         t += 2;
@@ -77,7 +72,7 @@ namespace wt1
             }
             return true;
         }
-        public int Compet(int a, int b)
+        public static int Compet(int a, int b)
         { 
             if ((a - b) > 0) return 1;
             else if ((a - b) < 0) return -1;
@@ -85,7 +80,7 @@ namespace wt1
         }
         public void SplitKeydata()
         {
-            var tmpData=new SampleData();
+            var preData=new SampleData();
             bool upFlag = false;
             bool downFlag = false;
             bool keyFlag = false;
@@ -95,7 +90,7 @@ namespace wt1
             wavs.keyArray = new ArrayList();
             foreach (SampleData item in wavs.dataArray)
             {
-                switch(Compet(item.value , tmpData.value))
+                switch(Compet(item.value , preData.value))
                 {
                     case UP://步入递增
                         upFlag = true;
@@ -114,7 +109,7 @@ namespace wt1
                         }
                         break;
                     case Zero://等值
-                        if(tmpData.value != 0) 
+                        if(preData.value != 0) 
                             keyFlag = true;
                         upFlag = false;
                         downFlag = false;
@@ -124,50 +119,51 @@ namespace wt1
                 if (keyFlag)
                 {
                     keyFlag = false;
-                    wavs.keyArray.Add(tmpData);
+                    wavs.keyArray.Add(preData);
                 }
-                tmpData = item;
+                preData = item;
             }
         }
         public void AnalyzePeriod() 
-        {
-            var tmpA = new SampleData();
+        {            
             wavs.keyDiffArray = new ArrayList();
+            var preData = new SampleData();
+            SortedSet<SampleData> lsdA = new SortedSet<SampleData>(new SampleCompare()); //上
+            SortedSet<SampleData> lsdB = new SortedSet<SampleData>(new SampleCompare()); //下
 
             foreach (SampleData item in wavs.keyArray)
             {
-                var perd = new Period
-                {
-                    diff = Math.Abs(item.value - tmpA.value),
-                    index = tmpA.index
-                };
-                wavs.keyDiffArray.Add(perd);
-                tmpA = item;
+                if (item.value > 0)
+                    lsdA.Add(item);  //正区
+                else
+                    lsdB.Add(item);  //负区
             }
 
-            int minimum = 100;//最低周期保守值
-            //bool upFlag = false;
-            bool downFlag = false;
-            var tmpB = new Period();
-            var periodTemplateArray = new ArrayList();
+            //int minimum = 100;//最低周期保守值
+            
+            
+            
+            bool upFlag = false;
+            var preItem = new Period();
+            wavs.tmpArray = new ArrayList();
+            //var periodTemplateArray = new ArrayList();
             foreach (Period item in wavs.keyDiffArray)
             {
-                if (item.diff > tmpB.diff)
+                if (item.diff > preItem.diff)  
+                    upFlag = true;
+                else if (item.diff < preItem.diff )
                 {
-                    tmpB = item;
-                    //upFlag = true;
-                    if (downFlag)
+                    if (upFlag)
                     {
-                        downFlag = false;
-                        periodTemplateArray.Add(tmpB);
+                        upFlag = false;
+                        SampleData smp = new SampleData();
+                        smp =(SampleData)wavs.dataArray[preItem.index];
+                        wavs.tmpArray.Add(smp);
                     }
                 }
-                else if (item.diff < tmpB.diff )
-                {
-                    downFlag = true;
-                }
-                tmpB = item;
+                preItem = item;
             }
+
         }
         public bool WaveAzProcess()
         {
@@ -177,14 +173,14 @@ namespace wt1
         }
         public string DrawOriginData(Panel panel, Form form)
         {
-            Paint(panel, wavs.dataArray);
+            Paint(panel, wavs.dataArray, wavs.dataSize);
             form.Text = wavs.WavPath;
             return wavs.WavName;
         }
         public void DrawGerneralData(Panel panel, Form form)
         {
-
-            Paint(panel, wavs.keyArray);
+            //Paint(panel, wavs.tmpArray, wavs.dataSize);
+            Paint(panel, wavs.keyArray, wavs.dataSize);
             form.Text = "由GerneralWave()函数生成";
         }
     }

@@ -34,6 +34,7 @@
             this.OpenBtn = new System.Windows.Forms.Button();
             this.General = new System.Windows.Forms.Button();
             this.Switch = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panel1
@@ -85,12 +86,25 @@
             this.Switch.UseVisualStyleBackColor = true;
             this.Switch.Click += new System.EventHandler(this.Switch_Click);
             // 
+            // button1
+            // 
+            this.button1.AutoSize = true;
+            this.button1.Location = new System.Drawing.Point(298, 870);
+            this.button1.Margin = new System.Windows.Forms.Padding(5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(87, 25);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Exit";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // Fm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1426, 913);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Switch);
             this.Controls.Add(this.General);
             this.Controls.Add(this.OpenBtn);
@@ -117,6 +131,7 @@
         private System.Windows.Forms.Button General;
         private System.Windows.Forms.Button Switch;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

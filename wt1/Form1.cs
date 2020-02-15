@@ -15,14 +15,14 @@ namespace wt1
         {
             if (funcs.ReadWaveFile())
                 chpy = funcs.DrawOriginData(panel1, this);
-            drawOriginFlag = true;
+            drawOriginFlag = false;
         }
         private void General_Click(object sender, EventArgs e)
         {
             if (chpy != null)
             {
                 funcs.DrawGerneralData(panel1, this);
-                drawOriginFlag = false;
+                drawOriginFlag = true;
             }
         }
         private void Switch_Click(object sender, EventArgs e)
@@ -48,6 +48,10 @@ namespace wt1
                 this.Close();
                 return;
             }
+        }
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
