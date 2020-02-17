@@ -21,7 +21,7 @@ namespace wt1
         {
             if (chpy != null)
             {
-                funcs.DrawGerneralData(panel1, this);
+                label_p.Text = funcs.DrawGerneralData(panel1, this).ToString();
                 drawOriginFlag = true;
             }
         }

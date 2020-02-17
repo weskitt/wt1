@@ -22,8 +22,8 @@ namespace wt1
             int index = 0;
             foreach (SampleData item in dataArray)
             {
-                dataPoint[index].X = item.location * panel.Width / dataCount ;
-                //dataPoint[index].X = item.index-3000;
+                //dataPoint[index].X = item.location * panel.Width / dataCount ;
+                dataPoint[index].X = item.location - 3000;
                 dataPoint[index].Y = item.value / 50 + panel.Height / 2;
                 ++index;
             }
@@ -124,52 +124,109 @@ namespace wt1
                 preData = item;
             }
         }
-        public void AnalyzePeriod() 
-        {            
+        public void AnalyzePeriod()
+        {
+            int minPeriod = 50;
             wavs.keyDiffArray = new ArrayList();
-            var preData = new SampleData();
-            SortedSet<SampleData> lsdA = new SortedSet<SampleData>(new SampleCompare()); //上
-            SortedSet<SampleData> lsdB = new SortedSet<SampleData>(new SampleCompare()); //下
-
+            //**************************分离正负样本并排序*************************************************
+            var lsdA = new SortedSet<SampleData>(new ByValueCompare() ); //上
+            var lsdB = new SortedSet<SampleData>(new ByValueCompare()); //下
+            SampleData spd;
             foreach (SampleData item in wavs.keyArray)
             {
                 if (item.value > 0)
                     lsdA.Add(item);  //正区
-                else
-                    lsdB.Add(item);  //负区
-            }
-
-            //int minimum = 100;//最低周期保守值
-            
-            
-            
-            bool upFlag = false;
-            var preItem = new Period();
-            wavs.tmpArray = new ArrayList();
-            //var periodTemplateArray = new ArrayList();
-            foreach (Period item in wavs.keyDiffArray)
-            {
-                if (item.diff > preItem.diff)  
-                    upFlag = true;
-                else if (item.diff < preItem.diff )
-                {
-                    if (upFlag)
-                    {
-                        upFlag = false;
-                        SampleData smp = new SampleData();
-                        smp =(SampleData)wavs.dataArray[preItem.index];
-                        wavs.tmpArray.Add(smp);
-                    }
+                else if (item.value < 0)  {
+                    spd = new SampleData { value = Math.Abs(item.value),  location = item.location  };
+                    lsdB.Add(spd);  //负区
                 }
-                preItem = item;
+
+            }
+            //**************************采取20个最大值索引样本*******************************************
+            int smpCount = 20; 
+            int tcount = smpCount;
+            List<int> tmA = new List<int>();
+            List<int> tmB = new List<int>();
+            foreach (var item in lsdA)
+            {
+                tmA.Add(item.location);
+                if (--tcount == 0)
+                {
+                    tcount = smpCount;
+                    tmA.Sort();
+                    break;
+                }
+            }
+            foreach (var item in lsdB)
+            {
+                tmB.Add(item.location);
+                if (--tcount == 0)
+                {
+                    tcount = smpCount;
+                    tmB.Sort();
+                    break;
+                }
             }
 
+            //*******************************分析相邻间距获取周期******************************************
+            int diff;
+            var dic = new Dictionary<int, int>();
+            //List<int> ht = new List<int>();
+            var preDataA = tmA[0];
+            var preDataB = tmB[0];
+            for (int c = 1; c < smpCount; c++)
+            {
+                diff = tmA[c] - preDataA;
+                if (dic.ContainsKey(diff))
+                    dic[diff] += 1;
+                else if(diff > minPeriod) //剔除小于最小周期的样本
+                    dic.Add(diff, 1);
+
+                diff = tmB[c] - preDataB;
+                if (dic.ContainsKey(diff))
+                    dic[diff] += 1;
+                else if (diff > minPeriod)//剔除小于最小周期的样本
+                    dic.Add(diff, 1);
+
+
+                preDataA = tmA[c];
+                preDataB = tmB[c];
+            }
+
+            var list = new List<KeyValuePair<int, int>>(dic);
+            list.Sort(delegate (KeyValuePair<int, int> s1, KeyValuePair<int, int> s2) {
+                return s2.Key.CompareTo(s1.Key);
+            });
+            int mc;
+            KeyValuePair<int, int> preData = list[0]; 
+            for (int i = 1; i < list.Count; i++)
+            {
+                mc = list[i-1].Key - list[i].Key;
+                if (mc==1 || mc==2)
+                {
+                    //误差优化
+                }
+            }
+            list.Sort(delegate(KeyValuePair<int, int> s1, KeyValuePair<int, int> s2){
+                return s2.Value.CompareTo(s1.Value);
+            });
+            dic.Clear();
+            foreach (KeyValuePair<int, int> pair in list)
+                if (pair.Value > 2) 
+                    dic.Add(pair.Key, pair.Value);
+
+            wavs.period = list[0].Key;
+            //*******************以下分析周期内各相分布状态***************************************************
+            //Step1 寻找初始相
+            Phase ph_big = new Phase();
+            wavs.phsaePack = new ArrayList();
+            ph_big.step = lsdA.Max.location;
         }
-        public bool WaveAzProcess()
+        public void WaveAzProcess()
         {
             SplitKeydata(); //分离极点数据出来
             AnalyzePeriod();//分析周期
-            return true;
+
         }
         public string DrawOriginData(Panel panel, Form form)
         {
@@ -177,11 +234,12 @@ namespace wt1
             form.Text = wavs.WavPath;
             return wavs.WavName;
         }
-        public void DrawGerneralData(Panel panel, Form form)
+        public int DrawGerneralData(Panel panel, Form form)
         {
             //Paint(panel, wavs.tmpArray, wavs.dataSize);
             Paint(panel, wavs.keyArray, wavs.dataSize);
             form.Text = "由GerneralWave()函数生成";
+            return wavs.period;
         }
     }
 }

@@ -35,6 +35,8 @@
             this.General = new System.Windows.Forms.Button();
             this.Switch = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label_p = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // panel1
@@ -98,12 +100,32 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(403, 875);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 15);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Period:";
+            // 
+            // label_p
+            // 
+            this.label_p.AutoSize = true;
+            this.label_p.Location = new System.Drawing.Point(472, 875);
+            this.label_p.Name = "label_p";
+            this.label_p.Size = new System.Drawing.Size(39, 15);
+            this.label_p.TabIndex = 16;
+            this.label_p.Text = "NULL";
+            // 
             // Fm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1426, 913);
+            this.Controls.Add(this.label_p);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Switch);
             this.Controls.Add(this.General);
@@ -132,6 +154,8 @@
         private System.Windows.Forms.Button Switch;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_p;
     }
 }
 

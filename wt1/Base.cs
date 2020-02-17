@@ -4,6 +4,11 @@ using System.Drawing;
 
 namespace wt1
 {
+    public struct Phase //描述周期内各相分布情况
+    {
+        public int step; //与初始相位移
+        public int bigAmplitude; //最大振幅
+    }
 
     public struct SampleData
     {
@@ -47,16 +52,25 @@ namespace wt1
         //    throw new System.NotImplementedException();
         //}
     }
-    public class SampleCompare : IComparer<SampleData>
+    public class ByValueCompare : IComparer<SampleData>
     {
         public int Compare(SampleData x, SampleData y)
         {
-            return y.value - x.value;
+            if (y.value == x.value)
+                return 1;
+            else
+                return y.value - x.value;
         }
     }
-    internal struct Period
+    public class ByLoctionCompare : IComparer<SampleData>
     {
-        internal int index, diff, weight;
+        public int Compare(SampleData x, SampleData y)
+        {
+            if (y.location == x.location)
+                return 1;
+            else
+                return y.location - x.location;
+        }
     }
 
 
@@ -79,9 +93,10 @@ namespace wt1
         public short dataSize;         //2byte,数据块大小  
         public string WavPath;
         public string WavName;
-        public ArrayList dataArray, keyArray, tmpArray, keyDiffArray;
-        public Point[] dataPoint;
-        public int period;
+        public ArrayList dataArray, keyArray, keyDiffArray; 
+        //public Point[] dataPoint;
+        public int period; //周期
+        public ArrayList phsaePack; //周期内相移包
     };
 
 }
