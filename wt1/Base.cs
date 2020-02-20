@@ -7,7 +7,7 @@ namespace wt1
     public struct Phase //描述周期内各相分布情况
     {
         public int step; //与初始相位移
-        public int bigAmplitude; //最大振幅
+        public int Amplitude; //最大振幅
     }
 
     public struct SampleData
@@ -93,10 +93,11 @@ namespace wt1
         public short dataSize;         //2byte,数据块大小  
         public string WavPath;
         public string WavName;
-        public ArrayList dataArray, keyArray, keyDiffArray; 
+        public List<SampleData> dataArray, keyArray, keyDiffArray; 
         //public Point[] dataPoint;
         public int period; //周期
-        public ArrayList phsaePack; //周期内相移包
+        public List<SampleData> peakList, valleyList;
+        public List<Phase> phsaePack; //周期内相移包
     };
 
 }

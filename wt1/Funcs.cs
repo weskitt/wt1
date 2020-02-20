@@ -12,7 +12,9 @@ namespace wt1
     {
         
         internal WAVE_s wavs = new WAVE_s();
-        public static void Paint(Panel panel, ArrayList dataArray, int dataCount)
+        public static int drawStep = 0;
+        public static int density = 1; 
+        public static void Paint(Panel panel, List<SampleData> dataArray, int dataCount)
         {
             var gp = panel.CreateGraphics();
             var drawRect = new Rectangle(0, 0, panel.Width, panel.Height);
@@ -20,11 +22,11 @@ namespace wt1
             var bb = new SolidBrush(Color.Black);
             var dataPoint = new Point[dataArray.Count];
             int index = 0;
-            foreach (SampleData item in dataArray)
+            foreach (var item in dataArray)
             {
-                //dataPoint[index].X = item.location * panel.Width / dataCount ;
-                dataPoint[index].X = item.location - 3000;
-                dataPoint[index].Y = item.value / 50 + panel.Height / 2;
+                dataPoint[ index ].X = item.location * panel.Width / dataCount ;
+                //dataPoint[ index ].X = (item.location - drawStep) * density;
+                dataPoint[ index ].Y = item.value / 50 + panel.Height / 2;
                 ++index;
             }
 
@@ -58,7 +60,7 @@ namespace wt1
                     fsm.Read(data, 0, wavs.dataSize);
                     wavs.dataSize /= 2;
                     wavs.WavName = wavs.WavName.Replace(".wav", "");
-                    wavs.dataArray = new ArrayList();
+                    wavs.dataArray = new List<SampleData>();
                     int t = 0;
                     SampleData spd;
                     for (int i = 0; i < wavs.dataSize; i++)
@@ -74,21 +76,23 @@ namespace wt1
         }
         public static int Compet(int a, int b)
         { 
-            if ((a - b) > 0) return 1;
-            else if ((a - b) < 0) return -1;
+            if (a > b) return 1;
+            else if (a < b) return -1;
             else  return 0;
         }
         public void SplitKeydata()
         {
-            var preData=new SampleData();
             bool upFlag = false;
             bool downFlag = false;
             bool keyFlag = false;
             const int Down = -1;
             const int UP = 1;
             const int Zero = 0;
-            wavs.keyArray = new ArrayList();
-            foreach (SampleData item in wavs.dataArray)
+            var preData = new SampleData();
+            wavs.keyArray = new List<SampleData>();
+            wavs.peakList  = new List<SampleData>();
+            wavs.valleyList = new List<SampleData>();
+            foreach (var item in wavs.dataArray)
             {
                 switch(Compet(item.value , preData.value))
                 {
@@ -109,10 +113,10 @@ namespace wt1
                         }
                         break;
                     case Zero://等值
-                        if(preData.value != 0) 
-                            keyFlag = true;
-                        upFlag = false;
-                        downFlag = false;
+                        //if(preData.value != 0) 
+                        //    keyFlag = true;
+                        //upFlag = false;
+                        //downFlag = false;
                         break;
                 }
 
@@ -120,6 +124,10 @@ namespace wt1
                 {
                     keyFlag = false;
                     wavs.keyArray.Add(preData);
+                    if (downFlag)
+                        wavs.peakList.Add(preData);
+                    if (upFlag)
+                        wavs.valleyList.Add(preData);
                 }
                 preData = item;
             }
@@ -127,43 +135,45 @@ namespace wt1
         public void AnalyzePeriod()
         {
             int minPeriod = 50;
-            wavs.keyDiffArray = new ArrayList();
+            wavs.keyDiffArray = new List<SampleData>();
             //**************************分离正负样本并排序*************************************************
-            var lsdA = new SortedSet<SampleData>(new ByValueCompare() ); //上
-            var lsdB = new SortedSet<SampleData>(new ByValueCompare()); //下
+            var plusSet    = new SortedSet<SampleData>(new ByValueCompare() ); //正数集合
+            var minusSet = new SortedSet<SampleData>(new ByValueCompare()); //负数集合
             SampleData spd;
             foreach (SampleData item in wavs.keyArray)
             {
                 if (item.value > 0)
-                    lsdA.Add(item);  //正区
+                    plusSet.Add(item);  //正区
                 else if (item.value < 0)  {
                     spd = new SampleData { value = Math.Abs(item.value),  location = item.location  };
-                    lsdB.Add(spd);  //负区
+                    minusSet.Add(spd); //负区
                 }
 
             }
-            //**************************采取20个最大值索引样本*******************************************
+            //List<SampleData> _plusList = new List<SampleData>(plusSet);
+            //**************************采取20个最大值location样本*******************************************
+            //**************************以Location排序******************************************************
             int smpCount = 20; 
             int tcount = smpCount;
-            List<int> tmA = new List<int>();
-            List<int> tmB = new List<int>();
-            foreach (var item in lsdA)
+            var plusList    = new List<int>();//20个最大正数集合
+            var minusList = new List<int>();//20个最小负数集合
+            foreach (var item in plusSet)
             {
-                tmA.Add(item.location);
-                if (--tcount == 0)
+                plusList.Add(item.location);
+                if (--tcount == 0) //判断采集完成后执行排序并跳出
                 {
                     tcount = smpCount;
-                    tmA.Sort();
+                    plusList.Sort();
                     break;
                 }
             }
-            foreach (var item in lsdB)
+            foreach (var item in minusSet)
             {
-                tmB.Add(item.location);
-                if (--tcount == 0)
+                minusList.Add(item.location);
+                if (--tcount == 0)//判断采集完成后执行排序并跳出
                 {
                     tcount = smpCount;
-                    tmB.Sort();
+                    minusList.Sort();
                     break;
                 }
             }
@@ -172,25 +182,25 @@ namespace wt1
             int diff;
             var dic = new Dictionary<int, int>();
             //List<int> ht = new List<int>();
-            var preDataA = tmA[0];
-            var preDataB = tmB[0];
+            var preDataA = plusList[0];
+            var preDataB = minusList[0];
             for (int c = 1; c < smpCount; c++)
             {
-                diff = tmA[c] - preDataA;
+                diff = plusList[c] - preDataA;
                 if (dic.ContainsKey(diff))
                     dic[diff] += 1;
                 else if(diff > minPeriod) //剔除小于最小周期的样本
                     dic.Add(diff, 1);
 
-                diff = tmB[c] - preDataB;
+                diff = minusList[c] - preDataB;
                 if (dic.ContainsKey(diff))
                     dic[diff] += 1;
                 else if (diff > minPeriod)//剔除小于最小周期的样本
                     dic.Add(diff, 1);
 
 
-                preDataA = tmA[c];
-                preDataB = tmB[c];
+                preDataA = plusList[c];
+                preDataB = minusList[c];
             }
 
             var list = new List<KeyValuePair<int, int>>(dic);
@@ -217,10 +227,27 @@ namespace wt1
 
             wavs.period = list[0].Key;
             //*******************以下分析周期内各相分布状态***************************************************
-            //Step1 寻找初始相
-            Phase ph_big = new Phase();
-            wavs.phsaePack = new ArrayList();
-            ph_big.step = lsdA.Max.location;
+            var _plusList = new List<SampleData>(plusSet);
+            int cur = _plusList[0].location; //默认以最大值来定义初始相位
+            int curEnd = cur + wavs.period;
+            Phase phase = new Phase
+            {
+                Amplitude = _plusList[0].value,
+                step = 0
+            };
+            wavs.phsaePack = new List<Phase>{ phase };//添加默认初始相
+            foreach (var item in wavs.peakList)
+            {
+                if ( cur < item.location && item.location <= curEnd)
+                {
+                    phase = new Phase {
+                        Amplitude = item.value,
+                        step = item.location - cur
+                    };
+                    wavs.phsaePack.Add(phase);
+                }
+            }
+
         }
         public void WaveAzProcess()
         {
