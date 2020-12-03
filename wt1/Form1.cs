@@ -21,7 +21,8 @@ namespace wt1
         {
             if (chpy != null)
             {
-                label_p.Text = funcs.DrawGerneralData(panel1, this).ToString();
+                label_p.Text = funcs.ReturnPeriod().ToString();
+                perDev.Text = funcs.ReturnPeriodDeviation().ToString();
                 drawOriginFlag = true;
             }
         }

@@ -265,5 +265,7 @@ namespace wt1
             form.Text = "由GerneralWave()函数生成";
             return wavs.period;
         }
+        public int ReturnPeriod() { return wavs.period; }
+        public int ReturnPeriodDeviation() { return wavs.per_deviation; }
     }
 }

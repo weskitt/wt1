@@ -37,15 +37,17 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label_p = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.perDev = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.AutoSize = true;
-            this.panel1.Location = new System.Drawing.Point(5, 5);
+            this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1416, 860);
+            this.panel1.Size = new System.Drawing.Size(1593, 1032);
             this.panel1.TabIndex = 2;
             // 
             // openFileDialog1
@@ -55,10 +57,10 @@
             // OpenBtn
             // 
             this.OpenBtn.AutoSize = true;
-            this.OpenBtn.Location = new System.Drawing.Point(10, 870);
-            this.OpenBtn.Margin = new System.Windows.Forms.Padding(5);
+            this.OpenBtn.Location = new System.Drawing.Point(11, 1044);
+            this.OpenBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.OpenBtn.Name = "OpenBtn";
-            this.OpenBtn.Size = new System.Drawing.Size(89, 25);
+            this.OpenBtn.Size = new System.Drawing.Size(100, 30);
             this.OpenBtn.TabIndex = 11;
             this.OpenBtn.Text = "Open Wave";
             this.OpenBtn.UseVisualStyleBackColor = true;
@@ -67,10 +69,10 @@
             // General
             // 
             this.General.AutoSize = true;
-            this.General.Location = new System.Drawing.Point(201, 870);
-            this.General.Margin = new System.Windows.Forms.Padding(5);
+            this.General.Location = new System.Drawing.Point(226, 1044);
+            this.General.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.General.Name = "General";
-            this.General.Size = new System.Drawing.Size(87, 25);
+            this.General.Size = new System.Drawing.Size(98, 30);
             this.General.TabIndex = 12;
             this.General.Text = "General";
             this.General.UseVisualStyleBackColor = true;
@@ -79,10 +81,10 @@
             // Switch
             // 
             this.Switch.AutoSize = true;
-            this.Switch.Location = new System.Drawing.Point(109, 870);
-            this.Switch.Margin = new System.Windows.Forms.Padding(5);
+            this.Switch.Location = new System.Drawing.Point(123, 1044);
+            this.Switch.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Switch.Name = "Switch";
-            this.Switch.Size = new System.Drawing.Size(82, 25);
+            this.Switch.Size = new System.Drawing.Size(92, 30);
             this.Switch.TabIndex = 13;
             this.Switch.Text = "Switch";
             this.Switch.UseVisualStyleBackColor = true;
@@ -91,10 +93,10 @@
             // button1
             // 
             this.button1.AutoSize = true;
-            this.button1.Location = new System.Drawing.Point(298, 870);
-            this.button1.Margin = new System.Windows.Forms.Padding(5);
+            this.button1.Location = new System.Drawing.Point(335, 1044);
+            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 25);
+            this.button1.Size = new System.Drawing.Size(98, 30);
             this.button1.TabIndex = 14;
             this.button1.Text = "Exit";
             this.button1.UseVisualStyleBackColor = true;
@@ -103,27 +105,47 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(403, 875);
+            this.label1.Location = new System.Drawing.Point(453, 1050);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 15);
+            this.label1.Size = new System.Drawing.Size(71, 18);
             this.label1.TabIndex = 15;
             this.label1.Text = "Period:";
             // 
             // label_p
             // 
             this.label_p.AutoSize = true;
-            this.label_p.Location = new System.Drawing.Point(472, 875);
+            this.label_p.Location = new System.Drawing.Point(531, 1050);
             this.label_p.Name = "label_p";
-            this.label_p.Size = new System.Drawing.Size(39, 15);
+            this.label_p.Size = new System.Drawing.Size(44, 18);
             this.label_p.TabIndex = 16;
             this.label_p.Text = "NULL";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(600, 1050);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 18);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "粗略误差：";
+            // 
+            // perDev
+            // 
+            this.perDev.AutoSize = true;
+            this.perDev.Location = new System.Drawing.Point(689, 1050);
+            this.perDev.Name = "perDev";
+            this.perDev.Size = new System.Drawing.Size(44, 18);
+            this.perDev.TabIndex = 18;
+            this.perDev.Text = "NULL";
+            // 
             // Fm1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1426, 913);
+            this.ClientSize = new System.Drawing.Size(1604, 1096);
+            this.Controls.Add(this.perDev);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label_p);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
@@ -133,11 +155,11 @@
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(5);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Fm1";
-            this.Padding = new System.Windows.Forms.Padding(5);
+            this.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fo";
@@ -156,6 +178,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_p;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label perDev;
     }
 }
 
