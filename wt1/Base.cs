@@ -96,6 +96,7 @@ namespace wt1
         public List<SampleData> sourceArray, keyArray, keyDiffArray;  //原始数据，峰谷数据集合，峰谷位移数据
         //public Point[] dataPoint;
         public int period; //周期
+        public int per_deviation; //周期偏差 
         public List<SampleData> peakList, valleyList; //定义峰/谷集合数据包
         public List<Phase> phsaePack; //周期包
     };

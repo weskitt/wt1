@@ -14,6 +14,7 @@ namespace wt1
         internal WAVE_s wavs = new WAVE_s();
         public static int drawStep = 0;
         public static int density = 1; 
+        //绘制部分
         public static void Paint(Panel panel, List<SampleData> dataArray, int dataCount)
         {
             var gp = panel.CreateGraphics();
@@ -35,6 +36,7 @@ namespace wt1
             gp.DrawLine(pen, 0, drawRect.Height / 2, drawRect.Width, drawRect.Height / 2);
 
         }
+        //读取文件部分
         public  bool ReadWaveFile() 
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -74,6 +76,7 @@ namespace wt1
             }
             return true;
         }
+        //功能函数部分
         public static int Compet(int a, int b)
         { 
             if (a > b) return 1;
@@ -122,113 +125,106 @@ namespace wt1
 
                 if (keyFlag)
                 {
-                    keyFlag = false;
-                    wavs.keyArray.Add(preData);
+                    keyFlag = false;//关闭标记，进入下个循环
+                    wavs.keyArray.Add(preData); //记录入峰谷集合
                     if (downFlag)
-                        wavs.peakList.Add(preData);
+                        wavs.peakList.Add(preData); //记录入峰数据包
                     if (upFlag)
-                        wavs.valleyList.Add(preData);
+                        wavs.valleyList.Add(preData); //记录入谷数据包
                 }
                 preData = item;
             }
         }
-        public void AnalyzePeriod()
+        public void AnalyzePeriod() // 相邻最大值周期获取算法
         {
-            int minPeriod = 50;
-            wavs.keyDiffArray = new List<SampleData>();
-            //**************************分离正负样本并排序*************************************************
-            var plusSet    = new SortedSet<SampleData>(new ByValueCompare() ); //正数集合
-            var minusSet = new SortedSet<SampleData>(new ByValueCompare()); //负数集合
+            // 相邻最大值周期获取算法
+            int minPeriod = 50;//定义最小周期用于排除前置非周期数据
+            wavs.keyDiffArray = new List<SampleData>(); //初始化峰谷位移数据包
+            //**************************分离正负样本并排序*************************************************用于采集峰谷最大值
+            var posSet    = new SortedSet<SampleData>(new ByValueCompare() ); //正数集合以value排序
+            var negSet = new SortedSet<SampleData>(new ByValueCompare()); //负数集合以value排序
             SampleData spd;
             foreach (SampleData item in wavs.keyArray)
             {
                 if (item.value > 0)
-                    plusSet.Add(item);  //正区
+                    posSet.Add(item);  //正区
                 else if (item.value < 0)  {
-                    spd = new SampleData { value = Math.Abs(item.value),  location = item.location  };
-                    minusSet.Add(spd); //负区
+                    spd = new SampleData { value = Math.Abs(item.value),  location = item.location  }; //采集负数区样本并取正
+                    negSet.Add(spd); //负区
                 }
-
+                
             }
             //List<SampleData> _plusList = new List<SampleData>(plusSet);
-            //**************************采取20个最大值location样本*******************************************
+            //**************************采取20个最大值value样本*******************************************
             //**************************以Location排序******************************************************
             int smpCount = 20; 
             int tcount = smpCount;
-            var plusList    = new List<int>();//20个最大正数集合
-            var minusList = new List<int>();//20个最小负数集合
-            foreach (var item in plusSet)
+            var LocListAtPosSet    = new List<int>();//20个最大正数集合
+            var LocListAtNegSet = new List<int>();//20个最小负数集合
+            foreach (var item in posSet)
             {
-                plusList.Add(item.location);
-                if (--tcount == 0) //判断采集完成后执行排序并跳出
+                LocListAtPosSet.Add(item.location);
+                if (--tcount == 0) //判断采集完成后恢复Location序列排序并跳出
                 {
                     tcount = smpCount;
-                    plusList.Sort();
+                    LocListAtPosSet.Sort();
                     break;
                 }
             }
-            foreach (var item in minusSet)
+            foreach (var item in negSet)
             {
-                minusList.Add(item.location);
-                if (--tcount == 0)//判断采集完成后执行排序并跳出
+                LocListAtNegSet.Add(item.location);
+                if (--tcount == 0)//判断采集完成后恢复Location序列排序并跳出
                 {
                     tcount = smpCount;
-                    minusList.Sort();
+                    LocListAtNegSet.Sort();
                     break;
                 }
             }
 
             //*******************************分析相邻间距获取周期******************************************
-            int diff;
-            var dic = new Dictionary<int, int>();
+            int perSamp; //周期样本
+            var perSampDic = new Dictionary<int, int>();//周期候选样本集合
             //List<int> ht = new List<int>();
-            var preDataA = plusList[0];
-            var preDataB = minusList[0];
+            var preDataA = LocListAtPosSet[0];
+            var preDataB = LocListAtNegSet[0];
             for (int c = 1; c < smpCount; c++)
             {
-                diff = plusList[c] - preDataA;
-                if (dic.ContainsKey(diff))
-                    dic[diff] += 1;
-                else if(diff > minPeriod) //剔除小于最小周期的样本
-                    dic.Add(diff, 1);
+                perSamp = Math.Abs(LocListAtPosSet[c] - preDataA);
+                if (perSampDic.ContainsKey(perSamp))
+                    perSampDic[perSamp] += 1;
+                else if(perSamp > minPeriod) //剔除小于最小周期的样本
+                    perSampDic.Add(perSamp, 1);
 
-                diff = minusList[c] - preDataB;
-                if (dic.ContainsKey(diff))
-                    dic[diff] += 1;
-                else if (diff > minPeriod)//剔除小于最小周期的样本
-                    dic.Add(diff, 1);
+                perSamp = Math.Abs(LocListAtNegSet[c] - preDataB);
+                if (perSampDic.ContainsKey(perSamp))
+                    perSampDic[perSamp] += 1;
+                else if (perSamp > minPeriod)//剔除小于最小周期的样本
+                    perSampDic.Add(perSamp, 1);
 
 
-                preDataA = plusList[c];
-                preDataB = minusList[c];
+                preDataA = LocListAtPosSet[c];
+                preDataB = LocListAtNegSet[c];
             }
 
-            var list = new List<KeyValuePair<int, int>>(dic);
-            list.Sort(delegate (KeyValuePair<int, int> s1, KeyValuePair<int, int> s2) {
-                return s2.Key.CompareTo(s1.Key);
-            });
-            int mc;
-            KeyValuePair<int, int> preData = list[0]; 
-            for (int i = 1; i < list.Count; i++)
+            var list = new List<KeyValuePair<int, int>>(perSampDic);
+            //list.Sort(delegate (KeyValuePair<int, int> s1, KeyValuePair<int, int> s2) {
+            //    return s2.Key.CompareTo(s1.Key);
+            //});
+            //wavs.per_deviation = list[0].Key - list[1].Key;//粗略周期偏差 
 
-            {
-                mc = list[i-1].Key - list[i].Key;
-                if (mc==1 || mc==2)
-                {
-                    //误差优化
-                }
-            }
             list.Sort(delegate(KeyValuePair<int, int> s1, KeyValuePair<int, int> s2){
                 return s2.Value.CompareTo(s1.Value);
             });
-            dic.Clear();
+            perSampDic.Clear();
             foreach (KeyValuePair<int, int> pair in list)
-                if (pair.Value > 2) 
-                    dic.Add(pair.Key, pair.Value);
+                if (pair.Value > 2) //记录候选权值大于2的周期值
+                    perSampDic.Add(pair.Key, pair.Value);
 
             wavs.period = list[0].Key;
+            wavs.per_deviation = Math.Abs(list[0].Key - list[1].Key);//粗略周期偏差 
             //*******************以下分析周期内各相分布状态***************************************************
-            var _plusList = new List<SampleData>(plusSet);
+            var _plusList = new List<SampleData>(posSet);
             int cur = _plusList[0].location; //默认以最大值来定义初始相位
             int curEnd = cur + wavs.period;
             Phase phase = new Phase
