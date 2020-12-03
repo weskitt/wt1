@@ -93,11 +93,11 @@ namespace wt1
         public short dataSize;         //2byte,数据块大小  
         public string WavPath;
         public string WavName;
-        public List<SampleData> dataArray, keyArray, keyDiffArray; 
+        public List<SampleData> sourceArray, keyArray, keyDiffArray;  //原始数据，峰谷数据集合，峰谷位移数据
         //public Point[] dataPoint;
         public int period; //周期
-        public List<SampleData> peakList, valleyList;
-        public List<Phase> phsaePack; //周期内相移包
+        public List<SampleData> peakList, valleyList; //定义峰/谷集合数据包
+        public List<Phase> phsaePack; //周期包
     };
 
 }

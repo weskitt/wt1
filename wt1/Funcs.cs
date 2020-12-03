@@ -60,13 +60,13 @@ namespace wt1
                     fsm.Read(data, 0, wavs.dataSize);
                     wavs.dataSize /= 2;
                     wavs.WavName = wavs.WavName.Replace(".wav", "");
-                    wavs.dataArray = new List<SampleData>();
+                    wavs.sourceArray = new List<SampleData>();
                     int t = 0;
                     SampleData spd;
                     for (int i = 0; i < wavs.dataSize; i++)
                     {
                         spd = new SampleData( BitConverter.ToInt16(data, t) ,  i);
-                        wavs.dataArray.Add(spd);
+                        wavs.sourceArray.Add(spd);
                         t += 2;
                     }
                     WaveAzProcess();
@@ -89,10 +89,10 @@ namespace wt1
             const int UP = 1;
             const int Zero = 0;
             var preData = new SampleData();
-            wavs.keyArray = new List<SampleData>();
-            wavs.peakList  = new List<SampleData>();
-            wavs.valleyList = new List<SampleData>();
-            foreach (var item in wavs.dataArray)
+            wavs.keyArray = new List<SampleData>(); //初始化 峰谷数据集合
+            wavs.peakList  = new List<SampleData>(); //初始化 峰数据包
+            wavs.valleyList = new List<SampleData>(); //初始化 谷数据包
+            foreach (var item in wavs.sourceArray)
             {
                 switch(Compet(item.value , preData.value))
                 {
@@ -210,6 +210,7 @@ namespace wt1
             int mc;
             KeyValuePair<int, int> preData = list[0]; 
             for (int i = 1; i < list.Count; i++)
+
             {
                 mc = list[i-1].Key - list[i].Key;
                 if (mc==1 || mc==2)
@@ -257,7 +258,7 @@ namespace wt1
         }
         public string DrawOriginData(Panel panel, Form form)
         {
-            Paint(panel, wavs.dataArray, wavs.dataSize);
+            Paint(panel, wavs.sourceArray, wavs.dataSize);
             form.Text = wavs.WavPath;
             return wavs.WavName;
         }
