@@ -34,11 +34,12 @@
             this.OpenBtn = new System.Windows.Forms.Button();
             this.General = new System.Windows.Forms.Button();
             this.Switch = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Exit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label_p = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.perDev = new System.Windows.Forms.Label();
+            this.Output = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panel1
@@ -58,7 +59,7 @@
             // 
             this.OpenBtn.AutoSize = true;
             this.OpenBtn.Location = new System.Drawing.Point(11, 1044);
-            this.OpenBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.OpenBtn.Margin = new System.Windows.Forms.Padding(6);
             this.OpenBtn.Name = "OpenBtn";
             this.OpenBtn.Size = new System.Drawing.Size(100, 30);
             this.OpenBtn.TabIndex = 11;
@@ -70,7 +71,7 @@
             // 
             this.General.AutoSize = true;
             this.General.Location = new System.Drawing.Point(226, 1044);
-            this.General.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.General.Margin = new System.Windows.Forms.Padding(6);
             this.General.Name = "General";
             this.General.Size = new System.Drawing.Size(98, 30);
             this.General.TabIndex = 12;
@@ -82,7 +83,7 @@
             // 
             this.Switch.AutoSize = true;
             this.Switch.Location = new System.Drawing.Point(123, 1044);
-            this.Switch.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Switch.Margin = new System.Windows.Forms.Padding(6);
             this.Switch.Name = "Switch";
             this.Switch.Size = new System.Drawing.Size(92, 30);
             this.Switch.TabIndex = 13;
@@ -90,17 +91,17 @@
             this.Switch.UseVisualStyleBackColor = true;
             this.Switch.Click += new System.EventHandler(this.Switch_Click);
             // 
-            // button1
+            // Exit
             // 
-            this.button1.AutoSize = true;
-            this.button1.Location = new System.Drawing.Point(335, 1044);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 30);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Exit";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.Exit.AutoSize = true;
+            this.Exit.Location = new System.Drawing.Point(335, 1044);
+            this.Exit.Margin = new System.Windows.Forms.Padding(6);
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(98, 30);
+            this.Exit.TabIndex = 14;
+            this.Exit.Text = "Exit";
+            this.Exit.UseVisualStyleBackColor = true;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // label1
             // 
@@ -138,28 +139,39 @@
             this.perDev.TabIndex = 18;
             this.perDev.Text = "NULL";
             // 
+            // Output
+            // 
+            this.Output.Location = new System.Drawing.Point(1466, 1045);
+            this.Output.Name = "Output";
+            this.Output.Size = new System.Drawing.Size(98, 30);
+            this.Output.TabIndex = 19;
+            this.Output.Text = "Output";
+            this.Output.UseVisualStyleBackColor = true;
+            this.Output.Click += new System.EventHandler(this.Output_Click);
+            // 
             // Fm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1604, 1096);
+            this.Controls.Add(this.Output);
             this.Controls.Add(this.perDev);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label_p);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Exit);
             this.Controls.Add(this.Switch);
             this.Controls.Add(this.General);
             this.Controls.Add(this.OpenBtn);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Fm1";
-            this.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Padding = new System.Windows.Forms.Padding(6);
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fo";
@@ -175,11 +187,12 @@
         private System.Windows.Forms.Button General;
         private System.Windows.Forms.Button Switch;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Exit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_p;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label perDev;
+        private System.Windows.Forms.Button Output;
     }
 }
 

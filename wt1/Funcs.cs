@@ -39,9 +39,13 @@ namespace wt1
         //读取文件部分
         public  bool ReadWaveFile() 
         {
+            string path = @"C:\Users\weskitt\OneDrive\wav\Test.wav";
+            string wavpath= @"C:\Users\weskitt\OneDrive\wav";
+            FileStream fs = File.Create(path);
+
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = "C:\\Users\\weskitt\\OneDrive\\wav";
+                openFileDialog.InitialDirectory = wavpath;
                 openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
@@ -52,14 +56,19 @@ namespace wt1
                     wavs.WavName = openFileDialog.SafeFileName;//获取文件名
                     var fsm = openFileDialog.OpenFile();
 
+                    byte[] wavHeader = new byte[42];
+                    fsm.Read(wavHeader, 0, 42);
+                    fs.Write(wavHeader, 0, 42);
+                    //fs.Close();
                     byte[] dataSize_Byte = new byte[2];
                     fsm.Seek(42, SeekOrigin.Begin); //定位储存数据大小处,检查数据大小
                     fsm.Read(dataSize_Byte, 0, 2);
                     wavs.dataSize = BitConverter.ToInt16(dataSize_Byte, 0);
 
                     byte[] data = new byte[wavs.dataSize];//读取数据
-                    fsm.Seek(44, SeekOrigin.Begin);
+                    fsm.Seek(44, SeekOrigin.Begin); //wav头44byte
                     fsm.Read(data, 0, wavs.dataSize);
+                    //fsm.Write()
                     wavs.dataSize /= 2;
                     wavs.WavName = wavs.WavName.Replace(".wav", "");
                     wavs.sourceArray = new List<SampleData>();
@@ -75,6 +84,7 @@ namespace wt1
                 }
             }
             return true;
+            
         }
         //功能函数部分
         public static int Compet(int a, int b)
